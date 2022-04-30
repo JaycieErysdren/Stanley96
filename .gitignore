@@ -1,0 +1,36 @@
+#
+# local stuff
+#
+
+/_local/
+
+#
+# ignore bsp compile artifacts
+#
+
+/content/**/mapsrc/**/*.bsp
+/content/**/mapsrc/**/*.compile.map
+/content/**/mapsrc/**/*.lit
+/content/**/mapsrc/**/*.log
+/content/**/mapsrc/**/*.prt
+/content/**/mapsrc/**/*.pts
+/content/**/mapsrc/**/*.texinfo
+/content/**/mapsrc/**/*.vis
+/content/**/mapsrc/**/autosave/
+
+#
+# specific folders and files that shouldn't be on the git
+#
+
+/game/*.bat
+/game/conhistory.txt
+/game/**/fte.cfg
+/game/**/*.sav
+/game/**/*.lno
+/game/**/csqccore.txt
+/game/**/saves/
+/game/**/screen_recording.mp4
+/game/**/screenshots/
+/game/**/ssqccore.txt
+/game/**/video/
+/game/maptimes.txt

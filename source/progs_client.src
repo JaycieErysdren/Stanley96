@@ -1,0 +1,12 @@
+#pragma target fte
+
+#pragma progs_dat "../game/stanley96/csprogs.dat"
+
+#define CSQC
+
+#includelist
+	fteextensions.qc
+	shared.qc
+
+	client.qc
+#endlist

@@ -1,0 +1,12 @@
+#pragma target fte
+
+#pragma progs_dat "../game/stanley96/progs.dat"
+
+#define SSQC
+
+#includelist
+	fteextensions.qc
+	shared.qc
+
+	server.qc
+#endlist

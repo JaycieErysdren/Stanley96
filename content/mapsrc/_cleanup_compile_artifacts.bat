@@ -1,0 +1,1 @@
+del /s /q *.compile.map *.vis *.log *.bsp *.lit *.texinfo *.texinfo.json *.prt *.pts *.jmx
