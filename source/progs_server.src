@@ -9,4 +9,5 @@
 	shared.qc
 
 	server.qc
+	func_brush.qc
 #endlist
