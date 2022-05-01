@@ -9,5 +9,6 @@
 	shared.qc
 
 	server.qc
-	func_brush.qc
+	bmodels.qc
+	stanley.qc
 #endlist

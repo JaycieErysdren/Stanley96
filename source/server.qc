@@ -5,6 +5,7 @@
 void() precache_everything =
 {
 	precache_model("progs/player.mdl");
+	//precache_model("models/e1m1.obj");
 	//precache_model("progs/v_shot.mdl");
 	//precache_sound("weapons/guncock.wav");
 };
@@ -49,6 +50,10 @@ void() ClientConnect = {};
 void() worldspawn =
 {	
 	precache_everything();
+
+	clientstat(STAT_NARRATOR_LINE1, EV_STRING, narrator_line1);	
+	clientstat(STAT_NARRATOR_LINE3, EV_STRING, narrator_line3);	
+	clientstat(STAT_NARRATOR_LINE2, EV_STRING, narrator_line2);	
 };
 
 void() PutClientInServer =

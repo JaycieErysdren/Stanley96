@@ -5,7 +5,13 @@
 void() func_brush =
 {
 	self.solid = SOLID_BSP;
-	//self.angles = self.mangle;
+	self.movetype = MOVETYPE_PUSH;
+	setmodel(self, self.model);
+}
+
+void() func_illusionary =
+{
+	self.solid = SOLID_NOT;
 	self.movetype = MOVETYPE_PUSH;
 	setmodel(self, self.model);
 }

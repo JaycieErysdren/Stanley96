@@ -1,5 +1,0 @@
-version 2
-set updatemode "1"
-set declined ""
-source "https://updates.triptohell.info/downloadables.php?game=Q1" "disabled"
-"Plugins/fteplug_hl2" "title=HL2 Formats" ver=6202 gamedir= arch=Win_x64 "desc=Provides support for various formats used by Valve's Source engine." root=bin file=fteplug_hl2_x64.dll
