@@ -80,3 +80,16 @@ void() SV_RunClientCommand =
 {
 	runstandardplayerphysics(self);
 };
+
+//
+// MULTICAST FUNCTIONS
+//
+
+void(float event, float value, entity ent) EasyMulticastFloat =
+{
+	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
+	WriteByte(MSG_MULTICAST, event);
+	WriteFloat(MSG_MULTICAST, value);
+	msg_entity = ent;
+	multicast(ent.origin, MULTICAST_ONE_R);
+};

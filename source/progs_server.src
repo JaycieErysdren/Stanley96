@@ -7,8 +7,10 @@
 #includelist
 	fteextensions.qc
 	shared.qc
+	narrator_shared.qc
 
 	server.qc
 	bmodels.qc
+	triggers.qc
 	stanley.qc
 #endlist

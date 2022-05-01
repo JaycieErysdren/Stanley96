@@ -102,3 +102,15 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	*/
 };
+
+void() CSQC_Parse_Event =
+{
+	// float(entity e, float channel, string newsample, float volume, float attenuation, float pitchpct, float flags, float timeoffset) soundupdate
+	switch(readbyte())
+	{
+		case EVENT_NARRATOR:
+			localsound(narrator_lines[readfloat()]);
+			break;
+		default: print("CSQC: i'm stupid and i don't know what to do\n"); break;
+	}
+};

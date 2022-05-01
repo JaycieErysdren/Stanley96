@@ -18,9 +18,29 @@ enum
 };
 
 //
+// MULTICAST EVENTS
+//
+
+enum
+{
+	EVENT_NARRATOR
+};
+
+//
+// NARRATOR LINES?
+//
+
+enum
+{
+	NARRATOR_LINE000,
+	NARRATOR_LINE001
+};
+
+//
 // GLOBAL ENTITY FIELDS
 //
 
 .string narrator_line1;
 .string narrator_line2;
 .string narrator_line3;
+.string narrator;

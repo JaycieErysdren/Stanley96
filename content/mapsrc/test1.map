@@ -1669,6 +1669,34 @@
 }
 // entity 46
 {
+"classname" "trigger_narrator"
+"narrator" "0"
+// brush 0
+{
+( 32 -128 0 ) ( 32 -127 0 ) ( 32 -128 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 32 -128 0 ) ( 32 -128 1 ) ( 33 -128 0 ) trigger [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 32 -128 0 ) ( 33 -128 0 ) ( 32 -127 0 ) trigger [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 160 -96 160 ) ( 160 -95 160 ) ( 161 -96 160 ) trigger [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 160 -96 160 ) ( 161 -96 160 ) ( 160 -96 161 ) trigger [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 160 -96 160 ) ( 160 -96 161 ) ( 160 -95 160 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}
+// entity 47
+{
+"classname" "trigger_narrator"
+"narrator" "1"
+// brush 0
+{
+( 1024 -800 0 ) ( 1024 -799 0 ) ( 1024 -800 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 -800 0 ) ( 1024 -800 1 ) ( 1025 -800 0 ) trigger [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 -800 0 ) ( 1025 -800 0 ) ( 1024 -799 0 ) trigger [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1152 -768 160 ) ( 1152 -767 160 ) ( 1153 -768 160 ) trigger [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1152 -768 160 ) ( 1153 -768 160 ) ( 1152 -768 161 ) trigger [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1152 -768 160 ) ( 1152 -768 161 ) ( 1152 -767 160 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}
+// entity 48
+{
 "classname" "func_group"
 "_tb_type" "_tb_layer"
 "_tb_name" "old cctv machine"
@@ -1677,7 +1705,7 @@
 "_tb_layer_hidden" "1"
 "_tb_layer_omit_from_export" "1"
 }
-// entity 47
+// entity 49
 {
 "classname" "func_detail"
 "_tb_layer" "1"
@@ -1916,7 +1944,7 @@
 ( 260 192 60 ) ( 260 183 58 ) ( 260 183 60 ) skip [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 }
-// entity 48
+// entity 50
 {
 "classname" "light"
 "origin" "240 164 68"
@@ -1924,7 +1952,7 @@
 "light" "150"
 "_tb_layer" "1"
 }
-// entity 49
+// entity 51
 {
 "classname" "light"
 "origin" "288 172 68"
@@ -1932,7 +1960,7 @@
 "light" "150"
 "_tb_layer" "1"
 }
-// entity 50
+// entity 52
 {
 "classname" "light"
 "origin" "336 164 68"
