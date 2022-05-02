@@ -32,5 +32,32 @@
 			"line2": "doors, he entered the door on his left.",
 			"line3": ""
 		}
+	},
+	"stanley/in_the_lounge_redone.wav":
+	{
+		"timedtext01":
+		{
+			"time": 5.3,
+			"line1": "As Stanley entered the lounge, he was",
+			"line2": "horrified to find not a single person",
+			"line3": "here."
+		},
+		"timedtext02":
+		{
+			"time": 5.2,
+			"line1": "He decided he would walk up to see his",
+			"line2": "boss, hoping that he would find an",
+			"line3": "answer there."
+		}
+	},
+	"stanley/up_to_his_boss.wav":
+	{
+		"timedtext01":
+		{
+			"time": 4.6,
+			"line1": "Coming to a staircase, Stanley walked",
+			"line2": "upstairs to his boss's office.",
+			"line3": ""
+		}
 	}
 }

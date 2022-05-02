@@ -17,11 +17,10 @@ void() trigger_narrator_touch =
 
 	self.enemy = other;
 
-	if (!self.sample || self.sample == "")
+	if (!self.noise || self.noise == "")
 		objerror("didn't set a narrator line!!");
 
-	//EasyMulticastFloat(EVENT_NARRATOR, stof(self.narrator), other);
-	EasyMulticastString(EVENT_NARRATOR, self.sample, other);
+	EasyMulticastString(EVENT_NARRATOR, self.noise, other);
 
 	self.nextthink = time + 1;
 	self.think = trigger_narrator_end;

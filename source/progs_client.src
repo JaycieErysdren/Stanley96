@@ -7,7 +7,6 @@
 #includelist
 	fteextensions.qc
 	shared.qc
-	narrator_shared.qc
 
 	client.qc
 #endlist
