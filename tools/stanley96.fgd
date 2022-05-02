@@ -507,33 +507,6 @@
 // katabase entity classes
 //
 
-@PointClass base(OneTargetName, OneTarget) size(-16 -16 -24, 16 16 32) = misc_interactable : "Player-interactable object." [
-	interact_item_image(string) : "Path to Item Image" : "" : "The image to display on screen."
-	interact_type(choices) : "Interaction Type" : 1 =
-	[
-		1 : "Viewable Item"
-		2 : "Objectives Sheet"
-	]
-]
-
-@PointClass base(Angle, OneTargetName, OneTarget, Alpha, EffectsFTE) size(32 32 16) color(255 128 0) studio({ "path" : mdl, "skin" : skin, "frame" : frame}) = misc_model : "A point entity for displaying models. A frame range can be given to animate the model." [
-	skin(integer) : "Skin index (default 0)" : : "Skin index (default 0) Use this when your custom model has more than one skin to select"
-	mdl(string) : "Model Selection (ex progs/model.mdl)"
-	frame(integer)
-	first_frame(integer)
-	last_frame(integer)
-	speed(integer) : "Speed" : 10
-	angles(integer) : "set 'angle' to 0 if this is used"
-]
-
-@PointClass = ambient_generic : "Generic looping ambient." [
-	soundfile(string) : "Path to Sound File" : "" : "The sound file to play."
-	volume(float) : "Sound Volume" : "0.5" : "Volume of the sound, expressed as a decimal between 0.0 and 1.0"
-	attenuation(choices) : "Sound Attenuation" : 0 =
-	[
-		0 : "ATTN_NONE (Hear everywhere)"
-		1 : "ATTN_NORM  (Standard distance)"
-		2 : "ATTN_IDLE (Smaller distance)"
-		3 : "ATTN_STATIC (Smallest distance)"
-	]
+@SolidClass = trigger_narrator : "Plays a single narrator line, and then disappears." [
+	sample(string) : "Narrator Line WAV" :  : "WAV name of the line to play."
 ]

@@ -1,0 +1,4 @@
+version 2
+set updatemode "1"
+set declined ""
+"Plugins/fteplug_ffmpeg" "title=FFMPEG Video Decoding Plugin" ver=6202 gamedir= arch=Win_x64 "desc=Provides support for more audio formats as well as video playback and better capture support." root=bin file=fteplug_ffmpeg_x64.dll

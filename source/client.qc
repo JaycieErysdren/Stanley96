@@ -1,4 +1,91 @@
 //
+// GLOBAL CSQC VARIABLES
+//
+
+float current_line_time;
+
+string caption_line1;
+string caption_line2;
+string caption_line3;
+
+jsonnode caption_tree;
+
+class CaptionController
+{
+	int i;
+	
+	virtual void() think =
+	{
+		if (i < caption_tree.length)
+		{
+			print("i'm thinkin' at ", ftos(time), "\n");
+
+			print((caption_tree.a[i])["line1"].s, "\n");
+			print((caption_tree.a[i])["line2"].s, "\n");
+			print((caption_tree.a[i])["line3"].s, "\n");
+			print(ftos(time + (caption_tree.a[i])["time"].f), "\n");
+
+			caption_line1 = (caption_tree.a[i])["line1"].s;
+			caption_line2 = (caption_tree.a[i])["line2"].s;
+			caption_line3 = (caption_tree.a[i])["line3"].s;
+
+			i++;
+
+			nextthink = time + (caption_tree.a[i])["time"].f;
+		}
+		else
+		{
+			caption_line1 = "";
+			caption_line2 = "";
+			caption_line3 = "";
+			print("ok byeee\n");
+			remove(this);
+		}
+	};
+
+	void() CaptionController =
+	{
+		nextthink = time + 0.1;
+	};
+};
+
+//
+// SPECIAL INITIALIZATIONS
+//
+
+jsonnode(string line) initialize_narrator =
+{
+	filestream f = fopen("json/captions.json", FILE_READNL);
+	jsonnode tree = json_parse(fgets(f));
+	fclose(f);
+	
+	if (tree)
+	{
+		if (cvar("developer") == 1)
+		{
+			for (int x = 0; x < tree[line].length; x++)
+			{
+				// fucked up that this is how the JSON accessor works
+				//print("caption", itos(x), ".time = ", ftos((tree[line].a[x])["time"].f), "\n");
+				//print("caption", itos(x), ".line1 = ", (tree[line].a[x])["line1"].s, "\n");
+				//print("caption", itos(x), ".line2 = ", (tree[line].a[x])["line2"].s, "\n");
+				//print("caption", itos(x), ".line3 = ", (tree[line].a[x])["line3"].s, "\n");
+			}
+		}
+
+		// play narrator line specified
+		soundupdate(self, CHAN_VOICE, line, 1, ATTN_NONE, 100, SOUNDFLAG_NOSPACIALISE, 0);
+		
+		// start caption timer
+		CaptionController controller = spawn(CaptionController);
+
+		return tree[line];
+	}
+
+	return 0;
+};
+
+//
 // ENGINE BUILTINS
 //
 
@@ -36,20 +123,24 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	renderscene();
 	
-	vector textbox_size = [view_size_x, 40];
-	
-	string narrator_line1 = getstats(STAT_NARRATOR_LINE1);
-	string narrator_line2 = getstats(STAT_NARRATOR_LINE2);
-	string narrator_line3 = getstats(STAT_NARRATOR_LINE3);
+	vector captionbox_size = [view_size_x, 40];
 
-	// narrator textbox
-	drawfill([0, screensize_y - textbox_size_y], textbox_size, [0.1, 0.1, 0.1], 1);
-	// line 1
-	drawstring([4, screensize_y - textbox_size_y + 4], narrator_line1, [8, 8], [1, 1, 1], 1, 0);
-	// line 2
-	drawstring([4, screensize_y - textbox_size_y + 16], narrator_line2, [8, 8], [1, 1, 1], 1, 0);
-	// line 3
-	drawstring([4, screensize_y - textbox_size_y + 28], narrator_line3, [8, 8], [1, 1, 1], 1, 0);
+	current_line_time = getsoundtime(self, CHAN_VOICE);
+	//print("current_line_time: ", ftos(current_line_time), "\n");
+
+	//if (time < caption_timer)
+	//{
+	//	caption_line1 = (caption_tree.a[caption_iteration])["line1"].s;
+	//	caption_line2 = (caption_tree.a[caption_iteration])["line2"].s;
+	//	caption_line3 = (caption_tree.a[caption_iteration])["line3"].s;
+	//	caption_timer = time + (caption_tree.a[caption_iteration])["time"].f;
+	//}
+
+	// narrator captionbox
+	drawfill([0, screensize_y - captionbox_size_y], captionbox_size, [0.1, 0.1, 0.1], 1); // background
+	drawstring([4, screensize_y - captionbox_size_y + 4], caption_line1, [8, 8], [1, 1, 1], 1, 0); // line 1
+	drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // line 2
+	drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // line 3
 
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
 	
@@ -109,8 +200,59 @@ void() CSQC_Parse_Event =
 	switch(readbyte())
 	{
 		case EVENT_NARRATOR:
-			localsound(narrator_lines[readfloat()]);
+			caption_tree = initialize_narrator(readstring());
+			//caption_iteration = 0;
+			//caption_timer = time + (caption_tree.a[caption_iteration])["time"].f;
+			//initialize_narrator(readstring());
 			break;
 		default: print("CSQC: i'm stupid and i don't know what to do\n"); break;
 	}
 };
+
+//
+// STANLEY96 CAPTION CLOCK(TM)
+//
+/*
+void() csqc_caption_clock_think =
+{
+	if (current_line_time > 0 && self.frame < cc_narrator1.length) // only do something if sound is playing
+	{
+		caption_t x = cc_narrator0[self.frame];
+		//caption_t x = cc_all[current_line_id][self.frame];
+
+		caption_line1 = x.line1;
+		caption_line2 = x.line2;
+		caption_line3 = x.line3;
+
+		self.frame++;
+
+		self.nextthink = time + x.length;
+	}
+	else
+	{
+		caption_line1 = "";
+		caption_line2 = "";
+		caption_line3 = "";
+		self.nextthink = time + 0.1;
+	}
+};
+
+void() csqc_caption_clock =
+{
+	entity csqc_caption_clock = spawn();
+	self = csqc_caption_clock;
+
+	self.frame = 0;
+	self.think = csqc_caption_clock_think;
+	self.nextthink = time + 0.1;
+};
+
+//
+// CSQC INIT FUNCTION
+//
+
+void(float apilevel, string enginename, float engineversion) CSQC_Init =
+{
+	csqc_caption_clock();
+};
+*/

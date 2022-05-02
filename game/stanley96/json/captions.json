@@ -1,0 +1,36 @@
+{
+	"stanley/to_the_lounge.wav":
+	{
+		"timedtext01":
+		{
+			"time": 4.8,
+			"line1": "Stanley decided to go to the staff",
+			"line2": "lounge, to check on his co-workers.",
+			"line3": ""
+		},
+		"timedtext02":
+		{
+			"time": 5.6,
+			"line1": "He never functioned well by himself,",
+			"line2": "and constantly needed support and",
+			"line3": "guidance from others."
+		},
+		"timedtext03":
+		{
+			"time": 3.3,
+			"line1": "So the thought of total solitude was",
+			"line2": "terrifying to him.",
+			"line3": ""
+		}
+	},
+	"stanley/door_on_his_left.wav":
+	{
+		"timedtext01":
+		{
+			"time": 4.9,
+			"line1": "When Stanley came to a set of two open",
+			"line2": "doors, he entered the door on his left.",
+			"line3": ""
+		}
+	}
+}

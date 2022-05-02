@@ -50,10 +50,6 @@ void() ClientConnect = {};
 void() worldspawn =
 {	
 	precache_everything();
-
-	clientstat(STAT_NARRATOR_LINE1, EV_STRING, narrator_line1);	
-	clientstat(STAT_NARRATOR_LINE3, EV_STRING, narrator_line3);	
-	clientstat(STAT_NARRATOR_LINE2, EV_STRING, narrator_line2);	
 };
 
 void() PutClientInServer =
@@ -90,6 +86,15 @@ void(float event, float value, entity ent) EasyMulticastFloat =
 	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
 	WriteByte(MSG_MULTICAST, event);
 	WriteFloat(MSG_MULTICAST, value);
+	msg_entity = ent;
+	multicast(ent.origin, MULTICAST_ONE_R);
+};
+
+void(float event, string value, entity ent) EasyMulticastString =
+{
+	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
+	WriteByte(MSG_MULTICAST, event);
+	WriteString(MSG_MULTICAST, value);
 	msg_entity = ent;
 	multicast(ent.origin, MULTICAST_ONE_R);
 };
