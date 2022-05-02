@@ -28,6 +28,8 @@
 /content/media/
 
 /game/*.bat
+/game/*.dll
+/game/*.lst
 /game/conhistory.txt
 /game/**/fte.cfg
 /game/**/*.sav
