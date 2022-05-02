@@ -8,6 +8,7 @@
 # ignore bsp compile artifacts
 #
 
+/content/**/mapsrc/**/*.bat
 /content/**/mapsrc/**/*.bsp
 /content/**/mapsrc/**/*.compile.map
 /content/**/mapsrc/**/*.lit
