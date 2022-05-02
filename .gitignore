@@ -24,6 +24,8 @@
 # specific folders and files that shouldn't be on the git
 #
 
+/content/media/
+
 /game/*.bat
 /game/conhistory.txt
 /game/**/fte.cfg
