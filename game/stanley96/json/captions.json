@@ -86,5 +86,43 @@
 			"line2": "",
 			"line3": ""
 		}
+	},
+	"stanley/into_the_elevator.wav":
+	{
+		"timedtext01":
+		{
+			"time": 5.5,
+			"line1": "Stanley was so bad at following",
+			"line2": "directions, it's incredible he wasn't",
+			"line3": "fired years ago."
+		},
+		"timedtext02":
+		{
+			"time": 6.1,
+			"line1": "Maybe this is why everyone had left.",
+			"line2": "No one wanted to be around someone as",
+			"line3": "bad at listening as him."
+		},
+		"timedtext03":
+		{
+			"time": 4.7,
+			"line1": "And since he was walking into the",
+			"line2": "middle of nowhere, and thus ruining",
+			"line3": "the entire story,"
+		},
+		"timedtext04":
+		{
+			"time": 6.1,
+			"line1": "Stanley decided that he would punish",
+			"line2": "himself. So when he came to the",
+			"line3": "elevator, and the doors opened,"
+		},
+		"timedtext05":
+		{
+			"time": 4.7,
+			"line1": "he stepped inside, and pushed the",
+			"line2": "button to go up.",
+			"line3": ""
+		}
 	}
 }
