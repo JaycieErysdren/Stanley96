@@ -60,7 +60,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	// set up 4:3 screen reisze
 	drawfill([0, 0], [vwidth, vheight], [0, 0, 0], 1);
 	setviewprop(VF_RT_DESTCOLOUR, "screenrt", -IMGFMT_R8G8B8A8, screensize);
-	setproperty(VF_SIZE, view_size);
+	setproperty(VF_VIEWPORT, [0, 0], view_size);
 
 	setproperty(VF_DRAWENGINESBAR, 0);
 	setproperty(VF_DRAWCROSSHAIR, 0);
@@ -73,6 +73,8 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	renderscene();
 	
+	//drawpic([0, 0], "gfx/dither_layer.png", screensize, [1, 1, 1], 1);
+
 	vector captionbox_size = [view_size_x, 40];
 
 	current_line_time = getsoundtime(self, CHAN_VOICE);
@@ -113,16 +115,31 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	
 	shaderforname("screenrtshader", "{\n{\nmap $rt:screenrt\nrgbgen vertex\n}\n}\n"); 
 
-	if (vheight < vwidth && (vheight * ar_normal) < vwidth )
-		// window is widescreen-shaped
-		drawpic([(vwidth / 2) - ((vheight * ar_normal) / 2), 0], "screenrtshader", [vheight * ar_normal, vheight], [1, 1, 1], 1);
-	else if ((vwidth / vheight) == ar_normal)
-		// perfectly 4:3 window
-		drawpic([0, 0], "screenrtshader", [vwidth, vheight], [1, 1, 1], 1);
-	else
-		// window is phone-shaped (?)
-		drawpic([0, (vheight / 2) - ((vwidth * 0.75) / 2)], "screenrtshader", [vwidth, vwidth * 0.75], [1, 1, 1], 1);
+	//drawpic([(vwidth / 2) - ((vheight * ar_normal) / 2), 0], "screenrtshader", [vheight * ar_normal, vheight], [1, 1, 1], 1);
 
+	vector display_pos;
+	vector display_size;
+
+	if (vheight < vwidth && (vheight * ar_normal) < vwidth )
+	{
+		// window is widescreen-shaped
+		display_pos = [(vwidth / 2) - ((vheight * ar_normal) / 2), 0];
+		display_size = [vheight * ar_normal, vheight];
+	}
+	else if ((vwidth / vheight) == ar_normal)
+	{
+		// perfectly 4:3 window
+		display_pos = [0, 0];
+		display_size = [vwidth, vheight];
+	}
+	else
+	{
+		// window is phone-shaped (?)
+		display_pos = [0, (vheight / 2) - ((vwidth * 0.75) / 2)];
+		display_size = [vwidth, vwidth * 0.75];
+	}
+	
+	drawpic(display_pos, "screenrtshader", display_size, [1, 1, 1], 1);
 
 	/* not sure if i wanna have a widescreen mode
 
