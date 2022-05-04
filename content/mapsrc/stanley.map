@@ -3127,7 +3127,7 @@
 // entity 46
 {
 "classname" "trigger_narrator"
-"noise" "stanley/to_the_lounge.wav"
+"narrator_line" "stanley/to_the_lounge.wav"
 // brush 0
 {
 ( 32 -128 0 ) ( 32 -127 0 ) ( 32 -128 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -3141,7 +3141,7 @@
 // entity 47
 {
 "classname" "trigger_narrator"
-"noise" "stanley/door_on_his_left.wav"
+"narrator_line" "stanley/door_on_his_left.wav"
 // brush 0
 {
 ( 1024 -800 0 ) ( 1024 -799 0 ) ( 1024 -800 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -3214,7 +3214,7 @@
 // entity 53
 {
 "classname" "trigger_narrator"
-"noise" "stanley/in_the_lounge_redone.wav"
+"narrator_line" "stanley/in_the_lounge_redone.wav"
 // brush 0
 {
 ( 1664 -1888 0 ) ( 1664 -1887 0 ) ( 1664 -1888 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -3596,7 +3596,7 @@
 // entity 64
 {
 "classname" "trigger_narrator"
-"noise" "stanley/up_to_his_boss.wav"
+"narrator_line" "stanley/up_to_his_boss.wav"
 // brush 0
 {
 ( 2512 -1600 0 ) ( 2512 -1600 1 ) ( 2512 -1601 0 ) trigger [ 1.5926598195281475e-15 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -3610,7 +3610,7 @@
 // entity 65
 {
 "classname" "trigger_narrator"
-"noise" "stanley/first_wrong.wav"
+"narrator_line" "stanley/first_wrong.wav"
 // brush 0
 {
 ( 928 -1184 0 ) ( 928 -1183 0 ) ( 928 -1184 1 ) trigger [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -3624,7 +3624,7 @@
 // entity 66
 {
 "classname" "trigger_narrator"
-"noise" "stanley/back_on_track.wav"
+"narrator_line" "stanley/back_on_track.wav"
 // brush 0
 {
 ( 944 -1664 0 ) ( 944 -1664 1 ) ( 944 -1665 0 ) trigger [ 1.5926598195281475e-15 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -4528,7 +4528,7 @@
 // entity 112
 {
 "classname" "trigger_narrator"
-"noise" "stanley/into_the_elevator.wav"
+"narrator_line" "stanley/into_the_elevator.wav"
 // brush 0
 {
 ( 608 -2048 0 ) ( 608 -2047 0 ) ( 608 -2048 1 ) trigger [ 0 -1 0 -32 ] [ 0 0 -1 0 ] 0 1 1

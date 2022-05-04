@@ -6,21 +6,24 @@
 			"time": 4.8,
 			"line1": "Stanley decided to go to the staff",
 			"line2": "lounge, to check on his co-workers.",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		},
 		"timedtext02":
 		{
 			"time": 5.6,
 			"line1": "He never functioned well by himself,",
 			"line2": "and constantly needed support and",
-			"line3": "guidance from others."
+			"line3": "guidance from others.",
+			"target": ""
 		},
 		"timedtext03":
 		{
 			"time": 3.3,
 			"line1": "So the thought of total solitude was",
 			"line2": "terrifying to him.",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		}
 	},
 	"stanley/door_on_his_left.wav":
@@ -30,7 +33,8 @@
 			"time": 4.9,
 			"line1": "When Stanley came to a set of two open",
 			"line2": "doors, he entered the door on his left.",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		}
 	},
 	"stanley/in_the_lounge_redone.wav":
@@ -40,14 +44,16 @@
 			"time": 5.3,
 			"line1": "As Stanley entered the lounge, he was",
 			"line2": "horrified to find not a single person",
-			"line3": "here."
+			"line3": "here.",
+			"target": ""
 		},
 		"timedtext02":
 		{
 			"time": 5.2,
 			"line1": "He decided he would walk up to see his",
 			"line2": "boss, hoping that he would find an",
-			"line3": "answer there."
+			"line3": "answer there.",
+			"target": ""
 		}
 	},
 	"stanley/up_to_his_boss.wav":
@@ -57,7 +63,8 @@
 			"time": 4.6,
 			"line1": "Coming to a staircase, Stanley walked",
 			"line2": "upstairs to his boss's office.",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		}
 	},
 	"stanley/first_wrong.wav":
@@ -67,14 +74,16 @@
 			"time": 5.6,
 			"line1": "This was not the correct way to the",
 			"line2": "employee lounge, and Stanley knew it",
-			"line3": "perfectly well."
+			"line3": "perfectly well.",
+			"target": ""
 		},
 		"timedtext02":
 		{
 			"time": 5.1,
 			"line1": "So he turned left at the first open",
 			"line2": "door, and walked back in the right",
-			"line3": "direction."
+			"line3": "direction.",
+			"target": ""
 		}
 	},
 	"stanley/back_on_track.wav":
@@ -84,7 +93,8 @@
 			"time": 2.7,
 			"line1": "And like that, he was back on track.",
 			"line2": "",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		}
 	},
 	"stanley/into_the_elevator.wav":
@@ -94,35 +104,40 @@
 			"time": 5.5,
 			"line1": "Stanley was so bad at following",
 			"line2": "directions, it's incredible he wasn't",
-			"line3": "fired years ago."
+			"line3": "fired years ago.",
+			"target": ""
 		},
 		"timedtext02":
 		{
 			"time": 6.1,
 			"line1": "Maybe this is why everyone had left.",
 			"line2": "No one wanted to be around someone as",
-			"line3": "bad at listening as him."
+			"line3": "bad at listening as him.",
+			"target": ""
 		},
 		"timedtext03":
 		{
 			"time": 4.7,
 			"line1": "And since he was walking into the",
 			"line2": "middle of nowhere, and thus ruining",
-			"line3": "the entire story,"
+			"line3": "the entire story,",
+			"target": ""
 		},
 		"timedtext04":
 		{
 			"time": 6.1,
 			"line1": "Stanley decided that he would punish",
 			"line2": "himself. So when he came to the",
-			"line3": "elevator, and the doors opened,"
+			"line3": "elevator, and the doors opened,",
+			"target": ""
 		},
 		"timedtext05":
 		{
 			"time": 4.7,
 			"line1": "he stepped inside, and pushed the",
 			"line2": "button to go up.",
-			"line3": ""
+			"line3": "",
+			"target": ""
 		}
 	}
 }

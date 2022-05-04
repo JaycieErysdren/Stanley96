@@ -508,5 +508,5 @@
 //
 
 @SolidClass = trigger_narrator : "Plays a single narrator line, and then disappears." [
-	noise(string) : "Narrator Line WAV" :  : "WAV name of the line to play."
+	narrator_line(string) : "Narrator Line WAV" :  : "WAV name of the line to play."
 ]

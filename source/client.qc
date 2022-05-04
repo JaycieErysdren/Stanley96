@@ -89,6 +89,11 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		caption_line1 = (caption_tree.a[caption_iteration])["line1"].s;
 		caption_line2 = (caption_tree.a[caption_iteration])["line2"].s;
 		caption_line3 = (caption_tree.a[caption_iteration])["line3"].s;
+		
+		string captiontargetname = (caption_tree.a[caption_iteration])["target"].s;
+		
+		if (captiontargetname && captiontargetname != "")
+			sendevent("FireTarget", "s", captiontargetname);
 
 		// save caption_iteration to a tempvar because we need to iterate it before the timer is set
 		// but the timer requires the original value

@@ -5,10 +5,21 @@
 #define SSQC
 
 #includelist
+	// shared
 	fteextensions.qc
 	shared.qc
 
+	// setup
 	server.qc
-	bmodels.qc
-	triggers.qc
+	csevents.qc
+
+	// entity base classes
+	CBaseEntity.qc
+	CBaseBrushEntity.qc
+	CBaseTrigger.qc
+
+	// entity classes
+	func_brush.qc
+	func_illusionary.qc
+	trigger_narrator.qc
 #endlist

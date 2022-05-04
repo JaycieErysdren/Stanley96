@@ -10,6 +10,10 @@ void() precache_everything =
 	//precache_sound("weapons/guncock.wav");
 };
 
+string __fullspawndata;
+
+entity activator;
+
 //
 // PLAYER FUNCTIONS
 //
