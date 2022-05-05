@@ -16,6 +16,7 @@ entity activator;
 //
 
 void() info_player_start = {};
+void() info_teleport_destination = {};
 
 vector() GetSpawnPoint =
 {
@@ -64,13 +65,25 @@ void() PutClientInServer =
 	self.angles = GetSpawnAngles();
 	self.fixangle = TRUE;
 
-	// half-life 2 player size
-	setsize(self, [-16, -16, 0], [16, 16, 72]);
-	self.view_ofs = [0, 0, 64];
+	if (cvar_string("mapname") == "wolf")
+	{
+		// wolf3d player size
+		setsize(self, [-16, -16, 0], [16, 16, 56]);
+		self.view_ofs = [0, 0, 32];
+	}
+	else
+	{
+		// half-life 2 player size
+		setsize(self, [-16, -16, 0], [16, 16, 72]);
+		self.view_ofs = [0, 0, 64];
+	}
 
 	// quake player size
 	// setsize(self, [-16, -16, -24], [16, 16, 32]);
 	// self.view_ofs = [0, 0, 22];
+	
+	// reset MenuQC loading bar every time we get into a game
+	localcmd("menu_cmd reset_loadingbar\n");
 };
 
 void() SV_RunClientCommand =

@@ -2,6 +2,8 @@
 // GLOBAL CSQC VARIABLES
 //
 
+// in game
+
 float current_line_time;
 //string current_line_sample;
 
@@ -47,7 +49,7 @@ jsonnode(string line) initialize_narrator =
 //
 
 void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
-{	
+{
 	clearscene();
 	
 	vector view_size = [320, 200];
@@ -73,7 +75,14 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	setproperty(VF_DRAWCROSSHAIR, 0);
 	setproperty(VF_DRAWWORLD, 1);
 
-	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, 64]);
+	float view_ofs;
+	
+	if (cvar_string("mapname") == "wolf")
+		view_ofs = 32;
+	else
+		view_ofs = 64;
+
+	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);
 	addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
 	
 	setproperty(VF_ANGLES, view_angles);
@@ -82,11 +91,9 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	
 	//drawpic([0, 0], "gfx/dither_layer.png", screensize, [1, 1, 1], 1);
 
-	vector captionbox_size = [view_size_x, 40];
-
-	if (getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
+	if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
 	{
-		localsound("stanley/ghosts.wav", CHAN_BODY, 0.5);
+		localsound("stanley/ghosts.wav", CHAN_BODY, 0.1);
 		music_status = 1;
 	}
 
@@ -150,14 +157,21 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		caption_line3 = "";
 	}
 
+	vector captionbox_size = [view_size_x, 40];
+
 	// narrator captionbox
 	drawfill([0, screensize_y - captionbox_size_y], captionbox_size, [0.1, 0.1, 0.1], 1); // background
-	drawstring([4, screensize_y - captionbox_size_y + 4], caption_line1, [8, 8], [1, 1, 1], 1, 0); // line 1
-	drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // line 2
-	drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // line 3
+	drawpic([0, screensize_y - captionbox_size_y], "gfx/dither_overlay", captionbox_size, [1, 1, 1], 0.4); // dithery overlay
+	drawstring([4, screensize_y - captionbox_size_y + 4], caption_line1, [8, 8], [1, 1, 1], 1, 0); // text line 1
+	drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // text line 2
+	drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // text line 3
 
-	drawstring([(view_size_x / 2) - 4, (view_size_y / 2) - 5], "+", [8, 8], [1, 1, 1], 1, 0);
-	//drawfill([0, 0], [view_size_x / 2, view_size_y / 2], [1, 0, 0], 0.5);
+	if (cvar("crosshair") == 1)
+		drawstring([(view_size_x / 2) - 4, (view_size_y / 2) - 5], "+", [8, 8], [1, 1, 1], 1, 0);
+
+	string captionbox_divider_text = "--------------------------------";
+	float captionbox_divider_size = captionbox_size_x / strlen(captionbox_divider_text);
+	drawstring([0, (screensize_y - captionbox_size_y) - (captionbox_divider_size / 2)], captionbox_divider_text, [captionbox_divider_size, captionbox_divider_size], [0.3, 0.3, 0.3], 1, 0);
 
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
 		

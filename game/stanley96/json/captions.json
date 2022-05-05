@@ -190,5 +190,183 @@
 			"line3": "FINISH WRITING CAPTIONS HERE!!!",
 			"target": ""
 		}
+	},
+	"stanley/walked_through_the_red_door.wav":
+	{
+		"timedtext01":
+		{
+			"time": 3,
+			"line1": "Now listen carefully,",
+			"line2": "this is important:",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext02":
+		{
+			"time": 3,
+			"line1": "Stanley walked through the red door.",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		}
+	},
+	"stanley/misunderstood_1.wav":
+	{
+		"timedtext01":
+		{
+			"time": 2.5,
+			"line1": "Aha, perhaps you misunderstood.",
+			"line2": "",
+			"line3": "",
+			"target": "tele_misunderstood_1"
+		},
+		"timedtext02":
+		{
+			"time": 3,
+			"line1": "Stanley walked through the ^1red^d door.",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		}
+	},
+	"stanley/misunderstood_2.wav":
+	{
+		"timedtext01":
+		{
+			"time": 2.5,
+			"line1": "I still don't think we're communicating",
+			"line2": "properly.",
+			"line3": "",
+			"target": "tele_misunderstood_2"
+		},
+		"timedtext02":
+		{
+			"time": 2.5,
+			"line1": "^1Stanley walked through the red door.^d",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		}
+	},
+	"stanley/go_ahead_then.wav":
+	{
+		"timedtext01":
+		{
+			"time": 4,
+			"line1": "Alright, fine, go ahead Stanley.",
+			"line2": "You want to know so badly what's",
+			"line3": "out there?",
+			"target": "door_blue_03"
+		},
+		"timedtext02":
+		{
+			"time": 2.5,
+			"line1": "You want to find out what lies at the",
+			"line2": "end of this road you've chosen?",
+			"line3": "Well, don't let me stop you.",
+			"target": ""
+		}
+	},
+	"stanley/nothing_here.wav":
+	{
+		"timedtext01":
+		{
+			"time": 3,
+			"line1": "You see? It's nothing.",
+			"line2": "",
+			"line3": "",
+			"target": "door_devroom"
+		},
+		"timedtext02":
+		{
+			"time": 6,
+			"line1": "No one's even built this section of the",
+			"line2": "map because you were never supposed",
+			"line3": "to be here in the first place!",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 7,
+			"line1": "It's just a bunch of skybox and dev",
+			"line2": "wall textures! That's it! Is this what ",
+			"line3": "you were looking for?",
+			"target": ""
+		},
+		"timedtext04":
+		{
+			"time": 6,
+			"line1": "Was it worth ruining the story I'd",
+			"line2": "written out for you? I put a lot of",
+			"line3": "time into that. And now you--",
+			"target": ""
+		},
+		"timedtext05":
+		{
+			"time": 5.5,
+			"line1": "Well here you are now just looking",
+			"line2": "at nothing! To think that that's all I",
+			"line3": "needed to make in the first place,",
+			"target": ""
+		},
+		"timedtext06":
+		{
+			"time": 5.5,
+			"line1": "just a whole lot of nothing, and you",
+			"line2": "would've been happy-- Well hey! You",
+			"line3": "still need a little something to do,",
+			"target": ""
+		},
+		"timedtext07":
+		{
+			"time": 7,
+			"line1": "am I right? Here, let me load up",
+			"line2": "another map, see if there's something",
+			"line3": "in here that'll keep you occupied...",
+			"target": ""
+		},
+		"timedtext08":
+		{
+			"time": 6,
+			"line1": "[mumbling]",
+			"line2": "Ah! Here's one. Let's boot this up.",
+			"line3": "We'll see if you like it.",
+			"target": ""
+		},
+		"timedtext09":
+		{
+			"time": 100,
+			"line1": "[mumbling]",
+			"line2": "Ah! Here's one. Let's boot this up.",
+			"line3": "We'll see if you like it.",
+			"target": "game_ending"
+		}
+	},
+	"stanley/alt_world_1.wav":
+	{
+		"timedtext01":
+		{
+			"time": 6.5,
+			"line1": "Well Stanley, is this any better?",
+			"line2": "I don't know why it would be, this",
+			"line3": "map wasn't even made for you.",
+			"target": ""
+		},
+		"timedtext02":
+		{
+			"time": 5.5,
+			"line1": "Atleast I created a world specifically",
+			"line2": "with you in mind. I wanted to make you",
+			"line3": "a leading man!",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 3,
+			"line1": "This one, well, I'm afraid you're on",
+			"line2": "your own there.",
+			"line3": "",
+			"target": ""
+		}
 	}
 }

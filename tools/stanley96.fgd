@@ -152,7 +152,9 @@
 @PointClass base(Player) = info_player_start : "Player 1 start point." []
 @PointClass base(Player) = info_player_start_dev : "Dev player start point." []
 
-@PointClass base(Player, OneTargetName) size(-32 -32 0, 32 32 64) = info_teleport_destination : "trigger_teleport destination point." []
+@PointClass base(Player, OneTargetName) = info_teleport_destination : "trigger_teleport destination point." []
+
+//@PointClass base(Player, OneTargetName) size(-32 -32 0, 32 32 64) = info_teleport_destination : "trigger_teleport destination point." []
 
 //
 // miscellaneous classes

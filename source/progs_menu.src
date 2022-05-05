@@ -1,0 +1,14 @@
+#pragma target fte
+
+#pragma progs_dat "../game/stanley96/menu.dat"
+
+#define MENU
+
+#includelist
+	// shared
+	fteextensions.qc
+	shared.qc
+
+	// setup
+	menu.qc
+#endlist

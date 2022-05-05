@@ -19,10 +19,18 @@
 
 	// entity classes
 	func_brush.qc
+	func_door.qc
 	func_rotate.qc
 	func_illusionary.qc
+	point_changelevel.qc
+	point_teleport.qc
+	trigger_changelevel.qc
 	trigger_narrator.qc
 	trigger_once.qc
+	trigger_teleport.qc
+
+	// temp
+	temp_wolf3d.qc
 
 	// misc
 	csevents.qc
