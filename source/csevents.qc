@@ -1,4 +1,7 @@
 void(string targ) CSEv_FireTarget_s =
 {
-	print("i'm supposed to fire ", targ, " here.\n");
+	CBaseEntity t = (CBaseEntity)find(world, ::targetname, targ);
+
+	if (t)
+		t.Use();
 };

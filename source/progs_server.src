@@ -11,7 +11,6 @@
 
 	// setup
 	server.qc
-	csevents.qc
 
 	// entity base classes
 	CBaseEntity.qc
@@ -20,6 +19,11 @@
 
 	// entity classes
 	func_brush.qc
+	func_rotate.qc
 	func_illusionary.qc
 	trigger_narrator.qc
+	trigger_once.qc
+
+	// misc
+	csevents.qc
 #endlist

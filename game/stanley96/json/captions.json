@@ -7,7 +7,7 @@
 			"line1": "Stanley decided to go to the staff",
 			"line2": "lounge, to check on his co-workers.",
 			"line3": "",
-			"target": ""
+			"target": "door_427"
 		},
 		"timedtext02":
 		{
@@ -34,7 +34,7 @@
 			"line1": "When Stanley came to a set of two open",
 			"line2": "doors, he entered the door on his left.",
 			"line3": "",
-			"target": ""
+			"target": "door_firstchoice"
 		}
 	},
 	"stanley/in_the_lounge_redone.wav":
@@ -45,7 +45,7 @@
 			"line1": "As Stanley entered the lounge, he was",
 			"line2": "horrified to find not a single person",
 			"line3": "here.",
-			"target": ""
+			"target": "door_lounge_enter"
 		},
 		"timedtext02":
 		{
@@ -53,7 +53,7 @@
 			"line1": "He decided he would walk up to see his",
 			"line2": "boss, hoping that he would find an",
 			"line3": "answer there.",
-			"target": ""
+			"target": "door_lounge_exit"
 		}
 	},
 	"stanley/up_to_his_boss.wav":
@@ -75,7 +75,7 @@
 			"line1": "This was not the correct way to the",
 			"line2": "employee lounge, and Stanley knew it",
 			"line3": "perfectly well.",
-			"target": ""
+			"target": "door_firstchoice_right"
 		},
 		"timedtext02":
 		{
@@ -94,7 +94,7 @@
 			"line1": "And like that, he was back on track.",
 			"line2": "",
 			"line3": "",
-			"target": ""
+			"target": "door_backontrack_01"
 		}
 	},
 	"stanley/into_the_elevator.wav":
@@ -137,6 +137,57 @@
 			"line1": "he stepped inside, and pushed the",
 			"line2": "button to go up.",
 			"line3": "",
+			"target": ""
+		}
+	},
+	"stanley/going_crazy.wav":
+	{
+		"timedtext01":
+		{
+			"time": 2.5,
+			"line1": "But Stanley just couldn't do it.",
+			"line2": "",
+			"line3": "",
+			"target": "door_crazy_01"
+		},
+		"timedtext02":
+		{
+			"time": 5,
+			"line1": "He considered the possibility of",
+			"line2": "facing his boss, of admitting that",
+			"line3": "he had left his left his post",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 6,
+			"line1": "during work hours, he might be fired",
+			"line2": "for that, and in such a competitive",
+			"line3": "economy, was it really worth taking",
+			"target": ""
+		},
+		"timedtext04":
+		{
+			"time": 8,
+			"line1": "that risk? All because he believed",
+			"line2": "everyone had disappeared? His boss",
+			"line3": "would think he was crazy.",
+			"target": ""
+		},
+		"timedtext05":
+		{
+			"time": 2.5,
+			"line1": "And then something occured to Stanley.",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext06":
+		{
+			"time": 100,
+			"line1": "FINISH WRITING CAPTIONS HERE!!!",
+			"line2": "FINISH WRITING CAPTIONS HERE!!!",
+			"line3": "FINISH WRITING CAPTIONS HERE!!!",
 			"target": ""
 		}
 	}

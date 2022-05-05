@@ -5,9 +5,6 @@
 void() precache_everything =
 {
 	precache_model("progs/player.mdl");
-	//precache_model("models/e1m1.obj");
-	//precache_model("progs/v_shot.mdl");
-	//precache_sound("weapons/guncock.wav");
 };
 
 string __fullspawndata;

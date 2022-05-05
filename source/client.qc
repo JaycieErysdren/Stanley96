@@ -3,14 +3,19 @@
 //
 
 float current_line_time;
+//string current_line_sample;
 
 string caption_line1;
 string caption_line2;
 string caption_line3;
 
+//float game_was_paused;
+
 jsonnode caption_tree;
 float caption_timer;
 float caption_iteration;
+
+float music_status;
 
 //
 // SPECIAL INITIALIZATIONS
@@ -25,7 +30,9 @@ jsonnode(string line) initialize_narrator =
 	if (tree)
 	{
 		// play narrator line specified
-		localsound(line, CHAN_VOICE, 1);
+		//soundupdate(self, CHAN_VOICE, line, 1.0, ATTN_NONE, 100, 0, 0);
+		//current_line_sample = line;
+		localsound(line, CHAN_VOICE);
 		caption_iteration = 0;
 		caption_timer = time + 0.1;
 
@@ -77,7 +84,40 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	vector captionbox_size = [view_size_x, 40];
 
+	if (getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
+	{
+		localsound("stanley/ghosts.wav", CHAN_BODY, 0.5);
+		music_status = 1;
+	}
+
 	current_line_time = getsoundtime(self, CHAN_VOICE);
+
+	/* this sucks
+	if (serverkeyfloat(SERVERKEY_PAUSESTATE) != 1)
+	{
+		if (game_was_paused == 1)
+		{
+			print("game was paused...\n");
+			soundupdate(self, CHAN_VOICE, current_line_sample, 1, ATTN_NONE, 100, 0, 0);
+			caption_iteration = 0;
+			caption_timer = time + 0.1;
+		}
+
+		game_was_paused = 0;
+		//print("game_was_paused: ", ftos(game_was_paused), "\n");
+	}
+	else
+	{
+		if (game_was_paused == 0)
+		{
+			print("game is paused...\n");
+			soundupdate(self, CHAN_VOICE, "", -1, ATTN_NONE, 100, 0, -current_line_time);
+			caption_iteration = 0;
+			caption_timer = time + 0.1;
+		}
+		game_was_paused = 1;
+	}
+	*/
 
 	// caption display machine
 	// 1. check if a narrator sound is playing
@@ -116,8 +156,11 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // line 2
 	drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // line 3
 
+	drawstring([(view_size_x / 2) - 4, (view_size_y / 2) - 5], "+", [8, 8], [1, 1, 1], 1, 0);
+	//drawfill([0, 0], [view_size_x / 2, view_size_y / 2], [1, 0, 0], 0.5);
+
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
-	
+		
 	shaderforname("screenrtshader", "{\n{\nmap $rt:screenrt\nrgbgen vertex\n}\n}\n"); 
 
 	//drawpic([(vwidth / 2) - ((vheight * ar_normal) / 2), 0], "screenrtshader", [vheight * ar_normal, vheight], [1, 1, 1], 1);

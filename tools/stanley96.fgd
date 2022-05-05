@@ -504,9 +504,27 @@
 ]
 
 //
-// katabase entity classes
+// stanley96 entity classes
 //
 
 @SolidClass = trigger_narrator : "Plays a single narrator line, and then disappears." [
 	narrator_line(string) : "Narrator Line WAV" :  : "WAV name of the line to play."
+]
+
+
+@SolidClass base(Angles, OneTargetName, OneTarget, EricWBrush, EricWBrushLight, Alpha, EffectsFTE) = func_rotate : "Rotating brush." [
+	spawnflags(Flags) =
+	[
+		1 : "Triggered by touch"
+		2 : "Triggered by +use"
+		4 : "Change frames"
+		8 : "Not solid"
+		16 : "Start open"
+		32 : "Continious Rotation"
+	]
+	speed(integer) : "Speed" : 50 : "Speed to travel when opening or closing, in units per second."
+	wait(float) : "Wait" : "3" : "Delay, in seconds, before the brush will automatically close, or continue from a path_corner. Set to -1 to never close."
+	health(integer) : "Health" : 0 : "Giving this a value other than 0 makes this door shootable. Shooting it will deplete its health value. When the health value reaches zero, it will open."
+	sound_start(string) : "Start Move Sound" :  : "Sound to play when the brush starts moving."
+	sound_stop(string) : "Stop Move Sound" :  : "Sound to play when the brush stops moving."
 ]

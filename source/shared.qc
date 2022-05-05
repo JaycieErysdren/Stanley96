@@ -14,3 +14,9 @@ enum
 {
 	EVENT_NARRATOR
 };
+
+//
+// GLOBAL ENTITY FIELDS
+//
+
+.float state;
