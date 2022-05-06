@@ -67,12 +67,13 @@ void(vector screensize) m_draw =
 			drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
 			drawpic(display_pos, "gfx/loading_bg", display_size, [1, 1, 1], 1);
 
-			drawstring([display_pos_x, display_pos_y + 16], "PRESS ANYTHING TO START", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
+			drawstring([display_pos_x + ((screensize_y / 32) / 2), display_pos_y + ((screensize_y / 32) / 2)], "PRESS AND KEY TO START", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 		}
 		else if (menu_gamestate == 1)  // game has started
 		{
-			drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 0.5);
-			drawstring([display_pos_x, (display_pos_y + display_size_y) - screensize_y / 16], "BEGIN THE GAME AGAIN", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
+			drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
+			drawpic(display_pos, "gfx/loading_bg", display_size, [1, 1, 1], 1);
+			drawstring([display_pos_x + ((screensize_y / 32) / 2), (display_pos_y + display_size_y) - (screensize_y / 32) - ((screensize_y / 32) / 2)], "BEGIN THE GAME AGAIN", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 		}
 	}
 };
