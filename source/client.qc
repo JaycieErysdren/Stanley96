@@ -157,6 +157,9 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		caption_line3 = "";
 	}
 
+	// screen color overlay
+	drawfill([0, 0], [vwidth, vheight], stov(cvar_string("stanley_fade_color")), cvar("stanley_fade_alpha"));
+
 	vector captionbox_size = [view_size_x, 40];
 
 	// narrator captionbox

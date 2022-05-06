@@ -57,8 +57,8 @@ void func_rotate :: func_rotate ( void )
 
 	Initialize();
 
-	//if (spawnflags & FUNC_ROTATE_FLAG_USEABLE)
-	//	flags |= var_USEABLE;
+	if (spawnflags & FUNC_ROTATE_FLAG_USEABLE)
+		flags |= FL_USEABLE;
 
 	if (sound_start)
 		precache_sound(sound_start);

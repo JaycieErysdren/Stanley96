@@ -16,6 +16,12 @@ enum
 };
 
 //
+// GLOBAL ENTITY FLAGS
+//
+
+const float FL_USEABLE = 4096;
+
+//
 // GLOBAL ENTITY FIELDS
 //
 

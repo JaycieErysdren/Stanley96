@@ -199,7 +199,7 @@
 			"line1": "Now listen carefully,",
 			"line2": "this is important:",
 			"line3": "",
-			"target": ""
+			"target": "door_redblue_01"
 		},
 		"timedtext02":
 		{
@@ -335,7 +335,7 @@
 		},
 		"timedtext09":
 		{
-			"time": 100,
+			"time": 6,
 			"line1": "[mumbling]",
 			"line2": "Ah! Here's one. Let's boot this up.",
 			"line3": "We'll see if you like it.",
@@ -365,6 +365,119 @@
 			"time": 3,
 			"line1": "This one, well, I'm afraid you're on",
 			"line2": "your own there.",
+			"line3": "",
+			"target": ""
+		}
+	},
+	"stanley/took_the_red_door.wav":
+	{
+		"timedtext01":
+		{
+			"time": 5,
+			"line1": "Good, good. Now, if you don't mind,",
+			"line2": "there's something I'd like to show you.",
+			"line3": "",
+			"target": "door_red_death"
+		},
+		"timedtext02":
+		{
+			"time": 4,
+			"line1": "But to do that, I think it would be",
+			"line2": "best for us to start from the",
+			"line3": "beginning.",
+			"target": "red_door_relay"
+		}
+	},
+	"stanley/sad_stanley.wav":
+	{
+		"timedtext01":
+		{
+			"time": 5,
+			"line1": "Timed text 01, line 1",
+			"line2": "Timed text 01, line 2",
+			"line3": "Timed text 01, line 3",
+			"target": ""
+		},
+		"timedtext02":
+		{
+			"time": 5,
+			"line1": "Timed text 02, line 1",
+			"line2": "Timed text 02, line 2",
+			"line3": "Timed text 02, line 3",
+			"target": ""
+		}
+	},
+	"stanley/in_the_boss_office.wav":
+	{
+		"timedtext01":
+		{
+			"time": 7.5,
+			"line1": "Entering his manager's office, Stanley",
+			"line2": "was once again stunned to discover not",
+			"line3": "an indication of any human life.",
+			"target": "door_boss"
+		},
+		"timedtext02":
+		{
+			"time": 5,
+			"line1": "It was at this point that he began to",
+			"line2": "feel dizzy, and a little sick.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 5.5,
+			"line1": "And he even thought he might pass out,",
+			"line2": "when suddenly he noticed a keypad next",
+			"line3": "to the filing cabinet,",
+			"target": ""
+		},
+		"timedtext04":
+		{
+			"time": 3,
+			"line1": "in the corner of his boss's office.",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext05":
+		{
+			"time": 7,
+			"line1": "Stanley had never seen this panel before,",
+			"line2": "and had no idea what combination",
+			"line3": "of numbers would produce any result.",
+			"target": ""
+		},
+		"timedtext06":
+		{
+			"time": 8,
+			"line1": "In fact, only Stanley's boss knew this.",
+			"line2": "Since the panel withheld access to the",
+			"line3": "boss's greatest, darkest secret.",
+			"target": ""
+		},
+		"timedtext07":
+		{
+			"time": 5.5,
+			"line1": "And so he had assigned the keypad a",
+			"line2": "combination that only he could possibly",
+			"line3": "know:",
+			"target": ","
+		},
+		"timedtext08":
+		{
+			"time": 8,
+			"line1": "the number of his freshman dorm number",
+			"line2": "in college. ^11 - 9 - 5 - 7^d.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext09":
+		{
+			"time": 6,
+			"line1": "But of course, Stanley couldn't",
+			"line2": "possibly have known this.",
 			"line3": "",
 			"target": ""
 		}

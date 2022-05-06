@@ -2,6 +2,15 @@
  
 **Stanley96** is a retro-styled demake of [The Stanley Parable (2011)](https://www.moddb.com/mods/the-stanley-parable) using the [FTEQW](https://fte.triptohell.info/) engine, a branch of the Quake engine.
 
+## Credits
+
+Jaycie Ewald - Programming, Level Design
+@necrolavigne - Level Textures
+
+Davey Wreden - The Stanley Parable (2011)
+Galactic Cafe - The Stanley Parable (2013)
+Crows Crows Crows - The Stanley Parable: Ultra Deluxe (2022)
+
 ## Q&A
 
 ### Is this game finished yet?

@@ -5,11 +5,35 @@
 void() precache_everything =
 {
 	precache_model("progs/player.mdl");
+	precache_sound("player/use1.wav");
+	precache_sound("player/use2.wav");
+	precache_sound("player/use3.wav");
+	precache_sound("player/use4.wav");
+	precache_sound("player/use5.wav");
+	precache_sound("player/footsteps/concrete1.wav");
+	precache_sound("player/footsteps/concrete2.wav");
+	precache_sound("player/footsteps/concrete3.wav");
+	precache_sound("player/footsteps/concrete4.wav");
+	precache_sound("player/footsteps/sand1.wav");
+	precache_sound("player/footsteps/sand2.wav");
+	precache_sound("player/footsteps/sand3.wav");
+	precache_sound("player/footsteps/sand4.wav");
+	precache_sound("player/footsteps/tile1.wav");
+	precache_sound("player/footsteps/tile2.wav");
+	precache_sound("player/footsteps/tile3.wav");
+	precache_sound("player/footsteps/tile4.wav");
+	precache_sound("player/footsteps/grass1.wav");
+	precache_sound("player/footsteps/grass2.wav");
+	precache_sound("player/footsteps/grass3.wav");
+	precache_sound("player/footsteps/grass4.wav");
 };
 
 string __fullspawndata;
 
 entity activator;
+
+float player_footsteptimer;
+float player_usetimer;
 
 //
 // PLAYER FUNCTIONS
@@ -39,13 +63,91 @@ vector() GetSpawnAngles =
 };
 
 //
+// PLAYER FOOTSTEPS
+//
+
+string() Player_Footstep_Check =
+{
+	float surfacefloat = 0;
+	string surfacestring = "";
+	vector surfaceorigin = '0 0 0';
+
+	traceline(self.origin, self.origin - '0 0 64', FALSE, self);
+
+	if (trace_fraction != 1)
+		surfaceorigin = trace_endpos;
+
+	surfacefloat = getsurfacenearpoint(self.groundentity, surfaceorigin);
+
+	if (surfacefloat >= 0)
+		surfacestring = getsurfacetexture(self.groundentity, surfacefloat);
+
+	surfacestring = substring(surfacestring, 0, 4);
+
+	return surfacestring;
+};
+
+string() Player_Footstep_Sound =
+{
+	string check;
+	string random_step = ftos(ceil(random(0, 4)));
+	
+	if (Player_Footstep_Check() == "carp") // carpet
+		check = strcat("player/footsteps/sand", random_step, ".wav");
+	else if (Player_Footstep_Check() == "tile") // tile
+		check = strcat("player/footsteps/tile", random_step, ".wav");
+	else if (Player_Footstep_Check() == "conc") // concrete
+		check = strcat("player/footsteps/concrete", random_step, ".wav");
+	else if (Player_Footstep_Check() == "gras") // grass
+		check = strcat("player/footsteps/grass", random_step, ".wav");
+	else if (Player_Footstep_Check() == "colo") // solid color
+		check = "";
+	else // generic
+		check = strcat("player/footsteps/concrete", random_step, ".wav");
+	return check;
+};
+
+void() Player_Footstep =
+{
+	float high = vlen(self.velocity) > 250;
+	float low = vlen(self.velocity) < 250;
+	float delay = 0;
+	string step = Player_Footstep_Sound();
+
+	if (self.velocity_x || self.velocity_y && !self.velocity_z && player_footsteptimer < time)
+	{
+		sound(self, CHAN_AUTO, step, 0.5, ATTN_NORM);
+		if (high) delay = 0.25;
+		if (low) delay = 0.5;
+		player_footsteptimer = time + delay;
+	}
+};
+
+//
+// PLAYER +USE
+//
+
+void() Player_UseCheck;
+
+//
 // ENGINE BUILTINS
 //
 
 void() main = {};
 void() StartFrame = {};
 void() RestoreGame = {};
-void() PlayerPreThink = {};
+
+void() PlayerPreThink =
+{
+	if (self.health)
+	{
+		Player_Footstep();
+
+		if (self.button3)
+			Player_UseCheck();
+	}
+};
+
 void() PlayerPostThink = {};
 void() ClientConnect = {};
 

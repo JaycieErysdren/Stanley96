@@ -136,7 +136,7 @@ float(float evtype, float scanx, float chary, float devid) Menu_InputEvent =
 		{
 			switch (evtype)
 			{
-				case IE_KEYDOWN: menu_gamestate = 1; localcmd("startgame\n"); return TRUE; break;
+				case IE_KEYDOWN: menu_gamestate = 1; localcmd("startgame\n"); cvar_set("stanley_fade_alpha", "0"); return TRUE; break;
 				default: break;
 			}
 		}

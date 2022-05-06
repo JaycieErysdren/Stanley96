@@ -18,11 +18,17 @@
 	CBaseTrigger.qc
 
 	// entity classes
+	func_accessibility.qc
 	func_brush.qc
-	func_door.qc
-	func_rotate.qc
 	func_illusionary.qc
+	func_rotate.qc
+	light.qc
 	point_changelevel.qc
+	point_command.qc
+	point_cvarset.qc
+	point_fade.qc
+	point_narrator.qc
+	point_relay.qc
 	point_teleport.qc
 	trigger_changelevel.qc
 	trigger_narrator.qc
@@ -34,4 +40,5 @@
 
 	// misc
 	csevents.qc
+	server_end.qc
 #endlist
