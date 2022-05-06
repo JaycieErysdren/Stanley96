@@ -4,12 +4,13 @@
 
 ## Credits
 
-Jaycie Ewald - Programming, Level Design
-@necrolavigne - Level Textures
+- Jaycie Ewald - Programming, Level Design
+- @necrolavigne - Level Textures
 
-Davey Wreden - The Stanley Parable (2011)
-Galactic Cafe - The Stanley Parable (2013)
-Crows Crows Crows - The Stanley Parable: Ultra Deluxe (2022)
+
+- Davey Wreden - The Stanley Parable (2011)
+- Galactic Cafe - The Stanley Parable (2013)
+- Crows Crows Crows - The Stanley Parable: Ultra Deluxe (2022)
 
 ## Q&A
 
