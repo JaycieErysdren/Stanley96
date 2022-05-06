@@ -392,18 +392,186 @@
 	{
 		"timedtext01":
 		{
-			"time": 5,
-			"line1": "Timed text 01, line 1",
-			"line2": "Timed text 01, line 2",
-			"line3": "Timed text 01, line 3",
+			"time": 5.8,
+			"line1": "This is a very sad story about",
+			"line2": "the death of a man named Stanley.",
+			"line3": "",
 			"target": ""
 		},
 		"timedtext02":
 		{
+			"time": 6,
+			"line1": "Stanley worked for a company in a",
+			"line2": "big building, where he was employee",
+			"line3": "number 427.",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 5.6,
+			"line1": "His job pushing buttons demanded",
+			"line2": "little of him, so there was not much",
+			"line3": "of himself to give.",
+			"target": ""
+		},
+		"timedtext04":
+		{
+			"time": 5.1,
+			"line1": "And in this way, Stanley's job felt",
+			"line2": "less and less like his every day.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext05":
+		{
+			"time": 5.7,
+			"line1": "But if buttons need pushing one day,",
+			"line2": "it means they'll need pushing the next,",
+			"line3": "and then the next.",
+			"target": ""
+		},
+		"timedtext06":
+		{
+			"time": 5.6,
+			"line1": "So without question or judgment,",
+			"line2": "Stanley continued to do what the screen",
+			"line3": "told him.",
+			"target": ""
+		},
+		"timedtext07":
+		{
+			"time": 6.5,
+			"line1": "One keystroke flowed into another",
+			"line2": "keystroke, flowed into his ride home,",
+			"line3": "flowed into dinner,",
+			"target": ""
+		},
+		"timedtext08":
+		{
+			"time": 5.2,
+			"line1": "flowed into waking up, flowed into",
+			"line2": "going to work, and here he was again.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext09":
+		{
+			"time": 6,
+			"line1": "Stanley was typing out a complete",
+			"line2": "sentence that said absolutely nothing",
+			"line3": "at all.",
+			"target": ""
+		},
+		"timedtext10":
+		{
+			"time": 3.6,
+			"line1": "If in reality, no one ever actually",
+			"line2": "disappeared from the office,",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext11":
+		{
+			"time": 5.6,
+			"line1": "and Stanley never got the opportunity",
+			"line2": "to make a decision, to choose which path",
+			"line3": "he wanted to take,",
+			"target": ""
+		},
+		"timedtext12":
+		{
+			"time": 2.7,
+			"line1": "would his life still have any meaning?",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext13":
+		{
+			"time": 6.5,
+			"line1": "Perhaps when we long for something",
+			"line2": "deeply enough, these hopes and fantasies",
+			"line3": "become so strong in our minds,",
+			"target": ""
+		},
+		"timedtext14":
+		{
+			"time": 6.3,
+			"line1": "that we truly believe that we're there,",
+			"line2": "controlling that person,",
+			"line3": "and living that adventure.",
+			"target": ""
+		},
+		"timedtext15":
+		{
+			"time": 5.9,
+			"line1": "To manipulate your own thoughts and",
+			"line2": "emotions might mean freedom from",
+			"line3": "a self-imposed prison.",
+			"target": ""
+		},
+		"timedtext16":
+		{
 			"time": 5,
-			"line1": "Timed text 02, line 1",
-			"line2": "Timed text 02, line 2",
-			"line3": "Timed text 02, line 3",
+			"line1": "But these delusions can be fatal to",
+			"line2": "those who can't tell the difference.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext17":
+		{
+			"time": 5.9,
+			"line1": "And so, Stanley asked, if that door",
+			"line2": "never opened, if I'll never be able to",
+			"line3": "walk away from those people,",
+			"target": ""
+		},
+		"timedtext18":
+		{
+			"time": 6.6,
+			"line1": "and from these buttons, is this life",
+			"line2": "still worth experiencing?",
+			"line3": "Am I actually happy?",
+			"target": ""
+		},
+		"timedtext19":
+		{
+			"time": 3.6,
+			"line1": "Stanley answered this question",
+			"line2": "by pushing a button.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext19a":
+		{
+			"time": 1.7,
+			"line1": "Stanley answered this question",
+			"line2": "by pushing a button.",
+			"line3": "Then he pushed a button.",
+			"target": ""
+		},
+		"timedtext20":
+		{
+			"time": 2.1,
+			"line1": "And then he pushed a button.",
+			"line2": "",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext20a":
+		{
+			"time": 2.5,
+			"line1": "And then he pushed a button.",
+			"line2": "Then, he pushed a button.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext20b":
+		{
+			"time": 1.8,
+			"line1": "And then he pushed a button.",
+			"line2": "Then, he pushed a button.",
+			"line3": "Then, he pushed a button.",
 			"target": ""
 		}
 	},

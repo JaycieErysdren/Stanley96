@@ -34,7 +34,7 @@ jsonnode(string line) initialize_narrator =
 		// play narrator line specified
 		//soundupdate(self, CHAN_VOICE, line, 1.0, ATTN_NONE, 100, 0, 0);
 		//current_line_sample = line;
-		localsound(line, CHAN_VOICE);
+		localsound(line, CHAN_VOICE, cvar("volume"));
 		caption_iteration = 0;
 		caption_timer = time + 0.1;
 
@@ -93,7 +93,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
 	{
-		localsound("stanley/ghosts.wav", CHAN_BODY, 0.1);
+		localsound("stanley/ghosts.wav", CHAN_BODY, 0.2 * cvar("volume"));
 		music_status = 1;
 	}
 
