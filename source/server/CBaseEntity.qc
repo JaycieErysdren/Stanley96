@@ -8,6 +8,8 @@ class CBaseEntity
 	string target_sound;
 	float target_delay;
 	float target_reset;
+	
+	string parentname;
 
 	float alpha;
 
@@ -28,6 +30,8 @@ class CBaseEntity
 
 void CBaseEntity :: CBaseEntity ( void )
 {
+	identity = 1; // hack
+
 	InitKeys();
 
 	if (!use)
@@ -89,6 +93,7 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 		case "_tb_layer": break;
 		// actual vars we need to look at
 		case "alpha" : alpha = stof(value); break;
+		case "parentname" : if (value != "") parentname = value; break;
 		case "target" : target = value; break;
 		case "targetname" : targetname = value; break;
 		case "target_delay": target_delay = stof(value); break;
@@ -96,6 +101,17 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 		case "target_reset" : target_reset = stof(value); break;
 		case "target_sound": target_sound = value; break;
 		default: print(sprintf("^3%s^7::SpawnKey:: Unknown key '%s' with value '%s'\n", classname, key, value)); break;
+	}
+};
+
+void CBaseEntity :: FrameUpdate ( void )
+{
+	if (parentname)
+	{
+		entity p = find(world, ::targetname, parentname);
+
+		if (p)
+			setorigin(this, p.origin);
 	}
 };
 

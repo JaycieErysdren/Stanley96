@@ -1,4 +1,8 @@
 //
+// server_builtins.qc
+//
+
+//
 // GLOBAL DEFINITIONS
 //
 
@@ -27,10 +31,6 @@ void() precache_everything =
 	precache_sound("player/footsteps/grass3.wav");
 	precache_sound("player/footsteps/grass4.wav");
 };
-
-string __fullspawndata;
-
-entity activator;
 
 float player_footsteptimer;
 float player_usetimer;
@@ -127,14 +127,43 @@ void() Player_Footstep =
 // PLAYER +USE
 //
 
-void() Player_UseCheck;
+void() Player_UseCheck = 
+{
+	if (player_usetimer > time)
+		return;
+
+	vector source = self.origin;
+	source_z = self.absmin_z + self.size_z * 0.8;
+
+	makevectors(self.v_angle);
+	traceline(source, source + v_forward * 64, FALSE, self);
+
+	if (trace_ent && trace_ent.flags & FL_USEABLE)
+	{
+		CBaseEntity use = (CBaseEntity)trace_ent;
+		use.Use();
+	}
+
+	sound(self, CHAN_AUTO, strcat("player/use", ftos(ceil(random(0, 5))), ".wav"), 1, ATTN_NORM);
+
+	player_usetimer = time + 1;
+};
 
 //
 // ENGINE BUILTINS
 //
 
 void() main = {};
-void() StartFrame = {};
+
+void() StartFrame =
+{
+	for (entity a = world; (a = findfloat(a, ::identity, 1));)
+	{
+		CBaseEntity ent = (CBaseEntity)a;
+		ent.FrameUpdate();
+	}
+};
+
 void() RestoreGame = {};
 
 void() PlayerPreThink =
@@ -191,26 +220,4 @@ void() PutClientInServer =
 void() SV_RunClientCommand =
 {
 	runstandardplayerphysics(self);
-};
-
-//
-// MULTICAST FUNCTIONS
-//
-
-void(float event, float value, entity ent) EasyMulticastFloat =
-{
-	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
-	WriteByte(MSG_MULTICAST, event);
-	WriteFloat(MSG_MULTICAST, value);
-	msg_entity = ent;
-	multicast(ent.origin, MULTICAST_ONE_R);
-};
-
-void(float event, string value, entity ent) EasyMulticastString =
-{
-	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
-	WriteByte(MSG_MULTICAST, event);
-	WriteString(MSG_MULTICAST, value);
-	msg_entity = ent;
-	multicast(ent.origin, MULTICAST_ONE_R);
 };

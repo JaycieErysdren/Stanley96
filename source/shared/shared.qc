@@ -26,3 +26,4 @@ const float FL_USEABLE = 4096;
 //
 
 .float state;
+.float identity;

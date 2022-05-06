@@ -6,39 +6,39 @@
 
 #includelist
 	// shared
-	fteextensions.qc
-	shared.qc
+	shared/fteextensions.qc
+	shared/shared.qc
 
-	// setup
-	server.qc
+	// initial setup
+	server/server_defs.qc
 
 	// entity base classes
-	CBaseEntity.qc
-	CBaseBrushEntity.qc
-	CBaseTrigger.qc
+	server/CBaseEntity.qc
+	server/CBaseBrushEntity.qc
+	server/CBaseTrigger.qc
 
 	// entity classes
-	func_accessibility.qc
-	func_brush.qc
-	func_illusionary.qc
-	func_rotate.qc
-	light.qc
-	point_changelevel.qc
-	point_command.qc
-	point_cvarset.qc
-	point_fade.qc
-	point_narrator.qc
-	point_relay.qc
-	point_teleport.qc
-	trigger_changelevel.qc
-	trigger_narrator.qc
-	trigger_once.qc
-	trigger_teleport.qc
+	server/func_accessibility.qc
+	server/func_brush.qc
+	server/func_illusionary.qc
+	server/func_rotate.qc
+	server/light.qc
+	server/point_changelevel.qc
+	server/point_command.qc
+	server/point_cvarset.qc
+	server/point_fade.qc
+	server/point_narrator.qc
+	server/point_relay.qc
+	server/point_teleport.qc
+	server/trigger_changelevel.qc
+	server/trigger_narrator.qc
+	server/trigger_once.qc
+	server/trigger_teleport.qc
 
 	// temp
-	temp_wolf3d.qc
+	server/temp_wolf3d.qc
 
-	// misc
-	csevents.qc
-	server_end.qc
+	// final setup
+	server/csevents.qc
+	server/server_builtins.qc
 #endlist

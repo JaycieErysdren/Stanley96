@@ -6,9 +6,9 @@
 
 #includelist
 	// shared
-	fteextensions.qc
-	shared.qc
+	shared/fteextensions.qc
+	shared/shared.qc
 
 	// setup
-	client.qc
+	client/client.qc
 #endlist
