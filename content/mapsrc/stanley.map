@@ -8419,6 +8419,19 @@
 }
 // entity 243
 {
+"classname" "func_detail"
+// brush 0
+{
+( 1536 -1672 0 ) ( 1536 -1671 0 ) ( 1536 -1672 1 ) floor_grey_b [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1536 -1680 0 ) ( 1536 -1680 1 ) ( 1537 -1680 0 ) floor_grey_b [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1536 -1672 0 ) ( 1537 -1672 0 ) ( 1536 -1671 0 ) floor_grey_b [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1576 -1664 40 ) ( 1576 -1663 40 ) ( 1577 -1664 40 ) floor_grey_b [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1576 -1664 160 ) ( 1577 -1664 160 ) ( 1576 -1664 161 ) floor_grey_b [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1592 -1664 160 ) ( 1592 -1664 161 ) ( 1592 -1663 160 ) floor_grey_b [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}
+// entity 244
+{
 "classname" "func_group"
 "_tb_type" "_tb_layer"
 "_tb_name" "old cctv machine"
@@ -8427,7 +8440,7 @@
 "_tb_layer_hidden" "1"
 "_tb_layer_omit_from_export" "1"
 }
-// entity 244
+// entity 245
 {
 "classname" "func_detail"
 "_tb_layer" "1"
@@ -8666,7 +8679,7 @@
 ( 260 192 60 ) ( 260 183 58 ) ( 260 183 60 ) skip [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 }
-// entity 245
+// entity 246
 {
 "classname" "light"
 "origin" "240 164 68"
@@ -8674,7 +8687,7 @@
 "light" "150"
 "_tb_layer" "1"
 }
-// entity 246
+// entity 247
 {
 "classname" "light"
 "origin" "288 172 68"
@@ -8682,7 +8695,7 @@
 "light" "150"
 "_tb_layer" "1"
 }
-// entity 247
+// entity 248
 {
 "classname" "light"
 "origin" "336 164 68"
@@ -8690,7 +8703,7 @@
 "light" "150"
 "_tb_layer" "1"
 }
-// entity 248
+// entity 249
 {
 "classname" "func_group"
 "_tb_type" "_tb_layer"
@@ -8700,7 +8713,7 @@
 "_tb_layer_hidden" "1"
 "_tb_layer_omit_from_export" "1"
 }
-// entity 249
+// entity 250
 {
 "classname" "info_player_start"
 "origin" "96 48 8"
