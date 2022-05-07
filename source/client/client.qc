@@ -51,8 +51,14 @@ jsonnode(string line) initialize_narrator =
 void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 {
 	clearscene();
-	
-	vector view_size = [320, 200];
+
+	vector view_size;
+
+	if (cvar("stanley_fullscreen") == 1)
+		view_size = [320, 240];
+	else
+		view_size = [320, 200];
+
 	vector screensize = [320, 240];
 
 	/* not sure if i wanna have a widescreen mode
@@ -162,19 +168,22 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	vector captionbox_size = [view_size_x, 40];
 
-	// narrator captionbox
-	drawfill([0, screensize_y - captionbox_size_y], captionbox_size, [0.1, 0.1, 0.1], 1); // background
-	drawpic([0, screensize_y - captionbox_size_y], "gfx/dither_overlay", captionbox_size, [1, 1, 1], 0.4); // dithery overlay
-	drawstring([4, screensize_y - captionbox_size_y + 4], caption_line1, [8, 8], [1, 1, 1], 1, 0); // text line 1
-	drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // text line 2
-	drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // text line 3
+	if (cvar("stanley_fullscreen") == 0)
+	{
+		// narrator captionbox
+		drawfill([0, screensize_y - captionbox_size_y], captionbox_size, [0.1, 0.1, 0.1], 1); // background
+		drawpic([0, screensize_y - captionbox_size_y], "gfx/dither_overlay", captionbox_size, [1, 1, 1], 0.4); // dithery overlay
+		drawstring([4, screensize_y - captionbox_size_y + 4], caption_line1, [8, 8], [1, 1, 1], 1, 0); // text line 1
+		drawstring([4, screensize_y - captionbox_size_y + 16], caption_line2, [8, 8], [1, 1, 1], 1, 0); // text line 2
+		drawstring([4, screensize_y - captionbox_size_y + 28], caption_line3, [8, 8], [1, 1, 1], 1, 0); // text line 3
 
-	if (cvar("crosshair") == 1)
-		drawstring([(view_size_x / 2) - 4, (view_size_y / 2) - 5], "+", [8, 8], [1, 1, 1], 1, 0);
+		if (cvar("crosshair") == 1)
+			drawstring([(view_size_x / 2) - 4, (view_size_y / 2) - 5], "+", [8, 8], [1, 1, 1], 1, 0);
 
-	string captionbox_divider_text = "--------------------------------";
-	float captionbox_divider_size = captionbox_size_x / strlen(captionbox_divider_text);
-	drawstring([0, (screensize_y - captionbox_size_y) - (captionbox_divider_size / 2)], captionbox_divider_text, [captionbox_divider_size, captionbox_divider_size], [0.3, 0.3, 0.3], 1, 0);
+		string captionbox_divider_text = "--------------------------------";
+		float captionbox_divider_size = captionbox_size_x / strlen(captionbox_divider_text);
+		drawstring([0, (screensize_y - captionbox_size_y) - (captionbox_divider_size / 2)], captionbox_divider_text, [captionbox_divider_size, captionbox_divider_size], [0.3, 0.3, 0.3], 1, 0);
+	}
 
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
 		

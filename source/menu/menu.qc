@@ -5,6 +5,7 @@
 float menu_loadingbar_width;
 float menu_active;
 float menu_gamestate;
+string menu_bg;
 
 //
 // SPECIAL FUNCTIONS
@@ -29,6 +30,7 @@ void() m_open =
 void() m_init =
 {
 	setcursormode(TRUE, "gfx/cursor", [16, 16], 4);
+	menu_bg = strcat("gfx/menu_bg_0", ftos(ceil(random(0, 2))));
 };
 
 void(vector screensize) m_draw =
@@ -65,14 +67,14 @@ void(vector screensize) m_draw =
 		{
 			// bg
 			drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
-			drawpic(display_pos, "gfx/loading_bg", display_size, [1, 1, 1], 1);
+			drawpic(display_pos, menu_bg, display_size, [1, 1, 1], 1);
 
 			drawstring([display_pos_x + ((screensize_y / 32) / 2), display_pos_y + ((screensize_y / 32) / 2)], "PRESS AND KEY TO START", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 		}
 		else if (menu_gamestate == 1)  // game has started
 		{
 			drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
-			drawpic(display_pos, "gfx/loading_bg", display_size, [1, 1, 1], 1);
+			drawpic(display_pos, menu_bg, display_size, [1, 1, 1], 1);
 			drawstring([display_pos_x + ((screensize_y / 32) / 2), (display_pos_y + display_size_y) - (screensize_y / 32) - ((screensize_y / 32) / 2)], "BEGIN THE GAME AGAIN", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 		}
 	}
@@ -104,8 +106,8 @@ void(vector screensize, float opaque) m_drawloading =
 
 	// bg
 	drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
-	drawpic(display_pos, "gfx/loading_bg", display_size, [1, 1, 1], 1);
-		
+	drawpic(display_pos, menu_bg, display_size, [1, 1, 1], 1);
+
 	drawstring([display_pos_x, display_pos_y + ((screensize_y / 32) / 2)], "LOADING...", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 
 	//drawstring([display_pos_x, display_size_y - (screensize_y / 32)], "THE END IS NEVER THE END IS NEVER THE END IS NEVER THE", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);

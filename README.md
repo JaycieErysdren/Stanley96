@@ -6,7 +6,7 @@
 
 - Jaycie Ewald - Programming, Level Design
 - @necrolavigne - Level Textures
-
+- Lionel Li - Background Art
 
 - Davey Wreden - The Stanley Parable (2011)
 - Galactic Cafe - The Stanley Parable (2013)
