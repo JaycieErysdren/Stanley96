@@ -14,22 +14,22 @@ void() precache_everything =
 	precache_sound("player/use3.wav");
 	precache_sound("player/use4.wav");
 	precache_sound("player/use5.wav");
+	precache_sound("player/footsteps/carpet1.wav");
+	precache_sound("player/footsteps/carpet2.wav");
+	precache_sound("player/footsteps/carpet3.wav");
+	precache_sound("player/footsteps/carpet4.wav");
 	precache_sound("player/footsteps/concrete1.wav");
 	precache_sound("player/footsteps/concrete2.wav");
 	precache_sound("player/footsteps/concrete3.wav");
 	precache_sound("player/footsteps/concrete4.wav");
-	precache_sound("player/footsteps/sand1.wav");
-	precache_sound("player/footsteps/sand2.wav");
-	precache_sound("player/footsteps/sand3.wav");
-	precache_sound("player/footsteps/sand4.wav");
+	precache_sound("player/footsteps/metal1.wav");
+	precache_sound("player/footsteps/metal2.wav");
+	precache_sound("player/footsteps/metal3.wav");
+	precache_sound("player/footsteps/metal4.wav");
 	precache_sound("player/footsteps/tile1.wav");
 	precache_sound("player/footsteps/tile2.wav");
 	precache_sound("player/footsteps/tile3.wav");
 	precache_sound("player/footsteps/tile4.wav");
-	precache_sound("player/footsteps/grass1.wav");
-	precache_sound("player/footsteps/grass2.wav");
-	precache_sound("player/footsteps/grass3.wav");
-	precache_sound("player/footsteps/grass4.wav");
 };
 
 float player_footsteptimer;
@@ -93,13 +93,15 @@ string() Player_Footstep_Sound =
 	string random_step = ftos(ceil(random(0, 4)));
 	
 	if (Player_Footstep_Check() == "carp") // carpet
-		check = strcat("player/footsteps/sand", random_step, ".wav");
-	else if (Player_Footstep_Check() == "tile") // tile
-		check = strcat("player/footsteps/tile", random_step, ".wav");
+		check = strcat("player/footsteps/carpet", random_step, ".wav");
+	else if (Player_Footstep_Check() == "ston") // stone
+		check = strcat("player/footsteps/concrete", random_step, ".wav");
 	else if (Player_Footstep_Check() == "conc") // concrete
 		check = strcat("player/footsteps/concrete", random_step, ".wav");
-	else if (Player_Footstep_Check() == "gras") // grass
-		check = strcat("player/footsteps/grass", random_step, ".wav");
+	else if (Player_Footstep_Check() == "meta") // metal
+		check = strcat("player/footsteps/metal", random_step, ".wav");
+	else if (Player_Footstep_Check() == "tile") // tile
+		check = strcat("player/footsteps/tile", random_step, ".wav");
 	else if (Player_Footstep_Check() == "colo") // solid color
 		check = "";
 	else // generic

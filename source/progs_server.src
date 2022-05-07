@@ -10,7 +10,7 @@
 	shared/shared.qc
 
 	// initial setup
-	server/server_defs.qc
+	server/defs.qc
 
 	// entity base classes
 	server/CBaseEntity.qc
@@ -40,5 +40,5 @@
 
 	// final setup
 	server/csevents.qc
-	server/server_builtins.qc
+	server/builtins.qc
 #endlist
