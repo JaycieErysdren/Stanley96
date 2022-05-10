@@ -6,9 +6,10 @@ class CBaseEntity
 {
 	string target_remove;
 	string target_sound;
+	string target_func;
 	float target_delay;
 	float target_reset;
-	
+
 	string parentname;
 
 	float alpha;
@@ -25,6 +26,8 @@ class CBaseEntity
 	virtual void() Think;
 	virtual void() Touch;
 	virtual void() Use;
+	virtual void() PlayerUse;
+	virtual void(string) UseFunc;
 	virtual void() UseTargets;
 };
 
@@ -97,6 +100,7 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 		case "target" : target = value; break;
 		case "targetname" : targetname = value; break;
 		case "target_delay": target_delay = stof(value); break;
+		case "target_func": if (value != "") target_func = value; break;
 		case "target_remove": target_remove = value; break;
 		case "target_reset" : target_reset = stof(value); break;
 		case "target_sound": target_sound = value; break;
@@ -132,6 +136,22 @@ void CBaseEntity :: Touch ( void )
 };
 
 void CBaseEntity :: Use ( void ) { };
+
+void CBaseEntity :: UseFunc ( string func )
+{
+	switch (func)
+	{
+		case "PlayerUse" : PlayerUse(); break;
+		case "Remove" : Remove(); break;
+		case "Trigger" : Use(); break;
+		default: print("^1WARNING: ^3", classname, " ^dhas unrecognized UseFunc input ", func, "!\n"); break;
+	}
+};
+
+void CBaseEntity :: PlayerUse ( void )
+{
+	Use();
+};
 
 void CBaseEntity :: UseTargets ( void )
 {
@@ -180,7 +200,11 @@ void CBaseEntity :: UseTargets ( void )
 		{
 			CBaseEntity tempuse = (CBaseEntity)ent;
 			tempuse.activator = this;
-			tempuse.Use();
+
+			if (target_func)
+				tempuse.UseFunc(target_func);
+			else
+				tempuse.UseFunc("Trigger");
 		}
 	}
 };

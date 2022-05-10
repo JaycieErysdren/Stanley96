@@ -143,7 +143,8 @@ void() Player_UseCheck =
 	if (trace_ent && trace_ent.flags & FL_USEABLE)
 	{
 		CBaseEntity use = (CBaseEntity)trace_ent;
-		use.Use();
+		//use.Use();
+		use.UseFunc("PlayerUse");
 	}
 
 	sound(self, CHAN_AUTO, strcat("player/use", ftos(ceil(random(0, 5))), ".wav"), 1, ATTN_NORM);
