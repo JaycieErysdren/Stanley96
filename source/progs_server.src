@@ -34,6 +34,7 @@
 	server/point_relay.qc
 	server/point_teleport.qc
 	server/trigger_changelevel.qc
+	server/trigger_crosshair.qc
 	server/trigger_narrator.qc
 	server/trigger_once.qc
 	server/trigger_teleport.qc
