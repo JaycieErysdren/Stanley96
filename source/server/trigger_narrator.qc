@@ -30,8 +30,6 @@ void trigger_narrator :: Use ( void )
 {
 	if (nextthink > time)
 		return;
-	
-	activator = enemy;
 
 	UseTargets();
 

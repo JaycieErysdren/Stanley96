@@ -32,8 +32,6 @@ void trigger_changelevel :: Use ( void )
 	if (nextthink > time)
 		return;
 
-	activator = enemy;
-
 	UseTargets();
 
 	nextthink = time + 0.1;

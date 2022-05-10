@@ -126,7 +126,7 @@ void CBaseEntity :: Touch ( void )
 	if (other.classname != "player")
 		return;
 
-	enemy = other;
+	activator = other;
 
 	Use();
 };
@@ -137,7 +137,6 @@ void CBaseEntity :: UseTargets ( void )
 {
 	void() delay_think
 	{
-		activator = enemy;
 		UseTargets();
 		Remove();
 	}
@@ -149,7 +148,6 @@ void CBaseEntity :: UseTargets ( void )
 		usetimer.classname = "_DelayedUse";
 		usetimer.nextthink = time + target_delay;
 		usetimer.think = delay_think;
-		usetimer.enemy = activator;
 		usetimer.message = message;
 		usetimer.target_remove = target_remove;
 		usetimer.target = target;
@@ -161,6 +159,7 @@ void CBaseEntity :: UseTargets ( void )
 	if (activator.classname == "player" && message != "")
 	{
 		centerprint(activator, message);
+
 		if (target_sound)
 			sound(activator, CHAN_VOICE, target_sound, 1, ATTN_NORM);
 	}
@@ -170,6 +169,7 @@ void CBaseEntity :: UseTargets ( void )
 		for (entity ent = world; (ent = find(ent, ::targetname, target_remove));)
 		{
 			CBaseEntity tempkill = (CBaseEntity)ent;
+			tempkill.activator = this;
 			tempkill.Remove();
 		}
 	}
@@ -179,6 +179,7 @@ void CBaseEntity :: UseTargets ( void )
 		for (entity ent = world; (ent = find(ent, ::targetname, target));)
 		{
 			CBaseEntity tempuse = (CBaseEntity)ent;
+			tempuse.activator = this;
 			tempuse.Use();
 		}
 	}

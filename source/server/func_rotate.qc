@@ -172,7 +172,6 @@ void func_rotate :: Wait ( void )
 	{
 		nextthink = ltime + var_wait;
 		think = Return;
-		activator = enemy;
 	}
 };
 

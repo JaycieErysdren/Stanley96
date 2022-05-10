@@ -22,7 +22,10 @@
 	server/func_brush.qc
 	server/func_illusionary.qc
 	server/func_rotate.qc
+	server/func_stanley_button.qc
+	server/func_stanley_elevator.qc
 	server/light.qc
+	server/path_node.qc
 	server/point_changelevel.qc
 	server/point_command.qc
 	server/point_cvarset.qc

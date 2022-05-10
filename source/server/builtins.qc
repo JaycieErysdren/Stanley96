@@ -1,5 +1,5 @@
 //
-// server_builtins.qc
+// builtins.qc
 //
 
 //

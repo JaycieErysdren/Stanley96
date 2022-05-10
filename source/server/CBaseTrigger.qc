@@ -23,8 +23,6 @@ void CBaseTrigger :: Use ( void )
 {
 	if (nextthink > time)
 		return;
-	
-	activator = enemy;
 
 	UseTargets();
 

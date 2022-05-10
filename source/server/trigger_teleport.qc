@@ -30,8 +30,6 @@ void trigger_teleport :: Use ( void )
 {
 	if (nextthink > time)
 		return;
-	
-	activator = enemy;
 
 	entity pl = activator;
 	CBaseEntity dest = (CBaseEntity)find(world, ::targetname, destination);

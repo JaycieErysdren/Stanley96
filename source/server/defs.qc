@@ -1,10 +1,10 @@
 //
-// server_defs.qc
+// defs.qc
 //
 
 string __fullspawndata;
 
-entity activator;
+.entity activator;
 
 //
 // MULTICAST FUNCTIONS
@@ -27,7 +27,3 @@ void(float event, string value, entity ent) EasyMulticastString =
 	msg_entity = ent;
 	multicast(ent.origin, MULTICAST_ONE_R);
 };
-
-
-
-
