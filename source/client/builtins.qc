@@ -1,23 +1,6 @@
 //
-// GLOBAL CSQC VARIABLES
+// builtins.qc
 //
-
-// in game
-
-float current_line_time;
-//string current_line_sample;
-
-string caption_line1;
-string caption_line2;
-string caption_line3;
-
-//float game_was_paused;
-
-jsonnode caption_tree;
-float caption_timer;
-float caption_iteration;
-
-float music_status;
 
 //
 // SPECIAL INITIALIZATIONS
@@ -43,6 +26,61 @@ jsonnode(string line) initialize_narrator =
 
 	return 0;
 };
+
+/* sucks
+float() ParseMapEntity =
+{
+	local string field, value;
+	local entity newent = spawn();
+	local void() spawnfunc = __NULL__;
+
+	while (1)
+	{
+		field = getentitytoken();
+		if not (field)
+			break;
+
+		if (field == "}")
+		{
+			if (!newent.classname)
+				break;
+
+			if (spawnfunc)
+			{
+				self = newent;
+				spawnfunc();
+				return TRUE;
+			}
+
+			remove(newent);
+			return TRUE;
+		}
+
+		value = getentitytoken();
+		if not (value)
+			break;
+
+		if (field == "classname")
+		{
+			if (value == "func_rotate")
+				spawnfunc = spawn_func_rotate;
+
+			newent.classname = strcat(value);
+		}
+		else if (field == "model")
+			newent.model = value;
+		else if (field == "modelindex")
+			newent.modelindex = stof(value);
+		else if (field == "origin")
+			newent.origin = stov(value);
+		else if (field == "angles")
+			newent.angles = stov(value);
+	}
+
+	remove(newent);
+	return FALSE;
+};
+*/
 
 //
 // ENGINE BUILTINS
@@ -86,7 +124,17 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	setproperty(VF_DRAWENGINESBAR, 0);
 	setproperty(VF_DRAWCROSSHAIR, 0);
-	setproperty(VF_DRAWWORLD, 1);
+
+	if (cvar("_ents_only") == 1)
+	{
+		setproperty(VF_DRAWWORLD, 0);
+		addentities(MASK_ENGINE);
+	}
+	else
+	{
+		setproperty(VF_DRAWWORLD, 1);
+		addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
+	}
 
 	float view_ofs;
 	
@@ -95,9 +143,8 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	else
 		view_ofs = 64;
 
-	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);
-	addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
-	
+	// set the camera to where the player is
+	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);	
 	setproperty(VF_ANGLES, view_angles);
 
 	renderscene();
@@ -261,7 +308,8 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 			display_size = [vwidth, vwidth * 0.75];
 		}
 	}
-	
+
+	// finally draw the screen
 	drawpic(display_pos, "screenrtshader", display_size, [1, 1, 1], 1);
 };
 
@@ -273,3 +321,30 @@ void() CSQC_Parse_Event =
 		default: print("CSQC: i'm stupid and i don't know what to do\n"); break;
 	}
 };
+
+/* sucks
+void() CSQC_WorldLoaded =
+{
+	string token;
+
+	while (1)
+	{
+		token = getentitytoken();
+
+		if (token == "")
+			break;
+
+		if (token != "{")
+		{
+			print("\n^1WARNING:^d bad entity data!\n\n");
+			return;
+		}
+
+		if (!ParseMapEntity())
+		{
+			print("\n^1WARNING:^d couldn't parse map entity!\n\n");
+			return;
+		}
+	}
+};
+*/

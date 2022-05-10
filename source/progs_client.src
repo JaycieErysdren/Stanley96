@@ -9,6 +9,12 @@
 	shared/fteextensions.qc
 	shared/shared.qc
 
-	// setup
-	client/client.qc
+	// initial setup
+	client/defs.qc
+
+	// entity classes
+	client/test_entity.qc
+
+	// final setup
+	client/builtins.qc
 #endlist
