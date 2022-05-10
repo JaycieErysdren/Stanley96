@@ -9,7 +9,7 @@ class trigger_changelevel : CBaseTrigger
 	void() trigger_changelevel;
 	
 	virtual void() ChangeLevel;
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -27,12 +27,13 @@ void trigger_changelevel :: SpawnKey ( string key, string value )
 	}
 };
 
-void trigger_changelevel :: Use ( void )
+void trigger_changelevel :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;
 
-	UseTargets();
+	// probably no reason to do this because we're switching levels right now
+	//UseTargets();
 
 	nextthink = time + 0.1;
 	touch = Null;

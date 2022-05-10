@@ -8,7 +8,7 @@ class trigger_teleport : CBaseTrigger
 
 	void() trigger_teleport;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void trigger_teleport :: SpawnKey ( string key, string value )
 	}
 };
 
-void trigger_teleport :: Use ( void )
+void trigger_teleport :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

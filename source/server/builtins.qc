@@ -144,7 +144,7 @@ void() Player_UseCheck =
 	{
 		CBaseEntity use = (CBaseEntity)trace_ent;
 		//use.Use();
-		use.UseFunc("PlayerUse");
+		use.CallFunction("Use");
 	}
 
 	sound(self, CHAN_AUTO, strcat("player/use", ftos(ceil(random(0, 5))), ".wav"), 1, ATTN_NORM);

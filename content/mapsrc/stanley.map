@@ -6556,8 +6556,9 @@
 // entity 114
 {
 "classname" "trigger_once"
-"target" "door_firstchoice_left"
-"target_remove" "door_backontrack_02_trigger"
+"target1" "door_firstchoice_left"
+"target2" "door_backontrack_02_trigger"
+"target2_func" "Remove"
 // brush 0
 {
 ( 1120 -1152 0 ) ( 1120 -1151 0 ) ( 1120 -1152 1 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -6624,7 +6625,7 @@
 // entity 117
 {
 "classname" "trigger_once"
-"target" "door_backontrack_02"
+"target1" "door_backontrack_02"
 // brush 0
 {
 ( 896 -1408 0 ) ( 896 -1407 0 ) ( 896 -1408 1 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -6638,7 +6639,7 @@
 // entity 118
 {
 "classname" "trigger_once"
-"target" "door_backontrack_02"
+"target1" "door_backontrack_02"
 "targetname" "door_backontrack_02_trigger"
 // brush 0
 {
@@ -7748,7 +7749,7 @@
 // entity 199
 {
 "classname" "trigger_once"
-"target" "door_red_01"
+"target1" "door_red_01"
 // brush 0
 {
 ( 1504 -1312 -384 ) ( 1504 -1311 -384 ) ( 1504 -1312 -383 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -7793,7 +7794,7 @@
 // entity 201
 {
 "classname" "trigger_once"
-"target" "door_red_02"
+"target1" "door_red_02"
 // brush 0
 {
 ( 1504 -1312 -768 ) ( 1504 -1311 -768 ) ( 1504 -1312 -767 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -7838,7 +7839,7 @@
 // entity 203
 {
 "classname" "trigger_once"
-"target" "door_red_03"
+"target1" "door_red_03"
 // brush 0
 {
 ( 1504 -1312 -1152 ) ( 1504 -1311 -1152 ) ( 1504 -1312 -1151 ) trigger [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -8230,7 +8231,7 @@
 "classname" "point_relay"
 "origin" "1600 -704 -288"
 "targetname" "red_door_relay"
-"target" "tele_red_door"
+"target1" "tele_red_door"
 "relay_delay" "10"
 }
 // entity 228
@@ -8447,7 +8448,7 @@
 {
 "classname" "func_stanley_elevator"
 "targetname" "elev"
-"target" "elev_start"
+"target1" "elev_start"
 "button_up" "elev_button_up"
 "button_down" "elev_button_down"
 "track_up" "elev_up"
@@ -8609,7 +8610,7 @@
 // entity 242
 {
 "classname" "func_stanley_button"
-"target" "elev"
+"target1" "elev"
 "targetname" "elev_button_down"
 // brush 0
 {
@@ -8632,7 +8633,7 @@
 // entity 243
 {
 "classname" "func_stanley_button"
-"target" "elev"
+"target1" "elev"
 "targetname" "elev_buttton_up"
 // brush 0
 {

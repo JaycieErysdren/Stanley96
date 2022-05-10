@@ -4,11 +4,13 @@
 
 class CBaseEntity
 {
-	string target_remove;
-	string target_sound;
-	string target_func;
-	float target_delay;
-	float target_reset;
+	string target1;
+	string target1_func;
+	float target1_delay;
+
+	string target2;
+	string target2_func;
+	float target2_delay;
 
 	string parentname;
 
@@ -26,8 +28,8 @@ class CBaseEntity
 	virtual void() Think;
 	virtual void() Touch;
 	virtual void() Use;
-	virtual void() PlayerUse;
-	virtual void(string) UseFunc;
+	virtual void() Trigger;
+	virtual void(string) CallFunction;
 	virtual void() UseTargets;
 };
 
@@ -51,9 +53,6 @@ void CBaseEntity :: CBaseEntity ( void )
 
 	if (!nextthink)
 		nextthink = time + 0.1;
-
-	if (!target_reset) target_reset = 1;
-	if (target_sound) precache_sound(target_sound);
 
 	switch(effects)
 	{
@@ -96,14 +95,14 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 		case "_tb_layer": break;
 		// actual vars we need to look at
 		case "alpha" : alpha = stof(value); break;
-		case "parentname" : if (value != "") parentname = value; break;
-		case "target" : target = value; break;
+		case "parentname" : parentname = value; break;
 		case "targetname" : targetname = value; break;
-		case "target_delay": target_delay = stof(value); break;
-		case "target_func": if (value != "") target_func = value; break;
-		case "target_remove": target_remove = value; break;
-		case "target_reset" : target_reset = stof(value); break;
-		case "target_sound": target_sound = value; break;
+		case "target1" : target1 = value; break;
+		case "target1_delay": target1_delay = stof(value); break;
+		case "target1_func": target1_func = value; break;
+		case "target2" : target2 = value; break;
+		case "target2_delay": target2_delay = stof(value); break;
+		case "target2_func": target2_func = value; break;
 		default: print(sprintf("^3%s^7::SpawnKey:: Unknown key '%s' with value '%s'\n", classname, key, value)); break;
 	}
 };
@@ -132,25 +131,25 @@ void CBaseEntity :: Touch ( void )
 
 	activator = other;
 
-	Use();
+	Trigger();
 };
 
-void CBaseEntity :: Use ( void ) { };
+void CBaseEntity :: Trigger ( void ) { };
 
-void CBaseEntity :: UseFunc ( string func )
+void CBaseEntity :: CallFunction ( string func )
 {
 	switch (func)
 	{
-		case "PlayerUse" : PlayerUse(); break;
+		case "Use" : Use(); break;
 		case "Remove" : Remove(); break;
-		case "Trigger" : Use(); break;
-		default: print("^1WARNING: ^3", classname, " ^dhas unrecognized UseFunc input ", func, "!\n"); break;
+		case "Trigger" : Trigger(); break;
+		default: print("^1WARNING: ^3", classname, " ^dhas unrecognized CallFunction input ", func, "!\n"); break;
 	}
 };
 
-void CBaseEntity :: PlayerUse ( void )
+void CBaseEntity :: Use ( void )
 {
-	Use();
+	Trigger();
 };
 
 void CBaseEntity :: UseTargets ( void )
@@ -161,50 +160,53 @@ void CBaseEntity :: UseTargets ( void )
 		Remove();
 	}
 
-	if (target_delay)
+	if (target1_delay)
 	{
-		CBaseEntity usetimer = spawn(CBaseEntity);
+		CBaseEntity usetimer1 = spawn(CBaseEntity);
 
-		usetimer.classname = "_DelayedUse";
-		usetimer.nextthink = time + target_delay;
-		usetimer.think = delay_think;
-		usetimer.message = message;
-		usetimer.target_remove = target_remove;
-		usetimer.target = target;
-		usetimer.target_delay = 0;
-
-		return;
+		usetimer1.classname = "_DelayedUse";
+		usetimer1.nextthink = time + target1_delay;
+		usetimer1.think = delay_think;
+		usetimer1.target1 = target1;
+		usetimer1.target1_delay = 0;
 	}
 
-	if (activator.classname == "player" && message != "")
+	if (target2_delay)
 	{
-		centerprint(activator, message);
+		CBaseEntity usetimer2 = spawn(CBaseEntity);
 
-		if (target_sound)
-			sound(activator, CHAN_VOICE, target_sound, 1, ATTN_NORM);
+		usetimer2.classname = "_DelayedUse";
+		usetimer2.nextthink = time + target2_delay;
+		usetimer2.think = delay_think;
+		usetimer2.target2 = target2;
+		usetimer2.target2_delay = 0;
 	}
 
-	if (target_remove)
+	if (target1 && !target1_delay)
 	{
-		for (entity ent = world; (ent = find(ent, ::targetname, target_remove));)
+		for (entity ent = world; (ent = find(ent, ::targetname, target1));)
 		{
-			CBaseEntity tempkill = (CBaseEntity)ent;
-			tempkill.activator = this;
-			tempkill.Remove();
+			CBaseEntity targ1 = (CBaseEntity)ent;
+			targ1.activator = this;
+
+			if (target1_func)
+				targ1.CallFunction(target1_func);
+			else
+				targ1.CallFunction("Trigger");
 		}
 	}
 
-	if (target)
+	if (target2 && !target2_delay)
 	{
-		for (entity ent = world; (ent = find(ent, ::targetname, target));)
+		for (entity ent = world; (ent = find(ent, ::targetname, target2));)
 		{
-			CBaseEntity tempuse = (CBaseEntity)ent;
-			tempuse.activator = this;
+			CBaseEntity targ2 = (CBaseEntity)ent;
+			targ2.activator = this;
 
-			if (target_func)
-				tempuse.UseFunc(target_func);
+			if (target2_func)
+				targ2.CallFunction(target2_func);
 			else
-				tempuse.UseFunc("Trigger");
+				targ2.CallFunction("Trigger");
 		}
 	}
 };

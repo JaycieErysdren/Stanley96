@@ -8,7 +8,7 @@ class trigger_crosshair : CBaseTrigger
 
 	void() trigger_crosshair;
 
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void trigger_crosshair :: SpawnKey ( string key, string value )
 	}
 };
 
-void trigger_crosshair :: Use ( void )
+void trigger_crosshair :: Trigger ( void )
 {
 	if (mode == 1 && cvar("crosshair") == 0)
 		cvar_set("crosshair", "1");

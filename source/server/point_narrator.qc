@@ -8,7 +8,7 @@ class point_narrator : CBaseEntity
 
 	void() point_narrator;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void point_narrator :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_narrator :: Use ( void )
+void point_narrator :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

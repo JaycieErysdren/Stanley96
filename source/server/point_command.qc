@@ -8,7 +8,7 @@ class point_command : CBaseEntity
 
 	void() point_command;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void point_command :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_command :: Use ( void )
+void point_command :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

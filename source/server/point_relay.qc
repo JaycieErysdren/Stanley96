@@ -9,7 +9,7 @@ class point_relay : CBaseEntity
 	void() point_relay;
 	
 	virtual void() Execute;
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -27,7 +27,7 @@ void point_relay :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_relay :: Use ( void )
+void point_relay :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

@@ -22,8 +22,6 @@
 	server/func_brush.qc
 	server/func_illusionary.qc
 	server/func_rotate.qc
-	server/func_stanley_button.qc
-	server/func_stanley_elevator.qc
 	server/light.qc
 	server/path_node.qc
 	server/point_changelevel.qc
@@ -31,6 +29,7 @@
 	server/point_cvarset.qc
 	server/point_fade.qc
 	server/point_narrator.qc
+	server/point_null.qc
 	server/point_relay.qc
 	server/point_teleport.qc
 	server/trigger_changelevel.qc

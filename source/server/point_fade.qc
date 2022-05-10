@@ -13,7 +13,7 @@ class point_fade : CBaseEntity
 	
 	virtual void() FadeTo;
 	virtual void() FadeFrom;
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -33,7 +33,7 @@ void point_fade :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_fade :: Use ( void )
+void point_fade :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;
@@ -43,13 +43,7 @@ void point_fade :: Use ( void )
 	else
 		cvar_set("stanley_fade_color", fade_color);
 
-	if (fade_type == 0)
-	{
-		fade_alpha = 1;
-		nextthink = time + 0.1;
-		think = FadeFrom;
-	}
-	else if (fade_type == 1)
+	if (fade_type == 1)
 	{
 		fade_alpha = 0;
 		nextthink = time + 0.1;

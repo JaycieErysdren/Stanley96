@@ -8,7 +8,7 @@ class trigger_narrator : CBaseTrigger
 
 	void() trigger_narrator;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void trigger_narrator :: SpawnKey ( string key, string value )
 	}
 };
 
-void trigger_narrator :: Use ( void )
+void trigger_narrator :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

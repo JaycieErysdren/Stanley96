@@ -4,6 +4,6 @@ void(string targ) CSEv_FireTarget_s =
 	{
 		CBaseEntity use = (CBaseEntity)ent;
 		//use.Use();
-		use.UseFunc("Trigger");
+		use.CallFunction("Trigger");
 	}
 };

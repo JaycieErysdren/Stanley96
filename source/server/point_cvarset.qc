@@ -9,7 +9,7 @@ class point_cvarset : CBaseEntity
 
 	void() point_cvarset;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -28,7 +28,7 @@ void point_cvarset :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_cvarset :: Use ( void )
+void point_cvarset :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;

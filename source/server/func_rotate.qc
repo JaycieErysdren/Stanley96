@@ -23,8 +23,7 @@ enumflags
 class func_rotate : CBaseBrushEntity
 {
 	float var_speed;
-	float var_wait;
-	float var_health;
+	float reset_time;
 	string sound_start;
 	string sound_stop;
 	vector new_angles;
@@ -34,7 +33,7 @@ class func_rotate : CBaseBrushEntity
 	virtual void() Done;
 	virtual void() Return;
 	virtual void(string key, string value) SpawnKey;
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void() Wait;
 };
 
@@ -72,15 +71,14 @@ void func_rotate :: func_rotate ( void )
 		touch = Null;
 
 	if (!var_speed) var_speed = 50;
-	if (!var_wait) var_wait = 1;
-	if (!var_health) var_health = 10;
+	if (!reset_time) reset_time = 1;
 
 	blocked = Null;
 
 	if (origin == [0, 0, 0])
 		objerror("No origin brush detected!");
 
-	void() rotate_forever { Use(); };
+	void() rotate_forever { Trigger(); };
 
 	if (spawnflags & FUNC_ROTATE_FLAG_CONTINIOUS)
 	{
@@ -95,9 +93,8 @@ void func_rotate :: SpawnKey ( string key, string value )
 	{
 		case "sound_start" : sound_start = value; break;
 		case "sound_stop" : sound_stop = value; break;
-		case "health" : var_health = stof(value); break;
 		case "speed" : var_speed = stof(value); break;
-		case "wait" : var_wait = stof(value); break;
+		case "reset_time" : reset_time = stof(value); break;
 		case "angles" : new_angles = stov(value); break;
 		default: super :: SpawnKey(key, value); break;
 	}
@@ -164,13 +161,13 @@ void func_rotate :: Wait ( void )
 
 	UseTargets();
 
-	if (var_wait < 0)
+	if (reset_time < 0)
 	{
 		think = Null;
 	}
 	else
 	{
-		nextthink = ltime + var_wait;
+		nextthink = ltime + reset_time;
 		think = Return;
 	}
 };
@@ -182,9 +179,6 @@ void func_rotate :: Return ( void )
 
 	if (spawnflags & FUNC_ROTATE_FLAG_CHANGEFRAMES)
 		frame = 0;
-
-	if (var_health)
-		takedamage = DAMAGE_YES;
 };
 
 void func_rotate :: Done ( void )
@@ -198,7 +192,7 @@ void func_rotate :: Done ( void )
 		frame = 0;
 };
 
-void func_rotate :: Use ( void )
+void func_rotate :: Trigger ( void )
 {
 	if (state == FUNC_ROTATE_STATE_OPENING || state == FUNC_ROTATE_STATE_CLOSING)
 		return;

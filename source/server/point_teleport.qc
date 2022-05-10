@@ -8,7 +8,7 @@ class point_teleport : CBaseEntity
 
 	void() point_teleport;
 	
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 };
 
@@ -26,7 +26,7 @@ void point_teleport :: SpawnKey ( string key, string value )
 	}
 };
 
-void point_teleport :: Use ( void )
+void point_teleport :: Trigger ( void )
 {
 	if (nextthink > time)
 		return;
