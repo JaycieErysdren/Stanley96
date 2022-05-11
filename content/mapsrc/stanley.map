@@ -7768,8 +7768,10 @@
 }
 // entity 149
 {
-"classname" "func_brush"
+"classname" "func_train"
 "_shadow" "0"
+"path_node" "elev_01"
+"targetname" "elev"
 // brush 0
 {
 ( 632 -2208 48 ) ( 632 -2352 48 ) ( 632 -2352 -32 ) skip [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -7998,9 +8000,10 @@
 }
 // entity 150
 {
-"classname" "func_stanley_button"
+"classname" "func_button"
 "target1" "elev"
 "targetname" "elev_button_down"
+"target1_func" "MoveBackward"
 // brush 0
 {
 ( 784 -2176 20 ) ( 792 -2176 12 ) ( 792 -2048 12 ) floor_pink_b [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
@@ -8021,9 +8024,10 @@
 }
 // entity 151
 {
-"classname" "func_stanley_button"
+"classname" "func_button"
 "target1" "elev"
 "targetname" "elev_buttton_up"
+"target1_func" "MoveForward"
 // brush 0
 {
 ( 784 -2176 76 ) ( 792 -2048 84 ) ( 792 -2176 84 ) floor_pink_b [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
@@ -8046,13 +8050,13 @@
 {
 "classname" "path_node"
 "origin" "704 -2280 560"
-"targetname" "elev_up"
+"targetname" "elev_02"
 }
 // entity 153
 {
 "classname" "path_node"
 "origin" "704 -2280 -336"
-"targetname" "elev_down"
+"targetname" "elev_00"
 }
 // entity 154
 {
@@ -8210,7 +8214,9 @@
 {
 "classname" "path_node"
 "origin" "704 -2280 48"
-"targetname" "elev_start"
+"targetname" "elev_01"
+"target1" "elev_02"
+"target2" "elev_00"
 }
 // entity 165
 {

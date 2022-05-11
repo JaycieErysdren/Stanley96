@@ -1,53 +1,46 @@
 //
-// func_stanley_elevator.qc
+// func_train.qc
 //
 
 enum
 {
-	FUNC_STANLEY_ELEVATOR_STATE_OFF,
-	FUNC_STANLEY_ELEVATOR_STATE_ON,
-	FUNC_STANLEY_ELEVATOR_STATE_FINISHED,
+	FUNC_TRAIN_STATE_OFF,
+	FUNC_TRAIN_STATE_FORWARD,
+	FUNC_TRAIN_STATE_BACKWARD,
+	FUNC_TRAIN_STATE_FINISHED
 };
 
-class func_stanley_elevator : CBaseBrushEntity
+class func_train : CBaseBrushEntity
 {
 	// entity variables
 	float var_speed;
 	float var_wait;
+	
+	string path_node;
 
 	string sound_start;
 	string sound_stop;
 
 	vector final_dest;
 
-	// stanley96
-	string button_up;
-	string button_down;
-	string track_up;
-	string track_down;
-
 	// entity functions
-	void() func_stanley_elevator;
+	void() func_train;
 	virtual void(vector tdest, float tspeed, void() nextfunc) CalcMove;
 	virtual void() Done;
 	virtual void() FindStartPath;
 	virtual void() MoveToNextPath;
+	virtual void() MoveForward;
+	virtual void() MoveBackward;
 	virtual void(string key, string value) SpawnKey;
-	virtual void() Use;
+	virtual void() Trigger;
 	virtual void() Wait;
 	virtual void() NextFunc;
+	virtual void(string) CallFunction;
 };
 
-void func_stanley_elevator :: func_stanley_elevator ( void )
+void func_train :: func_train ( void )
 {
-	// this is essentially my standard movetrack brush code, 
-	// but with some modifications to make it work specifically
-	// for stanley96's elevator (cuz i'm too lazy to make it in map logic)
-	// - jaycie 2022-05-09
-
-	solid = SOLID_BSP;
-	movetype = MOVETYPE_PUSH;
-	Initialize();
+	Initialize(MOVETYPE_PUSH, SOLID_BSP);
 
 	if (sound_start && sound_start != "") precache_sound(sound_start);
 	if (sound_stop && sound_stop != "") precache_sound(sound_stop);
@@ -57,22 +50,19 @@ void func_stanley_elevator :: func_stanley_elevator ( void )
 	touch = Null;
 	blocked = Null;
 
-	state = FUNC_STANLEY_ELEVATOR_STATE_OFF;
+	state = FUNC_TRAIN_STATE_OFF;
 
 	think = FindStartPath;
 	nextthink = ltime + 0.5;
 };
 
-void func_stanley_elevator :: NextFunc ( void ) { };
+void func_train :: NextFunc ( void ) { };
 
-void func_stanley_elevator :: SpawnKey ( string key, string value )
+void func_train :: SpawnKey ( string key, string value )
 {
 	switch (key)
 	{
-		case "button_up" : button_up = value; break;
-		case "button_down" : button_down = value; break;
-		case "track_up" : track_up = value; break;
-		case "track_down" : track_down = value; break;
+		case "path_node" : path_node = value; break;
 		case "sound_start" : sound_start = value; break;
 		case "sound_stop" : sound_stop = value; break;
 		case "speed" : var_speed = stof(value); break;
@@ -81,13 +71,23 @@ void func_stanley_elevator :: SpawnKey ( string key, string value )
 	}
 };
 
-void func_stanley_elevator :: CalcMove ( vector tdest, float tspeed, void() nextfunc )
+void func_train :: CallFunction ( string func )
+{
+	switch (func)
+	{
+		case "MoveForward" : MoveForward(); break;
+		case "MoveBackward" : MoveBackward(); break;
+		default: super :: CallFunction(func); break;
+	}
+};
+
+void func_train :: CalcMove ( vector tdest, float tspeed, void() nextfunc )
 {
 	vector vdestdelta;
 	float len, traveltime;
 
 	if (!tspeed || tspeed == 0)
-		objerror("FUNC_STANLEY_ELEVATOR: No move speed is defined!");
+		objerror("FUNC_TRAIN: No move speed is defined!");
 
 	void() CalcMoveDone =
 	{
@@ -125,9 +125,9 @@ void func_stanley_elevator :: CalcMove ( vector tdest, float tspeed, void() next
 	velocity = vdestdelta * (1/traveltime); // scale the destdelta vector by the time spent traveling to get velocity
 };
 
-void func_stanley_elevator :: FindStartPath ( void )
+void func_train :: FindStartPath ( void )
 {
-	CBaseEntity node = (CBaseEntity)find(world, ::targetname, target);
+	CBaseEntity node = (CBaseEntity)find(world, ::targetname, path_node);
 
 	setorigin(this, node.origin - (mins + maxs) * 0.5);
 
@@ -135,37 +135,50 @@ void func_stanley_elevator :: FindStartPath ( void )
 	// assume the level designer wants it to run automatically.
 	if (!targetname)
 	{
-		state = FUNC_STANLEY_ELEVATOR_STATE_ON;
+		state = FUNC_TRAIN_STATE_FORWARD;
 
 		if (sound_start && sound_start != "")
 			sound(this, CHAN_VOICE, sound_start, 1, ATTN_NORM);
 
 		nextthink = ltime + 0.1;
-		think = MoveToNextPath;
+		think = MoveForward;
 	}
 };
 
-void func_stanley_elevator :: MoveToNextPath ( void )
+void func_train :: MoveToNextPath ( void )
 {
-	print("hello!!\n");
-	/*
-	CBaseEntity node = (CBaseEntity)find(world, ::targetname, target);
+	CBaseEntity node = (CBaseEntity)find(world, ::targetname, path_node);
 
-	if (!node.target || node.target == "")
+	if ((node.target1 && node.target1 != "") || (node.target2 && node.target2 != ""))
 	{
-		Done();
-		return;
+		if (state == FUNC_TRAIN_STATE_FORWARD)
+			path_node = node.target1;
+		else if (state == FUNC_TRAIN_STATE_BACKWARD)
+			path_node = node.target2;
+
+		CBaseEntity nextnode = (CBaseEntity)find(world, ::targetname, path_node);
+
+		CalcMove(nextnode.origin - (mins + maxs) * 0.5, var_speed, Wait);
 	}
-
-	target = node.target;
-	*/
-
-	CBaseEntity nextnode = (CBaseEntity)find(world, ::targetname, target);
-
-	CalcMove(nextnode.origin - (mins + maxs) * 0.5, var_speed, Wait);
+	else
+		Done();
 };
 
-void func_stanley_elevator :: Wait ( void )
+void func_train :: MoveForward ( void )
+{
+	state = FUNC_TRAIN_STATE_FORWARD;
+
+	Trigger();
+};
+
+void func_train :: MoveBackward ( void )
+{
+	state = FUNC_TRAIN_STATE_BACKWARD;
+
+	Trigger();
+};
+
+void func_train :: Wait ( void )
 {
 	if (var_wait >= 0) var_wait = 0.1;
 
@@ -173,41 +186,22 @@ void func_stanley_elevator :: Wait ( void )
 	think = MoveToNextPath;
 };
 
-void func_stanley_elevator :: Done ( void )
+void func_train :: Done ( void )
 {	
-	state = FUNC_STANLEY_ELEVATOR_STATE_FINISHED;
+	state = FUNC_TRAIN_STATE_FINISHED;
 
 	if (sound_stop && sound_stop != "")
 		sound(this, CHAN_VOICE, sound_stop, 1, ATTN_NORM);
 };
 
-void func_stanley_elevator :: Use ( void )
+void func_train :: Trigger ( void )
 {
-	print("i have been used by an ", activator.targetname, "\n");
-	print(button_up, "\n");
-	print(button_down, "\n");
-	print(track_up, "\n");
-	print(track_down, "\n");
-
-	if (state == FUNC_STANLEY_ELEVATOR_STATE_FINISHED)
+	if (state == FUNC_TRAIN_STATE_FINISHED)
 		return;
 
-	if (sound_start && sound_start != "" && state == FUNC_STANLEY_ELEVATOR_STATE_OFF)
+	if (sound_start && sound_start != "" && state == FUNC_TRAIN_STATE_OFF)
 		sound(this, CHAN_VOICE, sound_start, 1, ATTN_NORM);
-
-	state = FUNC_STANLEY_ELEVATOR_STATE_ON;
 	
-	if (activator.targetname == button_up)
-	{
-		print("haha up!\n");
-		target = track_up;
-	}
-	else if (activator.targetname == button_down)
-	{
-		print("haha down!\n");
-		target = track_down;
-	}
-
 	nextthink = ltime + 0.1;
 	think = MoveToNextPath;
 };
