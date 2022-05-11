@@ -175,10 +175,12 @@ void func_train :: MoveToNextPath ( void )
 	{
 		if (sound_stop && sound_stop != "") sound(this, CHAN_VOICE, sound_stop, 1, ATTN_NORM);
 
+		UseTargets();
+
 		nextthink = ltime + 0.1;
 		think = Null;
 	}
-	else if (state == FUNC_TRAIN_STATE_FORWARD || state == FUNC_TRAIN_STATE_FORWARD)
+	else if (state == FUNC_TRAIN_STATE_FORWARD || state == FUNC_TRAIN_STATE_BACKWARD)
 	{
 		CBaseEntity nextnode = (CBaseEntity)find(world, ::targetname, path_node);
 		CalcMove(nextnode.origin - (mins + maxs) * 0.5, var_speed, Wait);

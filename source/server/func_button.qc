@@ -10,9 +10,11 @@ enumflags
 class func_button : CBaseBrushEntity
 {
 	void() func_button;
+	float reset_delay;
 
 	virtual void() Use;
 	virtual void(string) CallFunction;
+	virtual void(string, string) SpawnKey;
 	virtual void() DisableUse;
 	virtual void() EnableUse;
 };
@@ -37,14 +39,32 @@ void func_button :: CallFunction ( string func )
 	}
 };
 
+void func_button :: SpawnKey ( string key, string value )
+{
+	switch (key)
+	{
+		case "reset_delay" : reset_delay = stof(value); break;
+		default: super :: SpawnKey(key, value); break;
+	}
+};
+
+
 void func_button :: Use ( void )
 {
 	if (nextthink > time)
 		return;
 
+	print(classname, "with name ", targetname, " used!!\n");
+	print(target1, " fired with func ", target1_func, "\n");
+
 	UseTargets();
 
-	nextthink = time + 0.5;
+	if (!reset_delay || reset_delay == 0)
+		reset_delay = 0.1;
+	else if (reset_delay < 0)
+		think = DisableUse;
+
+	nextthink = time + reset_delay;
 };
 
 void func_button :: DisableUse ( void )

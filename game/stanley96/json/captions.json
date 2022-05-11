@@ -649,5 +649,56 @@
 			"line3": "",
 			"target": ""
 		}
+	},
+	"stanley/elevator_disobey.wav":
+	{
+		"timedtext01":
+		{
+			"time": 3,
+			"line1": "Oh, Stanley...",
+			"line2": "(sigh)",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext02":
+		{
+			"time": 5.5,
+			"line1": "You know, you really aren't going",
+			"line2": "anywhere. And I don't say that",
+			"line3": "decitfully! I truthfully mean",
+			"target": ""
+		},
+		"timedtext03":
+		{
+			"time": 6.5,
+			"line1": "that there isn't a story down here.",
+			"line2": "The story was back up where I told you",
+			"line3": "to go in the first place.",
+			"target": ""
+		},
+		"timedtext04":
+		{
+			"time": 3,
+			"line1": "Right now, you're just running around",
+			"line2": "looking at empty halls.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext05":
+		{
+			"time": 4,
+			"line1": "And frankly, that's perhaps even more",
+			"line2": "infuriating for me.",
+			"line3": "",
+			"target": ""
+		},
+		"timedtext06":
+		{
+			"time": 6,
+			"line1": "So why don't you throw me a bone?",
+			"line2": "Give me a chance, and just let me tell",
+			"line3": "the story I want to tell, hm?",
+			"target": ""
+		}
 	}
 }
