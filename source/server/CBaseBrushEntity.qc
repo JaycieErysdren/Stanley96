@@ -6,20 +6,19 @@ class CBaseBrushEntity : CBaseEntity
 {
 	void() CBaseBrushEntity;
 
-	virtual void() Initialize;
+	virtual void(float, float) Initialize;
 };
 
 void CBaseBrushEntity :: CBaseBrushEntity ( void )
 {
-	if (!movetype)
-		movetype = MOVETYPE_NONE;
-
-	if (!solid)
-		solid = SOLID_NOT;
+	// ??
 };
 
-void CBaseBrushEntity :: Initialize ( void )
+void CBaseBrushEntity :: Initialize ( float move_type, float solid_type )
 {
+	movetype = move_type;
+	solid = solid_type;
+
 	setmodel(this, model);
 	setorigin(this, origin);
 };

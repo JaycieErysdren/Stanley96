@@ -14,9 +14,7 @@ class CBaseTrigger : CBaseBrushEntity
 
 void CBaseTrigger :: CBaseTrigger ( void )
 {
-	solid = SOLID_TRIGGER;
-
-	Initialize();
+	Initialize(MOVETYPE_NONE, SOLID_TRIGGER);
 
 	modelindex = 0;
 	model = "";

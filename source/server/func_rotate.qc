@@ -48,13 +48,9 @@ void func_rotate :: func_rotate ( void )
 		state = FUNC_ROTATE_STATE_OPEN;
 
 	if (spawnflags & FUNC_ROTATE_FLAG_NOT_SOLID)
-		solid = SOLID_NOT;
+		Initialize(MOVETYPE_PUSH, SOLID_NOT);
 	else
-		solid = SOLID_BSP;
-
-	movetype = MOVETYPE_PUSH;
-
-	Initialize();
+		Initialize(MOVETYPE_PUSH, SOLID_BSP);
 
 	if (spawnflags & FUNC_ROTATE_FLAG_USEABLE)
 		flags |= FL_USEABLE;

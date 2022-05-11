@@ -17,10 +17,7 @@ class func_accessibility : CBaseBrushEntity
 
 void func_accessibility :: func_accessibility ( void )
 {
-	movetype = MOVETYPE_PUSH;
-	solid = SOLID_NOT;
-
-	Initialize();
+	Initialize(MOVETYPE_PUSH, SOLID_NOT);
 
 	temp_model = model;
 };
