@@ -93,6 +93,7 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 		case "effects": break;
 		case "skin": break;
 		case "_tb_layer": break;
+		case "_tb_group": break;
 		// actual vars we need to look at
 		case "alpha" : alpha = stof(value); break;
 		case "parentname" : parentname = value; break;

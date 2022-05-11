@@ -41,3 +41,7 @@
 /game/**/ssqccore.txt
 /game/**/video/
 /game/maptimes.txt
+
+# shh
+/game/duke/
+/game/duke.fmf

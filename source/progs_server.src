@@ -18,6 +18,8 @@
 	server/CBaseTrigger.qc
 
 	// entity classes
+	server/decore_fire.qc
+	server/decore_model.qc
 	server/func_accessibility.qc
 	server/func_brush.qc
 	server/func_button.qc

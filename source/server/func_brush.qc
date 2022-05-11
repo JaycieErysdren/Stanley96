@@ -21,7 +21,7 @@ class func_brush : CBaseBrushEntity
 	virtual void() Trigger;
 	virtual void() ToggleVisible;
 	virtual void() ToggleSolid;
-	virtual void() ToggleFrames;
+	virtual void() ToggleFrame;
 	virtual void(string) CallFunction;
 };
 
@@ -48,7 +48,7 @@ void func_brush :: CallFunction ( string func )
 	{
 		case "ToggleVisible" : ToggleVisible(); break;
 		case "ToggleSolid" : ToggleSolid(); break;
-		case "ToggleFrames" : ToggleFrames(); break;
+		case "ToggleFrame" : ToggleFrame(); break;
 		default: super :: CallFunction(func); break;
 	}
 };
@@ -62,7 +62,7 @@ void func_brush :: Trigger ( void )
 		ToggleSolid();
 
 	if (spawnflags & FUNC_BRUSH_TOGGLE_FRAMES)
-		ToggleFrames();
+		ToggleFrame();
 };
 
 void func_brush :: ToggleVisible ( void )
@@ -81,7 +81,7 @@ void func_brush :: ToggleSolid ( void )
 		solid = SOLID_BSP;
 };
 
-void func_brush :: ToggleFrames ( void )
+void func_brush :: ToggleFrame ( void )
 {
 	frame = 1 - frame;
 };

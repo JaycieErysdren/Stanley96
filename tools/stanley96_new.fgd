@@ -153,7 +153,7 @@
 
 @BaseClass = BasicLightStartOff [ spawnflags(flags) = [ 1 : "Start off" : 0 ] ]
 
-@BaseClass base(OneTargetName) color(255 255 40) = BasicLight [
+@BaseClass base(TargetName) color(255 255 40) = BasicLight [
 	light(integer) : "Brightness" : 300 : "Brightness/intensity value for the light. Negative values will subtract light from the surrounding area."
 	style(choices) : "Appearance" : 0 =
 	[

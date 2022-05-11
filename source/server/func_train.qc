@@ -26,7 +26,6 @@ class func_train : CBaseBrushEntity
 	// entity functions
 	void() func_train;
 	virtual void(vector tdest, float tspeed, void() nextfunc) CalcMove;
-	virtual void() Done;
 	virtual void() FindStartPath;
 	virtual void() MoveToNextPath;
 	virtual void() MoveForward;
@@ -129,6 +128,9 @@ void func_train :: FindStartPath ( void )
 {
 	CBaseEntity node = (CBaseEntity)find(world, ::targetname, path_node);
 
+	if (node.classname != "path_node")
+		objerror("FUNC_TRAIN: path entity is not a path_node!");
+
 	setorigin(this, node.origin - (mins + maxs) * 0.5);
 
 	// if it doesn't have a targetname set,
@@ -147,21 +149,40 @@ void func_train :: FindStartPath ( void )
 
 void func_train :: MoveToNextPath ( void )
 {
+	// create path_node cast
 	CBaseEntity node = (CBaseEntity)find(world, ::targetname, path_node);
 
-	if ((node.target1 && node.target1 != "") || (node.target2 && node.target2 != ""))
+	// if it's not a path_node then the mapper has done something wrong
+	if (node.classname != "path_node")
+		objerror("FUNC_TRAIN: path entity is not a path_node!");
+
+	// 1st - check if the node has a forwards track and the train is set to move forwards. if yes, move forwards
+	// 2nd - check if the node has a backwards track and the train is set to move backwards. if yes, move backwards
+	// 3rd - check if there's no node entity or if the node entity has neither forwards or backwards tracks. if yes, set to the train to never move again
+	// 4th - if none of the above is true, set the train to be temporarily off
+	if (node.target1 && node.target1 != "" && state == FUNC_TRAIN_STATE_FORWARD)
+		path_node = node.target1;
+	else if (node.target2 && node.target2 != "" && state == FUNC_TRAIN_STATE_BACKWARD)
+		path_node = node.target2;
+	else if (!node || ((!node.target1 || node.target1 == "") && (!node.target2 || node.target2 == "")))
+		state = FUNC_TRAIN_STATE_FINISHED;
+	else
+		state = FUNC_TRAIN_STATE_OFF;
+
+	// 1st - if the train is set to be temporarily or permanently off, play the stop sound and nullify the think func
+	// 2nd - if the train is set to move forwards or backwards, call a CalcMove
+	if (state == FUNC_TRAIN_STATE_FINISHED || state == FUNC_TRAIN_STATE_OFF)
 	{
-		if (state == FUNC_TRAIN_STATE_FORWARD)
-			path_node = node.target1;
-		else if (state == FUNC_TRAIN_STATE_BACKWARD)
-			path_node = node.target2;
+		if (sound_stop && sound_stop != "") sound(this, CHAN_VOICE, sound_stop, 1, ATTN_NORM);
 
+		nextthink = ltime + 0.1;
+		think = Null;
+	}
+	else if (state == FUNC_TRAIN_STATE_FORWARD || state == FUNC_TRAIN_STATE_FORWARD)
+	{
 		CBaseEntity nextnode = (CBaseEntity)find(world, ::targetname, path_node);
-
 		CalcMove(nextnode.origin - (mins + maxs) * 0.5, var_speed, Wait);
 	}
-	else
-		Done();
 };
 
 void func_train :: MoveForward ( void )
@@ -184,14 +205,6 @@ void func_train :: Wait ( void )
 
 	nextthink = ltime + var_wait;
 	think = MoveToNextPath;
-};
-
-void func_train :: Done ( void )
-{	
-	state = FUNC_TRAIN_STATE_FINISHED;
-
-	if (sound_stop && sound_stop != "")
-		sound(this, CHAN_VOICE, sound_stop, 1, ATTN_NORM);
 };
 
 void func_train :: Trigger ( void )
