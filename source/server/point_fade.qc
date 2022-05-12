@@ -39,9 +39,9 @@ void point_fade :: Trigger ( void )
 		return;
 
 	if (!fade_color || fade_color == "")
-		cvar_set("stanley_fade_color", "0 0 0");
+		cvar_set("r_fade_color", "0 0 0");
 	else
-		cvar_set("stanley_fade_color", fade_color);
+		cvar_set("r_fade_color", fade_color);
 
 	if (fade_type == 1)
 	{
@@ -62,7 +62,7 @@ void point_fade :: FadeTo ( void )
 	fade_alpha += frametime / fade_time;
 	fade_alpha = bound(0, fade_alpha, 1);
 	
-	cvar_set("stanley_fade_alpha", ftos(fade_alpha));
+	cvar_set("r_fade_alpha", ftos(fade_alpha));
 
 	if (fade_alpha >= 1)
 	{
@@ -81,7 +81,7 @@ void point_fade :: FadeFrom ( void )
 	fade_alpha -= frametime / fade_time;
 	fade_alpha = bound(0, fade_alpha, 1);
 	
-	cvar_set("stanley_fade_alpha", ftos(fade_alpha));
+	cvar_set("r_fade_alpha", ftos(fade_alpha));
 
 	if (fade_alpha <= 0)
 	{

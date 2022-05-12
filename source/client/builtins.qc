@@ -101,12 +101,12 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	vector view_size;
 	vector screensize;
 
-	if (cvar("stanley_view") == 1) // fullscreen (4:3 without narrator box)
+	if (cvar("r_viewmode") == 1) // fullscreen (4:3 without narrator box)
 	{
 		view_size = [320 * scale, 240 * scale];
 		screensize = [320 * scale, 240 * scale];
 	}
-	else if (cvar("stanley_view") == 2) // widescreen (16:9 without narrator box)
+	else if (cvar("r_viewmode") == 2) // widescreen (16:9 without narrator box)
 	{
 		view_size = [384 * scale, 216 * scale];
 		screensize = [384 * scale, 216 * scale];
@@ -216,20 +216,20 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	}
 
 	// screen color overlay
-	drawfill([0, 0], [vwidth, vheight], stov(cvar_string("stanley_fade_color")), cvar("stanley_fade_alpha"));
+	drawfill([0, 0], [vwidth, vheight], stov(cvar_string("r_fade_color")), cvar("r_fade_alpha"));
 
 	vector captionbox_size = [320 * scale, 40 * scale];
 	vector captionbox_textsize = [8 * scale, 8 * scale];
 	vector captionbox_pos;
 
-	if (cvar("stanley_view") == 1)
+	if (cvar("r_viewmode") == 1)
 	{
 		captionbox_pos = [0, screensize_y - captionbox_size_y];
 
 		if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
 			drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
 	}
-	else if (cvar("stanley_view") == 2)
+	else if (cvar("r_viewmode") == 2)
 	{
 		captionbox_pos = [(screensize_x - captionbox_size_x) / 2, screensize_y - captionbox_size_y];
 
@@ -266,7 +266,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	vector display_pos;
 	vector display_size;
 
-	if (cvar("stanley_view") == 2) // widescreen
+	if (cvar("r_viewmode") == 2) // widescreen
 	{
 		if (vheight < vwidth && (vheight * ar_widescreen) < vwidth)
 		{

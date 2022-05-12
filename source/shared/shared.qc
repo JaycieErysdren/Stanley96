@@ -39,9 +39,9 @@ void(float prevprogs) init =
 	autocvar(accessibility_resolution_scale, 1, "Accessibility: Screen resolution scaler");
 	autocvar(accessibility_crosshair, 0, "Accessibility: Always-on crosshair");
 	autocvar(accessibility_colorblind, 0, "Accessibility: Colorblind mode");
-	autocvar(stanley_view, 0, "Stanley96: 0 = default 1 = fullscreen 2 = widescreen");
-	autocvar(stanley_fade_color, [0, 0, 0], "Stanley96: On-screen fade color");
-	autocvar(stanley_fade_alpha, 0, "Stanley96: On-screen fade alpha");
+	autocvar(r_viewmode, 0, "Screen Viewmode: 0 = default 1 = fullscreen 2 = widescreen");
+	autocvar(r_fade_color, [0, 0, 0], "On-screen fade color");
+	autocvar(r_fade_alpha, 0, "On-screen fade alpha");
 };
 
 //
