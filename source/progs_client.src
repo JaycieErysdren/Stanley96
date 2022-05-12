@@ -5,10 +5,10 @@
 	#pragma progs_dat "../game/stanley96/csprogs.dat"
 #elif defined(DUKE)
 	#pragma progs_dat "../game/duke/csprogs.dat"
-#elif defined(PLATAFORM)
-	#pragma progs_dat "../game/platform/progs.dat"
+#elif defined(PLATFORM)
+	#pragma progs_dat "../game/platform/csprogs.dat"
 #else
-	#pragma progs_dat "../game/platform/progs.dat"
+	#error "INVALID PROJECT SET!"
 #endif
 
 #define CSQC

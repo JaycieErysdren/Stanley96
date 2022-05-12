@@ -27,6 +27,7 @@ void() m_init =
 	setcursormode(TRUE, "gfx/cursor", [16, 16], 4);
 	#if defined(STANLEY)
 	menu_bg = strcat("gfx/menu_bg_0", ftos(ceil(random(0, 2))));
+	#endif
 };
 
 void(vector screensize) m_draw =

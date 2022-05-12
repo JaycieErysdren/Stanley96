@@ -8,7 +8,7 @@
 #elif defined(PLATFORM)
 	#pragma progs_dat "../game/platform/progs.dat"
 #else
-	#pragma progs_dat "../game/platform/progs.dat"
+	#error "INVALID PROJECT SET!"
 #endif
 
 #define SSQC
@@ -22,40 +22,40 @@
 	server/defs.qc
 
 	// entity base classes
-	server/CBaseEntity.qc
-	server/CBaseBrushEntity.qc
-	server/CBaseTrigger.qc
+	server/classes/CBaseEntity.qc
+	server/classes/CBaseBrushEntity.qc
+	server/classes/CBaseTrigger.qc
 
 	// entity classes
-	server/decore_model.qc
-	server/func_accessibility.qc
-	server/func_brush.qc
-	server/func_button.qc
-	server/func_door.qc
-	server/func_illusionary.qc
-	server/func_rotate.qc
-	server/func_train.qc
-	server/light.qc
-	server/path_node.qc
-	server/point_changelevel.qc
-	server/point_command.qc
-	server/point_cvarset.qc
-	server/point_fade.qc
-	server/point_null.qc
-	server/point_relay.qc
-	server/point_teleport.qc
-	server/trigger_changelevel.qc
-	server/trigger_crosshair.qc
-	server/trigger_once.qc
-	server/trigger_teleport.qc
+	server/entities/decore_model.qc
+	server/entities/func_accessibility.qc
+	server/entities/func_brush.qc
+	server/entities/func_button.qc
+	server/entities/func_door.qc
+	server/entities/func_illusionary.qc
+	server/entities/func_rotate.qc
+	server/entities/func_train.qc
+	server/entities/light.qc
+	server/entities/path_node.qc
+	server/entities/point_changelevel.qc
+	server/entities/point_command.qc
+	server/entities/point_cvarset.qc
+	server/entities/point_fade.qc
+	server/entities/point_null.qc
+	server/entities/point_relay.qc
+	server/entities/point_teleport.qc
+	server/entities/trigger_changelevel.qc
+	server/entities/trigger_crosshair.qc
+	server/entities/trigger_once.qc
+	server/entities/trigger_teleport.qc
 
 	#if defined(DUKE)
-		server/decore_fire.qc
+		server/entities/decore_fire.qc
 	#endif
 
 	#if defined(STANLEY)
-		server/point_narrator.qc
-		server/trigger_narrator.qc
+		server/entities/point_narrator.qc
+		server/entities/trigger_narrator.qc
 	#endif
 
 	// final setup
