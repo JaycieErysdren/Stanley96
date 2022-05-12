@@ -14,6 +14,9 @@ class CBaseEntity
 
 	string parentname;
 
+	float touch_time;
+	float touch_state;
+
 	float alpha;
 
 	void() CBaseEntity;
@@ -31,6 +34,8 @@ class CBaseEntity
 	virtual void() Trigger;
 	virtual void(string) CallFunction;
 	virtual void() UseTargets;
+	virtual void() FrameUpdate;
+	virtual void() EndTouch;
 };
 
 void CBaseEntity :: CBaseEntity ( void )
@@ -110,12 +115,20 @@ void CBaseEntity :: SpawnKey ( string key, string value )
 
 void CBaseEntity :: FrameUpdate ( void )
 {
+	// parenting
 	if (parentname)
 	{
 		entity p = find(world, ::targetname, parentname);
 
 		if (p)
 			setorigin(this, p.origin);
+	}
+
+	// endtouch
+	if (touch_state == 1 && touch_time < time)
+	{
+		EndTouch();
+		touch_state = 0;
 	}
 };
 
@@ -130,10 +143,15 @@ void CBaseEntity :: Touch ( void )
 	if (other.classname != "player")
 		return;
 
+	touch_time = time;
+	touch_state = 1;
+
 	activator = other;
 
 	Trigger();
 };
+
+void CBaseEntity :: EndTouch ( void ) { };
 
 void CBaseEntity :: Trigger ( void ) { };
 
