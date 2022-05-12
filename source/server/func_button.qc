@@ -54,9 +54,6 @@ void func_button :: Use ( void )
 	if (nextthink > time)
 		return;
 
-	print(classname, "with name ", targetname, " used!!\n");
-	print(target1, " fired with func ", target1_func, "\n");
-
 	UseTargets();
 
 	if (!reset_delay || reset_delay == 0)

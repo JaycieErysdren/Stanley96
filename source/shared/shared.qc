@@ -43,3 +43,42 @@ void(float prevprogs) init =
 	autocvar(stanley_fade_color, [0, 0, 0], "Stanley96: On-screen fade color");
 	autocvar(stanley_fade_alpha, 0, "Stanley96: On-screen fade alpha");
 };
+
+//
+// MATH
+//
+
+// zeroconvert
+// shorthand for turning -1 to 0 for keyvalues for which 0 is a valid non-default selection
+// from Copper
+
+float(float in) zeroconvert =
+{
+	if (in == -1) return 0;
+	return in;
+};
+
+float(float in, float def) zeroconvertdefault =
+{
+	if (in == -1) return 0;
+	if (in == 0) return def;
+	return in;
+};
+
+// BoundsAngleSize
+// for measuring how large an entity is along an arbitrary vector
+// from Copper
+
+float(vector v, vector s) BoundsAngleSize =
+{
+	v_x = fabs(v_x);
+	v_y = fabs(v_y);
+	v_z = fabs(v_z);
+	
+	// size is always + + + but this is in case I switch the parameters somewhere
+	s_x = fabs(s_x);
+	s_y = fabs(s_y);
+	s_z = fabs(s_z);
+	
+	return v * s;
+};

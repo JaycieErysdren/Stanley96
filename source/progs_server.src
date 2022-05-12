@@ -23,6 +23,7 @@
 	server/func_accessibility.qc
 	server/func_brush.qc
 	server/func_button.qc
+	server/func_door.qc
 	server/func_illusionary.qc
 	server/func_rotate.qc
 	server/func_train.qc
