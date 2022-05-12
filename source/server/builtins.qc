@@ -8,7 +8,7 @@
 
 void() precache_everything =
 {
-	precache_model("progs/player.mdl");
+	//precache_model("progs/player.mdl");
 	precache_sound("player/use1.wav");
 	precache_sound("player/use2.wav");
 	precache_sound("player/use3.wav");
@@ -232,7 +232,7 @@ void() PutClientInServer =
 {
 	self.classname = "player";
 	self.solid = SOLID_SLIDEBOX;
-	setmodel(self, "progs/player.mdl");
+	//setmodel(self, "progs/player.mdl");
 	self.movetype = MOVETYPE_WALK;
 	self.health = 100;
 	setorigin(self, GetSpawnPoint());

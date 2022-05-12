@@ -6,6 +6,8 @@
 // SPECIAL INITIALIZATIONS
 //
 
+#if defined(STANLEY)
+
 jsonnode(string line) initialize_narrator =
 {
 	filestream f = fopen("json/captions.json", FILE_READNL);
@@ -27,60 +29,7 @@ jsonnode(string line) initialize_narrator =
 	return 0;
 };
 
-/* sucks
-float() ParseMapEntity =
-{
-	local string field, value;
-	local entity newent = spawn();
-	local void() spawnfunc = __NULL__;
-
-	while (1)
-	{
-		field = getentitytoken();
-		if not (field)
-			break;
-
-		if (field == "}")
-		{
-			if (!newent.classname)
-				break;
-
-			if (spawnfunc)
-			{
-				self = newent;
-				spawnfunc();
-				return TRUE;
-			}
-
-			remove(newent);
-			return TRUE;
-		}
-
-		value = getentitytoken();
-		if not (value)
-			break;
-
-		if (field == "classname")
-		{
-			if (value == "func_rotate")
-				spawnfunc = spawn_func_rotate;
-
-			newent.classname = strcat(value);
-		}
-		else if (field == "model")
-			newent.model = value;
-		else if (field == "modelindex")
-			newent.modelindex = stof(value);
-		else if (field == "origin")
-			newent.origin = stov(value);
-		else if (field == "angles")
-			newent.angles = stov(value);
-	}
-
-	remove(newent);
-	return FALSE;
-};
-*/
+#endif
 
 //
 // ENGINE BUILTINS
@@ -125,29 +74,18 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	setproperty(VF_DRAWENGINESBAR, 0);
 	setproperty(VF_DRAWCROSSHAIR, 0);
 
-	if (cvar("_ents_only") == 1)
-	{
-		setproperty(VF_DRAWWORLD, 0);
-		addentities(MASK_ENGINE);
-	}
-	else
-	{
-		setproperty(VF_DRAWWORLD, 1);
-		addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
-	}
+	setproperty(VF_DRAWWORLD, 1);
+	addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
 
-	float view_ofs;
-	
-	if (cvar_string("mapname") == "wolf")
-		view_ofs = 32;
-	else
-		view_ofs = 64;
+	float view_ofs = 64;
 
 	// set the camera to where the player is
 	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);	
 	setproperty(VF_ANGLES, view_angles);
 
 	renderscene();
+
+	#if defined(STANLEY)
 
 	if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
 	{
@@ -156,33 +94,6 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	}
 
 	current_line_time = getsoundtime(self, CHAN_VOICE);
-
-	/* this sucks
-	if (serverkeyfloat(SERVERKEY_PAUSESTATE) != 1)
-	{
-		if (game_was_paused == 1)
-		{
-			print("game was paused...\n");
-			soundupdate(self, CHAN_VOICE, current_line_sample, 1, ATTN_NONE, 100, 0, 0);
-			caption_iteration = 0;
-			caption_timer = time + 0.1;
-		}
-
-		game_was_paused = 0;
-		//print("game_was_paused: ", ftos(game_was_paused), "\n");
-	}
-	else
-	{
-		if (game_was_paused == 0)
-		{
-			print("game is paused...\n");
-			soundupdate(self, CHAN_VOICE, "", -1, ATTN_NONE, 100, 0, -current_line_time);
-			caption_iteration = 0;
-			caption_timer = time + 0.1;
-		}
-		game_was_paused = 1;
-	}
-	*/
 
 	// caption display machine
 	// 1. check if a narrator sound is playing
@@ -253,11 +164,13 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	drawstring(captionbox_pos + [4 * scale, 16 * scale], caption_line2, captionbox_textsize, [1, 1, 1], 1, 0); // text line 2
 	drawstring(captionbox_pos + [4 * scale, 28 * scale], caption_line3, captionbox_textsize, [1, 1, 1], 1, 0); // text line 3
 
-	vector crosshair_size = captionbox_textsize;
+	#endif
+
+	vector crosshair_size = [8 * scale, 8 * scale];
 	vector crosshair_pos = [(view_size_x / 2) - (crosshair_size_x / 2), (view_size_y / 2) - (crosshair_size_x / 1.6)];
 
 	if (cvar("crosshair") == 1 || cvar("accessibility_crosshair") == 1)
-		drawstring(crosshair_pos, "+", crosshair_size, [1, 1, 1], 1, 0);
+		drawstring(crosshair_pos, "+", crosshair_size, [1, 1, 1], 1, 0);	
 
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
 		
@@ -317,34 +230,9 @@ void() CSQC_Parse_Event =
 {
 	switch(readbyte())
 	{
+		#if defined(STANLEY)
 		case EVENT_NARRATOR: caption_tree = initialize_narrator(readstring()); break;
-		default: print("CSQC: i'm stupid and i don't know what to do\n"); break;
+		#endif
+		default: print("^1CSQC_Parse_Event: ^dUnknown Event!\n"); break;
 	}
 };
-
-/* sucks
-void() CSQC_WorldLoaded =
-{
-	string token;
-
-	while (1)
-	{
-		token = getentitytoken();
-
-		if (token == "")
-			break;
-
-		if (token != "{")
-		{
-			print("\n^1WARNING:^d bad entity data!\n\n");
-			return;
-		}
-
-		if (!ParseMapEntity())
-		{
-			print("\n^1WARNING:^d couldn't parse map entity!\n\n");
-			return;
-		}
-	}
-};
-*/

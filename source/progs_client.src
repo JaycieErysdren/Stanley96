@@ -1,6 +1,15 @@
 #pragma target fte
+#include "project.src"
 
-#pragma progs_dat "../game/stanley96/csprogs.dat"
+#if defined(STANLEY)
+	#pragma progs_dat "../game/stanley96/csprogs.dat"
+#elif defined(DUKE)
+	#pragma progs_dat "../game/duke/csprogs.dat"
+#elif defined(PLATAFORM)
+	#pragma progs_dat "../game/platform/progs.dat"
+#else
+	#pragma progs_dat "../game/platform/progs.dat"
+#endif
 
 #define CSQC
 
@@ -11,9 +20,6 @@
 
 	// initial setup
 	client/defs.qc
-
-	// entity classes
-	client/test_entity.qc
 
 	// final setup
 	client/builtins.qc

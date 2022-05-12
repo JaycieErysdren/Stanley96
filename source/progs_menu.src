@@ -1,6 +1,15 @@
 #pragma target fte
+#include "project.src"
 
-#pragma progs_dat "../game/stanley96/menu.dat"
+#if defined(STANLEY)
+	#pragma progs_dat "../game/stanley96/menu.dat"
+#elif defined(DUKE)
+	#pragma progs_dat "../game/duke/menu.dat"
+#elif defined(PLATFORM)
+	#pragma progs_dat "../game/platform/progs.dat"
+#else
+	#pragma progs_dat "../game/platform/progs.dat"
+#endif
 
 #define MENU
 
@@ -9,6 +18,9 @@
 	shared/fteextensions.qc
 	shared/shared.qc
 
-	// setup
-	menu/menu.qc
+	// initial setup
+	menu/defs.qc
+
+	// final setup
+	menu/builtins.qc
 #endlist

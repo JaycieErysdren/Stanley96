@@ -2,6 +2,8 @@
 // defs.qc
 //
 
+#if defined(STANLEY)
+
 float current_line_time;
 //string current_line_sample;
 
@@ -16,6 +18,8 @@ float caption_timer;
 float caption_iteration;
 
 float music_status;
+
+#endif
 
 //
 // CUSTOM DRAWMASKS

@@ -1,4 +1,5 @@
 game quake
+gamedir platform
 gamedir stanley96
 name "Stanley96"
 disablehomedir 1

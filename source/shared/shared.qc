@@ -10,10 +10,14 @@ float ar_widescreen = 16 / 9;
 // MULTICAST EVENTS
 //
 
+#ifdef STANLEY
+
 enum
 {
 	EVENT_NARRATOR
 };
+
+#endif
 
 //
 // GLOBAL ENTITY FLAGS
@@ -35,7 +39,6 @@ const float FL_USEABLE = 4096;
 void(float prevprogs) init =
 {
 	// set up all the custom cvars
-	autocvar(_ents_only, 0, "DEBUG: Draw only entities");
 	autocvar(accessibility_resolution_scale, 1, "Accessibility: Screen resolution scaler");
 	autocvar(accessibility_crosshair, 0, "Accessibility: Always-on crosshair");
 	autocvar(accessibility_colorblind, 0, "Accessibility: Colorblind mode");

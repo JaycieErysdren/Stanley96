@@ -1,11 +1,6 @@
 //
-// GLOBAL MENUQC VARIABLES
+// builtins.qc
 //
-
-float menu_loadingbar_width;
-float menu_active;
-float menu_gamestate;
-string menu_bg;
 
 //
 // SPECIAL FUNCTIONS
@@ -30,6 +25,7 @@ void() m_open =
 void() m_init =
 {
 	setcursormode(TRUE, "gfx/cursor", [16, 16], 4);
+	#if defined(STANLEY)
 	menu_bg = strcat("gfx/menu_bg_0", ftos(ceil(random(0, 2))));
 };
 
