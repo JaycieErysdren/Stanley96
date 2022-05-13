@@ -55,6 +55,7 @@ void(float prevprogs) init =
 	autocvar(r_fade_color, [0, 0, 0], "On-screen fade color");
 	autocvar(r_fade_alpha, 0, "On-screen fade alpha");
 	autocvar(achievement_display_time, 5, "Achievement notifcation display time, in seconds");
+	autocvar(achievement_enable, 1, "Controls whether or not achievements are enabled");
 };
 
 //

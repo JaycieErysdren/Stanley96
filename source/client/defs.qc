@@ -11,6 +11,8 @@ string achievement_image;
 float achievement_timer;
 float achievementbox_ypos;
 
+float has_achievements;
+
 #if defined(STANLEY)
 
 float current_line_time;
