@@ -1,0 +1,23 @@
+{
+	"testbinary":
+	{
+		"title": "Test Achievement: Binary",
+		"description": "An achievement that is either or off.",
+		"image": "gfx/loading_bg",
+		"steps": 1
+	},
+	"testprogress":
+	{
+		"title": "Test Achievement: Progress",
+		"description": "An achievement that fills up a progress meter.",
+		"image": "gfx/menu_bg_01",
+		"steps": 5
+	},
+	"achievement01":
+	{
+		"title": "You got an achievement!",
+		"description": "This is an achievement! That you got! Wow!",
+		"image": "gfx/cursor",
+		"steps": 1
+	}
+}

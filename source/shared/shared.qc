@@ -10,11 +10,20 @@ float ar_widescreen = 16 / 9;
 // MULTICAST EVENTS
 //
 
+// generic events - 1 through 127
+
+enum
+{
+	EVENT_ACHIEVEMENT
+};
+
+// project-specific events - always start at 128
+
 #ifdef STANLEY
 
 enum
 {
-	EVENT_NARRATOR
+	EVENT_NARRATOR = 128
 };
 
 #endif
@@ -45,6 +54,7 @@ void(float prevprogs) init =
 	autocvar(r_viewmode, 0, "Screen Viewmode: 0 = default 1 = fullscreen 2 = widescreen");
 	autocvar(r_fade_color, [0, 0, 0], "On-screen fade color");
 	autocvar(r_fade_alpha, 0, "On-screen fade alpha");
+	autocvar(achievement_display_time, 5, "Achievement notifcation display time, in seconds");
 };
 
 //

@@ -6,6 +6,27 @@
 // SPECIAL INITIALIZATIONS
 //
 
+jsonnode(string id) initialize_achievement =
+{
+	float displaytime = cvar("achievement_display_time");
+
+	if (displaytime <= 0)
+		return 0;
+
+	filestream f = fopen("json/achievements.json", FILE_READNL);
+	jsonnode tree = json_parse(fgets(f));
+	fclose(f);
+
+	if (tree)
+	{
+		achievement_timer = time + displaytime;
+		achievementbox_ypos = -8 * cvar("accessibility_resolution_scale");
+		return tree[id];
+	}
+
+	return 0;
+};
+
 #if defined(STANLEY)
 
 jsonnode(string line) initialize_narrator =
@@ -172,6 +193,26 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	if (cvar("crosshair") == 1 || cvar("accessibility_crosshair") == 1)
 		drawstring(crosshair_pos, "+", crosshair_size, [1, 1, 1], 1, 0);	
 
+	// achievement display machine
+	vector achievementbox_textsize = [8 * scale, 8 * scale];
+
+	achievementbox_ypos += (achievement_timer < time) ? -192 * frametime : 192 * frametime;
+	achievementbox_ypos = bound(-16 * scale, achievementbox_ypos, 4 * scale);
+
+	if (achievement_timer > time)
+	{
+		achievement_title = achievement_tree["title"].s;
+		achievement_description = achievement_tree["description"].s;
+		achievement_image = achievement_tree["image"].s;
+	}
+
+	drawfill([0, achievementbox_ypos - (4 * scale)], [(strlen(achievement_title) * (8 * scale)) + (24 * scale), 16 * scale], [0.1, 0.1, 0.1], 0.5); // background color
+
+	if (achievement_image != "")
+		drawpic([2 * scale, achievementbox_ypos - (2 * scale)], achievement_image, [12 * scale, 12 * scale], [1, 1, 1], 1); // achievement image
+
+	drawstring([16 * scale, achievementbox_ypos], achievement_tree["title"].s, [8 * scale, 8 * scale], [1, 1, 1], 1, 0); // achievement title
+
 	setviewprop(VF_RT_DESTCOLOUR, (string)__NULL__);
 		
 	shaderforname("screenrtshader", "{\n{\nmap $rt:screenrt\nrgbgen vertex\n}\n}\n"); 
@@ -230,6 +271,7 @@ void() CSQC_Parse_Event =
 {
 	switch(readbyte())
 	{
+		case EVENT_ACHIEVEMENT: achievement_tree = initialize_achievement(readstring()); break;
 		#if defined(STANLEY)
 		case EVENT_NARRATOR: caption_tree = initialize_narrator(readstring()); break;
 		#endif
