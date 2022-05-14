@@ -21,6 +21,15 @@
 	// initial setup
 	menu/defs.qc
 
+	// shpuld's SUI lib
+	menu/sui_sys.qc
+
+	// interactable elements
+	menu/elements.qc
+
+	// menu windows
+	menu/windows.qc
+
 	// final setup
 	menu/builtins.qc
 #endlist
