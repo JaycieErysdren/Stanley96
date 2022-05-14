@@ -4,13 +4,11 @@
 
 float menu_loadingbar_width;
 float menu_active;
-float menu_gamestate;
+//float menu_gamestate;
 string menu_bg;
 
 vector display_pos;
 vector display_size;
-float display_scale;
-vector internal_size;
 
 // menu IDs
 
@@ -18,7 +16,7 @@ enum
 {
 	MENU_MAIN,
 	MENU_SETTINGS,
-	MENU_HELP,
+	MENU_ABOUT,
 	MENU_GAMES,
 	MENU_MAPS
 };

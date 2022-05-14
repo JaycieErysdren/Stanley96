@@ -19,46 +19,34 @@ void() m_init =
 
 void(vector screensize) m_calculatedisplay =
 {
-	vector realsize = getproperty(VF_SCREENPSIZE);
-
-	internal_size = [1280, 960]; // FIXME: make responsive to widescreen mode
-
 	if (screensize_y < screensize_x && (screensize_y * ar_normal) < screensize_x )
 	{
 		// window is widescreen-shaped
 		display_pos = [(screensize_x / 2) - ((screensize_y * ar_normal) / 2), 0];
-		display_scale = realsize_y / internal_size_y;
-		//display_size = [screensize_y * ar_normal, screensize_y];
+		display_size = [screensize_y * ar_normal, screensize_y];
 	}
 	else if ((screensize_x / screensize_y) == ar_normal)
 	{
 		// perfectly 4:3 window
 		display_pos = [0, 0];
-		display_scale = realsize_x / internal_size_x;
-		//display_size = [screensize_x, screensize_y];
+		display_size = screensize;
 	}
 	else
 	{
 		// window is phone-shaped (?)
 		display_pos = [0, (screensize_y / 2) - ((screensize_x * 0.75) / 2)];
-		display_scale = realsize_x / internal_size_x;
-		//display_size = [screensize_x, screensize_x * 0.75];
+		display_size = [screensize_x, screensize_x * 0.75];
 	}
-
-	display_size = [internal_size_x = display_scale, internal_size_y * display_scale];
 };
 
 void(vector screensize) m_draw =
 {
-	if (menu_active == FALSE)
-	{
-		return;
-	}
-	else if (menu_active == TRUE)
-	{
-		sui_begin(screensize_x, screensize_y);
+	m_calculatedisplay(screensize);
+
+	sui_begin(screensize_x, screensize_y);
+
+	if (menu_active == TRUE)
 		menu_root(screensize);
-	}
 };
 
 void(vector screensize, float opaque) m_drawloading =
