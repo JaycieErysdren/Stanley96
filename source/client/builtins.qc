@@ -336,6 +336,7 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	registercommand("achievement_list");
 
 	#if defined(DUKE)
+	precache_model("models/v_models/v_sniper.iqm");
 	precache_model("models/v_models/v_shotgun.iqm");
 	cl_viewmodel = spawn();
 	cl_viewmodel.classname = "vm";

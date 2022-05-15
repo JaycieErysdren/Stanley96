@@ -57,6 +57,27 @@ const float FL_USEABLE = 4096;
 .float state;
 .float identity;
 
+#if defined(CRAFTWORLD)
+.float layer;
+
+// world layers
+enum
+{
+	LAYER_FRONT,
+	LAYER_MIDDLE,
+	LAYER_BACK
+};
+
+// cardinal directions
+enum
+{
+	D_NORTH,
+	D_SOUTH,
+	D_EAST,
+	D_WEST
+};
+#endif
+
 //
 // ENGINE BUILTINS
 //

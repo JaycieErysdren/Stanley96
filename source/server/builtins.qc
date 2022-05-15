@@ -212,6 +212,17 @@ void() PlayerPreThink =
 {
 	if (self.health)
 	{
+		#if defined(CRAFTWORLD)
+		self.layer = cvar("player_layer");
+
+		if (self.layer == LAYER_BACK)
+			setorigin(self, [self.origin_x, 160, self.origin_z]);
+		else if (self.layer == LAYER_MIDDLE)
+			setorigin(self, [self.origin_x, 96, self.origin_z]);
+		else if (self.layer == LAYER_FRONT)
+			setorigin(self, [self.origin_x, 32, self.origin_z]);
+		#endif
+
 		Player_Footstep();
 
 		if (self.button3)

@@ -16,6 +16,10 @@ class CBaseEntity
 
 	float touch_time;
 	float touch_state;
+	
+	#if defined(CRAFTWORLD)
+		float layer;
+	#endif
 
 	float alpha;
 
@@ -130,6 +134,17 @@ void CBaseEntity :: FrameUpdate ( void )
 		EndTouch();
 		touch_state = 0;
 	}
+
+#if defined(CRAFTWORLD)
+
+	if (layer == LAYER_BACK)
+		setorigin(this, [origin_x, 160, origin_z]);
+	else if (layer == LAYER_MIDDLE)
+		setorigin(this, [origin_x, 96, origin_z]);
+	else if (layer == LAYER_FRONT)
+		setorigin(this, [origin_x, 32, origin_z]);
+
+#endif
 };
 
 void CBaseEntity :: Null ( void ) { };
