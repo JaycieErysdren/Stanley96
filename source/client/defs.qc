@@ -13,6 +13,10 @@ float achievementbox_ypos;
 
 float has_achievements;
 
+#if defined(DUKE)
+entity cl_viewmodel;
+#endif
+
 #if defined(STANLEY)
 
 float current_line_time;

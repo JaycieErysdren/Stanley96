@@ -1,0 +1,129 @@
+"Language: en"
+
+#
+# main menu
+#
+
+msgid "m_start"
+msgstr "Start"
+
+msgid "m_resume"
+msgstr "Resume"
+
+msgid "m_about"
+msgstr "About"
+
+msgid "m_games"
+msgstr "Games"
+
+msgid "m_settings"
+msgstr "Settings"
+
+msgid "m_accessibility"
+msgstr "Accessibility"
+
+msgid "m_quit"
+msgstr "Quit"
+
+msgid "m_back"
+msgstr "Back"
+
+#
+# about menu
+#
+
+msgid "m_credits01"
+msgstr "GAME: Jaycie Erysdren and evie_src"
+
+msgid "m_credits02"
+msgstr "TRANSLATION: staticanimal, Aymeric Buceron,"
+
+msgid "m_credits03"
+msgstr "     and Alexandra 'Maestra Fenix' Bravo."
+
+msgid "m_credits04"
+msgstr "TRENCHBROOM: SleepwalkR, ericw, and others"
+
+msgid "m_credits05"
+msgstr "SUI TEMPLATE: Shpuld"
+
+msgid "m_credits06"
+msgstr "FTEQW: Forethought Entertainment"
+
+msgid "m_credits07"
+msgstr "QUAKE: id Software"
+
+#
+# settings menu
+#
+
+msgid "m_volume_game"
+msgstr "Game Volume"
+
+msgid "m_volume_music"
+msgstr "Music Volume"
+
+msgid "m_video"
+msgstr "Video Options"
+
+msgid "m_windowed"
+msgstr "Windowed"
+
+msgid "m_fullscreen"
+msgstr "Fullscreen"
+
+msgid "m_sensitivity"
+msgstr "Sensitivity"
+
+msgid "m_controls"
+msgstr "Controls"
+
+msgid "m_key_use"
+msgstr "Use"
+
+msgid "m_key_moveforward"
+msgstr "Forward"
+
+msgid "m_key_moveback"
+msgstr "Back"
+
+msgid "m_key_moveleft"
+msgstr "Left"
+
+msgid "m_key_moveright"
+msgstr "Right"
+
+msgid "m_bind1"
+msgstr "Press a key for"
+
+msgid "m_bind2"
+msgstr "ESC to cancel, BACKSPACE to remove"
+
+#
+# accessibility menu
+#
+
+msgid "m_miscellaneous"
+msgstr "Miscellaneous"
+
+msgid "m_resolution_scale"
+msgstr "Resolution Scale"
+
+msgid "m_colorblind"
+msgstr "Colorblind Mode"
+
+msgid "m_crosshair"
+msgstr "Crosshair"
+
+msgid "m_viewmode"
+msgstr "Aspect Ratio"
+
+msgid "m_viewmode0"
+msgstr "Default (4:3)"
+
+msgid "m_viewmode1"
+msgstr "Fullscreen (4:3)"
+
+msgid "m_viewmode2"
+msgstr "Widescreen (16:9)"
+

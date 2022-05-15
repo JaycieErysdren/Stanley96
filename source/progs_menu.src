@@ -1,17 +1,7 @@
 #pragma target fte
-#include "project.src"
+#include "definitions.src"
 
-#if defined(STANLEY)
-	#pragma progs_dat "../game/stanley96/menu.dat"
-#elif defined(DUKE)
-	#pragma progs_dat "../game/duke/menu.dat"
-#elif defined(PLATFORM)
-	#pragma progs_dat "../game/platform/menu.dat"
-#elif defined(EXPERIMENTAL)
-	#pragma progs_dat "../game/experimental/menu.dat"
-#else
-	#error "INVALID PROJECT SET!"
-#endif
+#pragma progs_dat "../game/platform/menu.dat"
 
 #define MENU
 

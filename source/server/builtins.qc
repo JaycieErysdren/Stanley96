@@ -226,13 +226,22 @@ void() worldspawn =
 {	
 	precache_everything();
 	initialize_lightstyles();
+
+	#if defined(CRAFTWORLD)
+		cvar_set("chase_active", "1");
+	#endif
 };
 
 void() PutClientInServer =
 {
 	self.classname = "player";
 	self.solid = SOLID_SLIDEBOX;
-	//setmodel(self, "progs/player.mdl");
+
+	#if defined(CRAFTWORLD)
+		precache_model("models/player.mdl");
+		setmodel(self, "models/player.mdl");
+	#endif
+
 	self.movetype = MOVETYPE_WALK;
 	self.health = 100;
 	setorigin(self, GetSpawnPoint());

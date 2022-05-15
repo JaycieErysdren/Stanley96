@@ -166,9 +166,7 @@ void() menu_accessibility =
 	sui_fill([(size_x / 2) - 1, 2], [2, tbsize_y], MENU_BORDER, 1, 0);
 
 	// content body
-	sui_text(bpos, MENU_TEXT_SMALL, _("m_miscellaneous"), MENU_TEXT_1, 1, 0);
-
-	bpos_y += 24; in_cvarslider(bpos, [bsize_x, 32], [1, 5, 5], "accessibility_resolution_scale", _("m_resoluation_scale"), "%.0f");
+	in_cvarslider(bpos, [bsize_x, 32], [1, 5, 5], "accessibility_resolution_scale", _("m_resolution_scale"), "%.0f");
 	bpos_y += 40; in_cvarcheckbox("ac_colorblind", bpos, bsize, "accessibility_colorblind", _("m_colorblind")) ? cvar_toggle("accessibility_colorblind", [1, 0]) : 0;
 	bpos_y += 32; in_cvarcheckbox("ac_crosshair", bpos, bsize, "accessibility_crosshair", _("m_crosshair")) ? cvar_toggle("accessibility_crosshair", [1, 0]) : 0;
 
@@ -176,7 +174,7 @@ void() menu_accessibility =
 
 	sui_text(bpos, MENU_TEXT_SMALL, _("m_viewmode"), MENU_TEXT_1, 1, 0);
 
-	bpos_y += 24; in_button("ac_viewmode0", bpos, bsize, _("m_viewmode0"), TRUE) ? localcmd("r_viewmode 0\n") : 0;
+	bpos_y += 16; in_button("ac_viewmode0", bpos, bsize, _("m_viewmode0"), TRUE) ? localcmd("r_viewmode 0\n") : 0;
 	bpos_y += 24; in_button("ac_viewmode1", bpos, bsize, _("m_viewmode1"), TRUE) ? localcmd("r_viewmode 1\n") : 0;
 	bpos_y += 24; in_button("ac_viewmode2", bpos, bsize, _("m_viewmode2"), TRUE) ? localcmd("r_viewmode 2\n") : 0;
 

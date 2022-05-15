@@ -150,94 +150,97 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	setproperty(VF_DRAWWORLD, 1);
 	addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
 
-	float view_ofs = 64;
-
-	// set the camera to where the player is
-	setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);	
-	setproperty(VF_ANGLES, view_angles);
+	#if defined(CRAFTWORLD)
+		setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, -256, 64]);	
+		setproperty(VF_ANGLES, [0, 90, 0]);
+	#else
+		// set the camera to where the player is
+		float view_ofs = 64;
+		setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);	
+		setproperty(VF_ANGLES, view_angles);
+	#endif
 
 	renderscene();
 
 	#if defined(STANLEY)
+		if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
+		{
+			localsound("stanley/ghosts.wav", CHAN_BODY, 0.2 * cvar("volume"));
+			music_status = 1;
+		}
 
-	if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
-	{
-		localsound("stanley/ghosts.wav", CHAN_BODY, 0.2 * cvar("volume"));
-		music_status = 1;
-	}
+		current_line_time = getsoundtime(self, CHAN_VOICE);
 
-	current_line_time = getsoundtime(self, CHAN_VOICE);
+		// caption display machine
+		// 1. check if a narrator sound is playing
+		// 2. check if the timer has expired
+		// 3. make sure caption_iteration hasn't reached the end yet
+		if (current_line_time > 0 && caption_timer < time && caption_iteration < caption_tree.length)
+		{
+			// parse through the json tree to get the lines
+			caption_line1 = (caption_tree.a[caption_iteration])["line1"].s;
+			caption_line2 = (caption_tree.a[caption_iteration])["line2"].s;
+			caption_line3 = (caption_tree.a[caption_iteration])["line3"].s;
+			
+			string captiontargetname = (caption_tree.a[caption_iteration])["target"].s;
+			
+			if (captiontargetname && captiontargetname != "")
+				sendevent("FireTarget", "s", captiontargetname);
 
-	// caption display machine
-	// 1. check if a narrator sound is playing
-	// 2. check if the timer has expired
-	// 3. make sure caption_iteration hasn't reached the end yet
-	if (current_line_time > 0 && caption_timer < time && caption_iteration < caption_tree.length)
-	{
-		// parse through the json tree to get the lines
-		caption_line1 = (caption_tree.a[caption_iteration])["line1"].s;
-		caption_line2 = (caption_tree.a[caption_iteration])["line2"].s;
-		caption_line3 = (caption_tree.a[caption_iteration])["line3"].s;
-		
-		string captiontargetname = (caption_tree.a[caption_iteration])["target"].s;
-		
-		if (captiontargetname && captiontargetname != "")
-			sendevent("FireTarget", "s", captiontargetname);
+			// save caption_iteration to a tempvar because we need to iterate it before the timer is set
+			// but the timer requires the original value
+			float tempvar = caption_iteration;
+			caption_iteration++;
 
-		// save caption_iteration to a tempvar because we need to iterate it before the timer is set
-		// but the timer requires the original value
-		float tempvar = caption_iteration;
-		caption_iteration++;
+			caption_timer = time + (caption_tree.a[tempvar])["time"].f;
+		}
+		else if (current_line_time < 0)
+		{
+			// reset when a line stops playing
+			caption_line1 = "";
+			caption_line2 = "";
+			caption_line3 = "";
+		}
 
-		caption_timer = time + (caption_tree.a[tempvar])["time"].f;
-	}
-	else if (current_line_time < 0)
-	{
-		// reset when a line stops playing
-		caption_line1 = "";
-		caption_line2 = "";
-		caption_line3 = "";
-	}
+		// screen color overlay
+		drawfill([0, 0], [vwidth, vheight], stov(cvar_string("r_fade_color")), cvar("r_fade_alpha"));
 
-	// screen color overlay
-	drawfill([0, 0], [vwidth, vheight], stov(cvar_string("r_fade_color")), cvar("r_fade_alpha"));
+		vector captionbox_size = [320 * scale, 40 * scale];
+		vector captionbox_textsize = [8 * scale, 8 * scale];
+		vector captionbox_pos;
 
-	vector captionbox_size = [320 * scale, 40 * scale];
-	vector captionbox_textsize = [8 * scale, 8 * scale];
-	vector captionbox_pos;
+		if (cvar("r_viewmode") == 1)
+		{
+			captionbox_pos = [0, screensize_y - captionbox_size_y];
 
-	if (cvar("r_viewmode") == 1)
-	{
-		captionbox_pos = [0, screensize_y - captionbox_size_y];
+			if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
+				drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
+		}
+		else if (cvar("r_viewmode") == 2)
+		{
+			captionbox_pos = [(screensize_x - captionbox_size_x) / 2, screensize_y - captionbox_size_y];
 
-		if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
-			drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
-	}
-	else if (cvar("r_viewmode") == 2)
-	{
-		captionbox_pos = [(screensize_x - captionbox_size_x) / 2, screensize_y - captionbox_size_y];
+			if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
+				drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
+		}
+		else
+		{
+			captionbox_pos = [0, screensize_y - captionbox_size_y];
 
-		if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
-			drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
-	}
-	else
-	{
-		captionbox_pos = [0, screensize_y - captionbox_size_y];
+			// narrator captionbox base
+			drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 1); // background color
+			drawpic(captionbox_pos, "gfx/dither_overlay", captionbox_size, [1, 1, 1], 0.4); // dithery overlay
 
-		// narrator captionbox base
-		drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 1); // background color
-		drawpic(captionbox_pos, "gfx/dither_overlay", captionbox_size, [1, 1, 1], 0.4); // dithery overlay
+			string captionbox_divider_text = "--------------------------------";
+			float captionbox_divider_size = captionbox_size_x / strlen(captionbox_divider_text);
+			drawstring(captionbox_pos - [0, captionbox_divider_size / 2], captionbox_divider_text, [captionbox_divider_size, captionbox_divider_size], [0.3, 0.3, 0.3], 1, 0);
+		}
 
-		string captionbox_divider_text = "--------------------------------";
-		float captionbox_divider_size = captionbox_size_x / strlen(captionbox_divider_text);
-		drawstring(captionbox_pos - [0, captionbox_divider_size / 2], captionbox_divider_text, [captionbox_divider_size, captionbox_divider_size], [0.3, 0.3, 0.3], 1, 0);
-	}
-
-	drawstring(captionbox_pos + [4 * scale, 4 * scale], caption_line1, captionbox_textsize, [1, 1, 1], 1, 0); // text line 1
-	drawstring(captionbox_pos + [4 * scale, 16 * scale], caption_line2, captionbox_textsize, [1, 1, 1], 1, 0); // text line 2
-	drawstring(captionbox_pos + [4 * scale, 28 * scale], caption_line3, captionbox_textsize, [1, 1, 1], 1, 0); // text line 3
-
+		drawstring(captionbox_pos + [4 * scale, 4 * scale], caption_line1, captionbox_textsize, [1, 1, 1], 1, 0); // text line 1
+		drawstring(captionbox_pos + [4 * scale, 16 * scale], caption_line2, captionbox_textsize, [1, 1, 1], 1, 0); // text line 2
+		drawstring(captionbox_pos + [4 * scale, 28 * scale], caption_line3, captionbox_textsize, [1, 1, 1], 1, 0); // text line 3
 	#endif
+	
 
 	vector crosshair_size = [8 * scale, 8 * scale];
 	vector crosshair_pos = [(view_size_x / 2) - (crosshair_size_x / 2), (view_size_y / 2) - (crosshair_size_x / 1.6)];
@@ -331,6 +334,17 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	registercommand("achievement_get");
 	registercommand("achievement_clearall");
 	registercommand("achievement_list");
+
+	#if defined(DUKE)
+	precache_model("models/v_models/v_shotgun.iqm");
+	cl_viewmodel = spawn();
+	cl_viewmodel.classname = "vm";
+	cl_viewmodel.renderflags = RF_VIEWMODEL;
+	cl_viewmodel.effects |= EF_NOSHADOW;
+	cl_viewmodel.drawmask = MASK_VIEWMODEL;
+	setmodel(cl_viewmodel, "models/v_models/v_shotgun.iqm");
+	setsize(cl_viewmodel, [0, 0, 0], [0, 0, 0]);
+	#endif
 };
 
 float(string cmd) CSQC_ConsoleCommand =

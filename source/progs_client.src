@@ -1,17 +1,7 @@
 #pragma target fte
-#include "project.src"
+#include "definitions.src"
 
-#if defined(STANLEY)
-	#pragma progs_dat "../game/stanley96/csprogs.dat"
-#elif defined(DUKE)
-	#pragma progs_dat "../game/duke/csprogs.dat"
-#elif defined(PLATFORM)
-	#pragma progs_dat "../game/platform/csprogs.dat"
-#elif defined(EXPERIMENTAL)
-	#pragma progs_dat "../game/experimental/csprogs.dat"
-#else
-	#error "INVALID PROJECT SET!"
-#endif
+#pragma progs_dat "../game/platform/csprogs.dat"
 
 #define CSQC
 
