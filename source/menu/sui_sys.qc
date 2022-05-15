@@ -735,6 +735,44 @@ void(vector pos, vector size, string pic, vector color, float alpha, float flags
 	drawpic(pos, pic, size, color, alpha, flags);
 };
 
+// JAYCIE EDIT 2022-05-14
+// added individual border side functions
+
+void(vector pos, vector size, float width, vector color, float alpha, float flags) sui_border_top =
+{
+	sui_transform_box(pos, size);
+	
+	// Top line
+	drawfill(pos, [size_x, width], color, alpha, flags);
+};
+
+void(vector pos, vector size, float width, vector color, float alpha, float flags) sui_border_bottom =
+{
+	sui_transform_box(pos, size);
+	
+	// Bottom line
+	drawfill([pos_x, pos_y + size_y - width], [size_x, width], color, alpha, flags);
+};
+
+void(vector pos, vector size, float width, vector color, float alpha, float flags) sui_border_left =
+{
+	sui_transform_box(pos, size);
+
+	// Left line
+	drawfill([pos_x, pos_y + width], [width, size_y - width * 2], color, alpha, flags);
+};
+
+void(vector pos, vector size, float width, vector color, float alpha, float flags) sui_border_right =
+{
+	sui_transform_box(pos, size);
+
+	// Right line
+	drawfill([pos_x + size_x - width, pos_y + width], [width, size_y - width * 2], color, alpha, flags);
+};
+
+// end of edit
+//=======================
+
 void(vector pos, vector size, float width, vector color, float alpha, float flags) sui_border_box =
 {
 	sui_transform_box(pos, size);
@@ -748,7 +786,6 @@ void(vector pos, vector size, float width, vector color, float alpha, float flag
 	// Right line
 	drawfill([pos_x + size_x - width, pos_y + width], [width, size_y - width * 2], color, alpha, flags);
 };
-
 
 void(vector pos, vector size, string text, vector color, float alpha, float flags) sui_text =
 {

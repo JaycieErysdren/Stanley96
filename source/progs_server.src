@@ -7,6 +7,8 @@
 	#pragma progs_dat "../game/duke/progs.dat"
 #elif defined(PLATFORM)
 	#pragma progs_dat "../game/platform/progs.dat"
+#elif defined(EXPERIMENTAL)
+	#pragma progs_dat "../game/experimental/progs.dat"
 #else
 	#error "INVALID PROJECT SET!"
 #endif

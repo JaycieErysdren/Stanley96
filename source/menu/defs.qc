@@ -6,9 +6,12 @@ float menu_loadingbar_width;
 float menu_active;
 //float menu_gamestate;
 string menu_bg;
+string loading_bg;
 
 vector display_pos;
 vector display_size;
+
+float changed_settings;
 
 // menu IDs
 
@@ -17,8 +20,17 @@ enum
 	MENU_MAIN,
 	MENU_SETTINGS,
 	MENU_ABOUT,
+	MENU_ACCESSIBILITY,
 	MENU_GAMES,
 	MENU_MAPS
+};
+
+// tab border IDs
+
+enum
+{
+	TAB_INACTIVE,
+	TAB_ACTIVE
 };
 
 float current_menu;
@@ -26,7 +38,7 @@ float current_menu;
 // style definitions
 
 vector MENU_BG = '0.15 0.15 0.15';
-vector MENU_BG_DARK = '0 0 0';
+vector MENU_BG_DARK = '0.05 0.05 0.05';
 vector MENU_BORDER = '1 1 1';
 vector MENU_BUTTON = '0.2 0.2 0.2';
 vector MENU_BUTTON_BORDER = '1 1 1';

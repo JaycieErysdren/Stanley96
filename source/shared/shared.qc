@@ -1,4 +1,20 @@
 //
+// shared.qc
+//
+
+//
+// USEFUL FUNCTIONS
+//
+
+void(string cvar_s, vector values) cvar_toggle =
+{
+	if (cvar(cvar_s) == values[0])
+		cvar_set(cvar_s, ftos(values[1]));
+	else
+		cvar_set(cvar_s, ftos(values[0]));
+};
+
+//
 // ASPECT RATIO VALUES
 //
 

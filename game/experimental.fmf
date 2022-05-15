@@ -1,0 +1,5 @@
+game quake
+gamedir platform
+gamedir experimental
+name "Experimental"
+disablehomedir 1

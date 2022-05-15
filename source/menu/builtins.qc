@@ -14,6 +14,7 @@ void() m_init =
 
 	#if defined(STANLEY)
 	menu_bg = strcat("gfx/menu_bg_0", ftos(ceil(random(0, 2))));
+	loading_bg = strcat("gfx/menu_bg_0", ftos(ceil(random(0, 2))));
 	#endif
 };
 
@@ -47,6 +48,8 @@ void(vector screensize) m_draw =
 
 	if (menu_active == TRUE)
 		menu_root(screensize);
+
+	sui_end();
 };
 
 void(vector screensize, float opaque) m_drawloading =
@@ -55,7 +58,7 @@ void(vector screensize, float opaque) m_drawloading =
 
 	// bg
 	drawfill([0, 0], [screensize_x, screensize_y], [0, 0, 0], 1);
-	drawpic(display_pos, menu_bg, display_size, [1, 1, 1], 1);
+	drawpic(display_pos, loading_bg, display_size, [1, 1, 1], 1);
 
 	drawstring([display_pos_x, display_pos_y + ((screensize_y / 32) / 2)], "LOADING...", [screensize_y / 32, screensize_y / 32], [1, 1, 1], 1, 0);
 
@@ -67,7 +70,9 @@ void(vector screensize, float opaque) m_drawloading =
 	float menu_loadingbar_size = display_size_x / strlen(menu_loadingbar_text);
 	drawfill([display_pos_x, (display_pos_y + display_size_y) - menu_loadingbar_size], [menu_loadingbar_width, display_size_y / menu_loadingbar_size], [1, 1, 1], 1);
 
+#if defined(STANLEY)
 	drawstring([display_pos_x, (display_pos_y + display_size_y) - menu_loadingbar_size], menu_loadingbar_text, [menu_loadingbar_size, menu_loadingbar_size], [0, 0, 0], 1, 0);
+#endif
 };
 
 void(float wantmode) m_toggle =
