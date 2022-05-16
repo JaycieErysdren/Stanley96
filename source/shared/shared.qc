@@ -35,11 +35,36 @@ enum
 
 // project-specific events - always start at 128
 
-#ifdef STANLEY
+#if defined(STANLEY)
 
 enum
 {
 	EVENT_NARRATOR = 128
+};
+
+#endif
+
+//
+// ITEM VALUSE
+//
+
+#if defined(DUKE)
+
+enum
+{
+	IT_FISTS,
+	IT_PISTOL,
+	IT_SHOTGUN,
+	IT_RPG
+};
+
+#elif defined(BITCHHELL)
+
+enum
+{
+	IT_BAT,
+	IT_PISTOL,
+	IT_SHOTGUN
 };
 
 #endif
