@@ -1,5 +1,5 @@
 #define PLATFORM
 #define EXPERIMENTAL
-#define CRAFTWORLD
+//#define CRAFTWORLD
 //#define STANLEY
-//#define DUKE
+#define DUKE

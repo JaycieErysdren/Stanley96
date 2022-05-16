@@ -107,7 +107,7 @@ void() menu_settings =
 	
 	// content body
 	sui_text(bpos, MENU_TEXT_SMALL, _("m_controls"), MENU_TEXT_1, 1, 0);
-	//bpos_y += 16; bind_list("bindlist", bpos, [bsize_x, 160], binds_scroll);
+	bpos_y += 16; in_bindlist("st_bindlist", bpos, [bsize_x, 160], binds_scroll);
 	bpos_y += 168; in_cvarslider(bpos, [bsize_x, 32], [0.1, 10], "sensitivity", _("m_sensitivity"), "%.2f");
 
 	bpos = [bsize_x + 24, 40];

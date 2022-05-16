@@ -78,9 +78,6 @@ msgstr "Sensitivity"
 msgid "m_controls"
 msgstr "Controls"
 
-msgid "m_key_use"
-msgstr "Use"
-
 msgid "m_key_moveforward"
 msgstr "Forward"
 
@@ -92,6 +89,27 @@ msgstr "Left"
 
 msgid "m_key_moveright"
 msgstr "Right"
+
+msgid "m_key_use"
+msgstr "Use"
+
+msgid "m_key_crouch"
+msgstr "Crouch"
+
+msgid "m_key_kick"
+msgstr "Kick"
+
+msgid "m_key_reload"
+msgstr "Reload"
+
+msgid "m_key_equip01"
+msgstr "Equip Bat"
+
+msgid "m_key_equip02"
+msgstr "Equip Pistol"
+
+msgid "m_key_equip03"
+msgstr "Equip Shotgun"
 
 msgid "m_bind1"
 msgstr "Press a key for"

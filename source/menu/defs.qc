@@ -13,6 +13,8 @@ vector display_size;
 
 float changed_settings;
 
+vector binds_scroll;
+
 // menu IDs
 
 enum

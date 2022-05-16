@@ -105,3 +105,32 @@ void(vector pos, vector size, vector minmaxsteps, string cvar_s, string name, st
 	in_slider(strcat(cvar_s, "sldr"), [pos_x, pos_y + size_y * 0.5], [size_x, size_y * 0.5], minmaxsteps, current);
 	if (current != old) cvar_set(cvar_s, ftos(current));
 };
+
+// keybind button
+void(string id, vector pos, vector size, string name, string command) in_bindbutton =
+{
+	sui_push_frame(pos, size);
+	sui_set_align([SUI_ALIGN_START, SUI_ALIGN_CENTER]);
+	string key = sui_binder(id, [0, 0], size, name, command);
+	if (sui_is_hovered(id)) sui_fill([0, 0], size, MENU_HIGHLIGHT, 0.1, 0);
+	sui_text([6, 0], MENU_TEXT_SMALL, name, MENU_TEXT_1, 1, 0);
+	sui_set_align([SUI_ALIGN_END, SUI_ALIGN_CENTER]);
+	sui_text([-6, 0], MENU_TEXT_SMALL, key, MENU_TEXT_1, 1, 0);
+	
+	sui_pop_frame();
+};
+
+// list of keybinds
+void(string id, vector pos, vector size, __inout vector scrollofs) in_bindlist =
+{
+	sui_fill(pos, size, MENU_BG_DARK, 0.75, 0);
+	sui_list_view_begin(strcat(id, "scrl"), pos, size, [size_x - 6, 24], bindlist.length, scrollofs, [0, 6]);
+	vector listitem_pos = '0 0 0';
+	for (float index = sui_list_item(listitem_pos); index > -1; index = sui_list_item(listitem_pos))
+	{
+		sui_push_frame(listitem_pos, [size_x - 6, 24]);
+		in_bindbutton(strcat(id, ftos(index)), [0, 0], [size_x - 6, 24], bindlist[index].name, bindlist[index].command);
+		sui_pop_frame();
+	}
+	sui_list_view_end();	
+};
