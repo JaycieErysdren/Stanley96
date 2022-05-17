@@ -177,6 +177,7 @@ void() menu_accessibility =
 	bpos_y += 16; in_button("ac_viewmode0", bpos, bsize, _("m_viewmode0"), TRUE) ? localcmd("r_viewmode 0\n") : 0;
 	bpos_y += 24; in_button("ac_viewmode1", bpos, bsize, _("m_viewmode1"), TRUE) ? localcmd("r_viewmode 1\n") : 0;
 	bpos_y += 24; in_button("ac_viewmode2", bpos, bsize, _("m_viewmode2"), TRUE) ? localcmd("r_viewmode 2\n") : 0;
+	bpos_y += 24; in_button("ac_viewmode3", bpos, bsize, _("m_viewmode3"), TRUE) ? localcmd("r_viewmode 3\n") : 0;
 
 	sui_set_align([SUI_ALIGN_END, SUI_ALIGN_END]);
 

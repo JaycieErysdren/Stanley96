@@ -21,6 +21,7 @@ void(string cvar_s, vector values) cvar_toggle =
 float ar_normal = 4 / 3;
 float ar_laptop1 = 1366 / 768;
 float ar_widescreen = 16 / 9;
+float ar_widescreen2 = 16 / 10;
 
 //
 // MULTICAST EVENTS

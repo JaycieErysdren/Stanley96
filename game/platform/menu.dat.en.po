@@ -145,3 +145,6 @@ msgstr "Fullscreen (4:3)"
 msgid "m_viewmode2"
 msgstr "Widescreen (16:9)"
 
+msgid "m_viewmode3"
+msgstr "Widescreen (16:10)"
+

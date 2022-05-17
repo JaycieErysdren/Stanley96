@@ -139,6 +139,11 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		view_size = [384 * scale, 216 * scale];
 		screensize = [384 * scale, 216 * scale];
 	}
+	else if (cvar("r_viewmode") == 3) // widescreen (16:10 without narrator box)
+	{
+		view_size = [384 * scale, 240 * scale];
+		screensize = [384 * scale, 240 * scale];
+	}
 	else // normal (4:3 with narrator box)
 	{
 		view_size = [320 * scale, 200 * scale];
@@ -248,7 +253,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 			if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
 				drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
 		}
-		else if (cvar("r_viewmode") == 2)
+		else if (cvar("r_viewmode") == 2 || cvar("r_viewmode") == 3)
 		{
 			captionbox_pos = [(screensize_x - captionbox_size_x) / 2, screensize_y - captionbox_size_y];
 
@@ -313,7 +318,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	vector display_pos;
 	vector display_size;
 
-	if (cvar("r_viewmode") == 2) // widescreen
+	if (cvar("r_viewmode") == 2) // widescreen 16:9
 	{
 		if (vheight < vwidth && (vheight * ar_widescreen) < vwidth)
 		{
@@ -332,6 +337,27 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 			// window is phone-shaped (?)
 			display_pos = [0, (vheight / 2) - ((vwidth * 0.5625) / 2)];
 			display_size = [vwidth, vwidth * 0.5625];
+		}
+	}
+	else if (cvar("r_viewmode") == 3) // widescreen 16:10
+	{
+		if (vheight < vwidth && (vheight * ar_widescreen2) < vwidth)
+		{
+			// window is widescreen-shaped
+			display_pos = [(vwidth / 2) - ((vheight * ar_widescreen2) / 2), 0];
+			display_size = [vheight * ar_widescreen2, vheight];
+		}
+		else if ((vwidth / vheight) == ar_widescreen2)
+		{
+			// perfectly 16:9 window
+			display_pos = [0, 0];
+			display_size = [vwidth, vheight];
+		}
+		else
+		{
+			// window is phone-shaped (?)
+			display_pos = [0, (vheight / 2) - ((vwidth * 0.5625) / 2)];
+			display_size = [vwidth, vwidth * 0.625];
 		}
 	}
 	else
