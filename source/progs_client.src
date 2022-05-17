@@ -13,6 +13,9 @@
 	// initial setup
 	client/defs.qc
 
+	// weapons
+	client/weapons.qc
+
 	// final setup
 	client/builtins.qc
 #endlist

@@ -104,6 +104,12 @@ jsonnode(string line) initialize_narrator =
 
 #endif
 
+void(string name, string func) trigger_map_entity =
+{
+	print("Triggering entity ", name, " with function ", func, " at ", ftos(time), "\n");
+	sendevent("FireTarget", "ss", name, func);
+};
+
 //
 // ENGINE BUILTINS
 //
@@ -160,6 +166,32 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		setproperty(VF_ANGLES, view_angles);
 	#endif
 
+	#if defined(DUKE) || defined(BITCHHELL)
+		UpdateWeapon();
+	#endif
+
+	view_org = getproperty(VF_ORIGIN);
+	skyroom_active = getentity(getstatf(STAT_VIEW2), GE_ACTIVE);
+
+	if (skyroom_active)
+	{
+
+		skyroom_org = getentity(getstatf(STAT_VIEW2), GE_ORIGIN);
+		skyroom_scale = getentity(getstatf(STAT_VIEW2), GE_SKIN);
+
+		skyroom_rotangle = getentity(getstatf(STAT_VIEW2), GE_ANGLES);
+		skyroom_rotspeed = getentity(getstatf(STAT_VIEW2), GE_FRAME);
+
+		skyroom_offs = [view_org_x / skyroom_scale, view_org_y / skyroom_scale, view_org_z / skyroom_scale];
+
+		if (skyroom_rotspeed > 0)
+			setproperty(VF_SKYROOM_CAMERA, skyroom_org + skyroom_offs, (void)skyroom_rotangle, (void)(time * skyroom_rotspeed));
+		else
+			setproperty(VF_SKYROOM_CAMERA, skyroom_org + skyroom_offs);
+	}
+
+	//print("active: ", ftos(skyroom_active), " entnum: ", ftos(getstatf(STAT_VIEW2)), strcat(" origin: ", ftos(skyroom_org_x), " ", ftos(skyroom_org_y), " ", ftos(skyroom_org_z)), " scale: ", ftos(skyroom_scale), "\n"); 
+
 	renderscene();
 
 	#if defined(STANLEY)
@@ -185,7 +217,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 			string captiontargetname = (caption_tree.a[caption_iteration])["target"].s;
 			
 			if (captiontargetname && captiontargetname != "")
-				sendevent("FireTarget", "s", captiontargetname);
+				sendevent("FireTarget", "ss", captiontargetname, "Trigger");
 
 			// save caption_iteration to a tempvar because we need to iterate it before the timer is set
 			// but the timer requires the original value
@@ -240,7 +272,6 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		drawstring(captionbox_pos + [4 * scale, 16 * scale], caption_line2, captionbox_textsize, [1, 1, 1], 1, 0); // text line 2
 		drawstring(captionbox_pos + [4 * scale, 28 * scale], caption_line3, captionbox_textsize, [1, 1, 1], 1, 0); // text line 3
 	#endif
-	
 
 	vector crosshair_size = [8 * scale, 8 * scale];
 	vector crosshair_pos = [(view_size_x / 2) - (crosshair_size_x / 2), (view_size_y / 2) - (crosshair_size_x / 1.6)];
@@ -334,17 +365,21 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	registercommand("achievement_get");
 	registercommand("achievement_clearall");
 	registercommand("achievement_list");
+	registercommand("ent_fire");
 
-	#if defined(DUKE)
-	precache_model("models/v_models/v_sniper.iqm");
-	precache_model("models/v_models/v_shotgun.iqm");
+	#if defined(DUKE) || defined(BITCHHELL)
 	cl_viewmodel = spawn();
 	cl_viewmodel.classname = "vm";
 	cl_viewmodel.renderflags = RF_VIEWMODEL;
 	cl_viewmodel.effects |= EF_NOSHADOW;
 	cl_viewmodel.drawmask = MASK_VIEWMODEL;
-	setmodel(cl_viewmodel, "models/v_models/v_shotgun.iqm");
 	setsize(cl_viewmodel, [0, 0, 0], [0, 0, 0]);
+	#endif
+
+	#if defined(DUKE)
+	precache_model("models/v_models/v_sniper.iqm");
+	precache_model("models/v_models/v_shotgun.iqm");
+	setmodel(cl_viewmodel, "models/v_models/v_shotgun.iqm");
 	#endif
 };
 
@@ -354,6 +389,7 @@ float(string cmd) CSQC_ConsoleCommand =
 
 	switch(argv(0))
 	{
+		case "ent_fire" : trigger_map_entity(argv(1), argv(2)); return TRUE;
 		case "achievement_clearall" : clear_achievements(); return TRUE;
 		case "achievement_get" : if (argv(1) != "") achievement_tree = initialize_achievement(argv(1)); return TRUE;
 		default: return FALSE;
@@ -367,6 +403,7 @@ void() CSQC_Parse_Event =
 	switch(readbyte())
 	{
 		case EVENT_ACHIEVEMENT: achievement_tree = initialize_achievement(readstring()); break;
+		case EVENT_SKYROOM: skyroom_org = [readcoord(), readcoord(), readcoord()]; skyroom_scale = readfloat(); skyroom_active = 1; break;
 		#if defined(STANLEY)
 		case EVENT_NARRATOR: caption_tree = initialize_narrator(readstring()); break;
 		#endif

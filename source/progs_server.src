@@ -34,6 +34,7 @@
 	server/entities/point_cvarset.qc
 	server/entities/point_fade.qc
 	server/entities/point_null.qc
+	server/entities/point_skycamera.qc
 	server/entities/point_relay.qc
 	server/entities/point_teleport.qc
 	server/entities/trigger_achievement.qc

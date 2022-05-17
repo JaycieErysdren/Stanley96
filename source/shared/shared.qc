@@ -30,7 +30,8 @@ float ar_widescreen = 16 / 9;
 
 enum
 {
-	EVENT_ACHIEVEMENT
+	EVENT_ACHIEVEMENT,
+	EVENT_SKYROOM
 };
 
 // project-specific events - always start at 128

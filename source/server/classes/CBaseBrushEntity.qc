@@ -21,4 +21,5 @@ void CBaseBrushEntity :: Initialize ( float move_type, float solid_type )
 
 	setmodel(this, model);
 	setorigin(this, origin);
+	print("^1", vtos(origin), "\n");
 };

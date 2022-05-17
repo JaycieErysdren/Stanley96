@@ -1,9 +1,8 @@
-void(string targ) CSEv_FireTarget_s =
+void(string targ, string func) CSEv_FireTarget_ss =
 {
 	for (entity ent = world; (ent = find(ent, ::targetname, targ));)
 	{
 		CBaseEntity use = (CBaseEntity)ent;
-		//use.Use();
-		use.CallFunction("Trigger");
+		use.CallFunction(func);
 	}
 };

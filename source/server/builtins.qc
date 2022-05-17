@@ -210,6 +210,8 @@ void() RestoreGame = {};
 
 void() PlayerPreThink =
 {
+	self.view2 = sky_viewer;
+
 	if (self.health)
 	{
 		#if defined(CRAFTWORLD)

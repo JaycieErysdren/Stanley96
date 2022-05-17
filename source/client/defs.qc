@@ -13,6 +13,16 @@ float achievementbox_ypos;
 
 float has_achievements;
 
+vector skyroom_org;
+vector skyroom_offs;
+float skyroom_scale;
+float skyroom_active;
+
+vector skyroom_rotangle;
+float skyroom_rotspeed;
+
+vector view_org;
+
 #if defined(DUKE)
 entity cl_viewmodel;
 #endif
