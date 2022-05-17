@@ -210,7 +210,17 @@ void() RestoreGame = {};
 
 void() PlayerPreThink =
 {
+	//===========
+	// handle skyroom crap
 	self.view2 = sky_viewer;
+
+	if (skyfogcmd2 != skyfogcmd)
+		stuffcmd(self, 0, skyfogcmd, "\n");
+
+	skyfogcmd2 = skyfogcmd;
+
+	//
+	//===========
 
 	if (self.health)
 	{

@@ -22,7 +22,6 @@ class point_skycamera : CBaseEntity
 	void() point_skycamera;
 	
 	virtual void() UpdateSky;
-	virtual void() UpdateSkyFog;
 	virtual void() Trigger;
 	virtual void(string, string) SpawnKey;
 	virtual void(string) CallFunction;
@@ -30,12 +29,13 @@ class point_skycamera : CBaseEntity
 
 void point_skycamera :: point_skycamera ( void )
 {
-	// hack
-	skin = 16;
+	skyroom_scale = 16;
 
-	super :: CBaseEntity();
-
-	UpdateSky();
+	if (!targetname || targetname == "")
+	{
+		super :: CBaseEntity();
+		UpdateSky();
+	}
 };
 
 void point_skycamera :: SpawnKey ( string key, string value )
@@ -71,6 +71,19 @@ void point_skycamera :: UpdateSky ( void )
 {
 	if (!(spawnflags & POINT_SKYCAMERA_DONT_SKYROOM))
 	{
+		if (skyfog_density > 0)
+		{
+			// figure out skyfog colors
+			if (!skyfog_color)
+				skyfog_color = [1, 1, 1];
+			else if (skyfog_color_x > 1 || skyfog_color_y > 1 || skyfog_color_z > 1)
+				skyfog_color = [skyfog_color_x / 255, skyfog_color_y / 255, skyfog_color_z / 255];
+
+			string colorstring = strcat(ftos(skyfog_color_x), " ", ftos(skyfog_color_y), " ", ftos(skyfog_color_z));
+			skyfogcmd = strcat("skyroomfog ", ftos(skyfog_density), " ", colorstring);
+		}
+
+		// set up skyroom viewer
 		entity viewer = spawn();
 		viewer.classname = "_SkyViewer";
 		viewer.angles = rotation_angles;
@@ -83,19 +96,6 @@ void point_skycamera :: UpdateSky ( void )
 	if (skybox && skybox != "")
 		localcmd(strcat("sky ", skybox, "\n"));
 
-	print("sky updated.\n");
-
 	if (!targetname || targetname == "")
 		Remove();
-};
-
-void point_skycamera :: UpdateSkyFog ( void )
-{
-	if (skyfog_color)
-		skyfog_color = [skyfog_color_x / 255, skyfog_color_y / 255, skyfog_color_z / 255];
-	else
-		skyfog_color = [1, 1, 1];
-
-	string realcolor = strcat(ftos(skyfog_color_x), " ", ftos(skyfog_color_y), " ", ftos(skyfog_color_z));
-	string skyroomfogcmd = strcat("skyroomfog ", ftos(skyfog_density), " ", realcolor);
 };

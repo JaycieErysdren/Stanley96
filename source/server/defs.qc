@@ -7,6 +7,8 @@ string __fullspawndata;
 .entity activator;
 
 entity sky_viewer;
+string skyfogcmd;
+string skyfogcmd2;
 
 //
 // MULTICAST FUNCTIONS

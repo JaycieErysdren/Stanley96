@@ -397,6 +397,16 @@
 ]
 
 //
+// decore entities
+//
+
+@PointClass base(Appearflags) size(16 16 16) color(160 192 224) model({ "path": model, "skin": skin, "frame": frame }) = decore_model :  "Displays a non-solid model." [
+	model(string) : "Filename of model"
+	frame(integer) : "frame of mdl to display" : 0
+	skin(integer) : "skin of mdl to display" : 0
+]
+
+//
 // stanley96 classes
 //
 
