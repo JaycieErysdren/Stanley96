@@ -83,6 +83,7 @@ void() main = {};
 
 void() StartFrame =
 {
+	// call FrameUpdate on every class-based entity in the server
 	for (entity a = world; (a = findfloat(a, ::identity, 1));)
 	{
 		CBaseEntity ent = (CBaseEntity)a;
@@ -117,10 +118,13 @@ void() worldspawn =
 	precache_everything();
 	initialize_lightstyles();
 
-	// flush data
+	// flush sky data
 	forceinfokey(world, "skyname", "");
-	// force it
+	// force the sky
 	forceinfokey(world, "skyname", self.skyname);
+
+	registercommand("scale_player");
+	player_scale = 1;
 };
 
 void() PutClientInServer =
@@ -134,4 +138,15 @@ void() SV_RunClientCommand =
 		input_movevalues *= 0.4;
 
 	runstandardplayerphysics(self);
+};
+
+void(string cmd) ConsoleCmd =
+{
+	tokenize(cmd);
+	
+	switch(argv(0))
+	{
+		case "scale_player" : player_scale = stof(argv(1)); break;
+		default: print("^1Unknown command entered.\n"); break;
+	}
 };

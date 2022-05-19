@@ -23,32 +23,40 @@ varying vec4 vc;
 
 #ifdef FRAGMENT_SHADER
 
-	#ifdef REPEAT4
-		uniform vec2 repeat = vec2(2, 2);
-	#elif defined(REPEAT8)
-		uniform vec2 repeat = vec2(4, 4);
-	#else
-		uniform vec2 repeat = vec2(1, 1);
-	#endif
-
 	void main ()
 	{
-		vec4 mask = texture2D(s_mask, tc);
+		vec2 p = tc;
 
-		vec4 img = texture2D(s_img, tc  * repeat);
+		#if defined(PIXELATE_D)
+			vec2 pixels = vec2(PIXELATE_D);
+			p.x -= mod(p.x, 1.0 / pixels.x);
+			p.y -= mod(p.y, 1.0 / pixels.y);
+		#endif
+
+		#if defined(REPEAT_M)
+			vec4 mask = texture2D(s_mask, tc * REPEAT_M);
+		#else
+			vec4 mask = texture2D(s_mask, tc);
+		#endif
+
+		#if defined(REPEAT_D)
+			vec4 img = texture2D(s_img, p - floor(p) * REPEAT_D);
+		#else
+			vec4 img = texture2D(s_img, p - floor(p));
+		#endif
 		
-		#ifdef FADEHALF
-			img.a = mask.r * 0.5;
-		#elif defined(FADEQUARTER)
-			img.a = mask.r * 0.25;
+		#if defined(ALPHA)
+			img.a = mask.r * ALPHA;
 		#else
 			img.a = mask.r;
 		#endif
 
-		if (img.a < 0.1)
-			discard;
+		#if defined(DISCARD)
+			if (img.a < 0.1)
+				discard;
+		#endif
 
-		#ifdef FULLBRIGHT
+		#if defined(FULLBRIGHT)
 			img.rgb += texture2D(s_fullbright, tc).rgb;
 		#endif
 		

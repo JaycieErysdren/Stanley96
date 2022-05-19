@@ -18,7 +18,7 @@ class player : CBaseEntity
 	#if defined(DUKE) || defined(BITCHHELL)
 	virtual void() Attack;
 	#endif
-	virtual void() Kick;
+	virtual void() Melee;
 	virtual void() Jump;
 	virtual void() Crouch;
 	virtual void() UnCrouch;
@@ -28,6 +28,7 @@ class player : CBaseEntity
 	virtual void(float) SwitchWeapon;
 	virtual void(float) Hurt;
 	virtual void() Die;
+	virtual void(vector, vector) SetSize;
 };
 
 void player :: player ( void )
@@ -87,6 +88,16 @@ void player :: Die ( void ) { };
 
 void player :: PreFrame ( void )
 {
+	// scale safety check
+	if (scale <= 0)
+		scale = 1;
+
+	if (scale != player_scale)
+	{
+		print("current scale is ", ftos(scale), " target scale is ", ftos(player_scale), "\n");
+		scale = player_scale;
+	}
+
 	// skyroom stuff, gets networked to csqc by the engine
 	view2 = sky_viewer;
 	if (skyfogcmd2 != skyfogcmd) stuffcmd(this, 0, skyfogcmd, "\n");
@@ -131,7 +142,7 @@ void player :: PreFrame ( void )
 				UseCheck();
 
 			if (button5)
-				Kick();
+				Melee();
 
 			if (button6)
 				Reload();
@@ -182,6 +193,11 @@ void player :: Attack ( void )
 };
 
 #endif
+
+void player :: SetSize ( vector minsize, vector maxsize )
+{
+	setsize(this, minsize, maxsize);
+};
 
 void player :: Jump ( void )
 {
@@ -277,8 +293,8 @@ void player :: MovementStep ( void )
 
 void player :: Crouch ( void )
 {
-	setsize(this, PLAYER_SIZE_MIN_CROUCHED, PLAYER_SIZE_MAX_CROUCHED);
-	view_ofs = PLAYER_VIEW_OFFSET_CROUCHED;
+	setsize(this, PLAYER_SIZE_MIN_CROUCHED * scale, PLAYER_SIZE_MAX_CROUCHED * scale);
+	view_ofs = PLAYER_VIEW_OFFSET_CROUCHED * scale;
 };
 
 void player :: UnCrouch ( void )
@@ -293,6 +309,10 @@ void player :: UnCrouch ( void )
 	}
 };
 
-void player :: Kick ( void ) { };
+void player :: Melee ( void )
+{
+	EasyMulticastFloat(EVENT_WEAPON, WEAPON_MELEE, this);
+	readytime = time + 1;
+};
 
 void player :: SwitchWeapon ( float to ) { };

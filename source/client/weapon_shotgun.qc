@@ -10,3 +10,4 @@ enum
 };
 
 string S_SHOTGUN_SHOOT = "weapons/shotgun_fire.wav";
+string M_SHOTGUN = "models/v_models/v_shotgun_hn.iqm";

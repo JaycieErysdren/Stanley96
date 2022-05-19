@@ -10,6 +10,8 @@ entity sky_viewer;
 string skyfogcmd;
 string skyfogcmd2;
 
+float player_scale;
+
 .string skyname;
 
 //

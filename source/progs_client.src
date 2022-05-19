@@ -16,6 +16,7 @@
 
 	#if defined(DUKE) || defined(BITCHHELL)
 	// weapons
+	client/weapon_kick.qc
 	client/weapon_shotgun.qc
 	client/weapons.qc
 	#endif

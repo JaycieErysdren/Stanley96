@@ -32,8 +32,9 @@ vector view_offs;
 vector view_finalangles;
 vector view_finalorigin;
 
-#if defined(DUKE)
-entity cl_viewmodel;
+#if defined(DUKE) || defined(BITCHHELL)
+entity cl_viewmodel1;
+entity cl_viewmodel2;
 #endif
 
 #if defined(STANLEY)

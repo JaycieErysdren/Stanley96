@@ -71,7 +71,8 @@ enum
 enum
 {
 	WEAPON_RELOAD,
-	WEAPON_FIRE
+	WEAPON_FIRE,
+	WEAPON_MELEE
 };
 
 #endif

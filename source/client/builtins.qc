@@ -363,22 +363,29 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	view_offs = [0, 0, 64];
 
 	#if defined(DUKE) || defined(BITCHHELL)
-	cl_viewmodel = spawn();
-	cl_viewmodel.classname = "vm";
-	cl_viewmodel.renderflags = RF_VIEWMODEL;
-	cl_viewmodel.effects |= EF_NOSHADOW;
-	cl_viewmodel.drawmask = MASK_VIEWMODEL;
-	setsize(cl_viewmodel, [0, 0, 0], [0, 0, 0]);
+	cl_viewmodel1 = spawn();
+	cl_viewmodel1.classname = "vm";
+	cl_viewmodel1.renderflags = RF_VIEWMODEL;
+	cl_viewmodel1.effects |= EF_NOSHADOW;
+	cl_viewmodel1.drawmask = MASK_VIEWMODEL;
+	setsize(cl_viewmodel1, [0, 0, 0], [0, 0, 0]);
+
+	cl_viewmodel2 = spawn();
+	cl_viewmodel2.classname = "vm";
+	cl_viewmodel2.renderflags = RF_VIEWMODEL;
+	cl_viewmodel2.effects |= EF_NOSHADOW;
+	cl_viewmodel2.drawmask = MASK_VIEWMODEL;
+	setsize(cl_viewmodel2, [0, 0, 0], [0, 0, 0]);
 	#endif
 
 	#if defined(DUKE)
 	precache_model("models/v_models/v_sniper.iqm");
-	precache_model("models/v_models/v_shotgun.iqm");
-	precache_model("models/v_models/v_shotgun_hn.iqm");
-	precache_sound("weapons/shotgun_deploy.wav");
-	precache_sound("weapons/shotgun_fire.wav");
-	setmodel(cl_viewmodel, "models/v_models/v_shotgun_hn.iqm");
-	SetEntityFrame(cl_viewmodel, F_SHOTGUN_DRAW);
+	precache_model(M_SHOTGUN);
+	precache_model(M_KICK);
+	precache_sound(S_SHOTGUN_SHOOT);
+	setmodel(cl_viewmodel1, M_SHOTGUN);
+	setmodel(cl_viewmodel2, M_KICK);
+	SetEntityFrame(cl_viewmodel1, F_SHOTGUN_DRAW);
 	#endif
 };
 
