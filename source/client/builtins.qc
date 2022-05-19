@@ -2,118 +2,6 @@
 // builtins.qc
 //
 
-//
-// SPECIAL INITIALIZATIONS
-//
-
-void() clear_achievements =
-{
-	float success = fremove("achievements.dat");
-	
-	if (success == 0)
-		print("Successfully cleared achievement data.\n");
-	else
-		print("Could not clear achievement data.\n");
-};
-
-jsonnode(string id) initialize_achievement =
-{
-	if (cvar("achievement_enable") <= 0)
-		return 0;
-
-	filestream f = fopen("achievements.dat", FILE_READ);
-
-	if (f > 0)
-	{
-		string line;
-
-		while ((line = fgets(f)))
-		{
-			tokenizebyseparator(line, ",");
-
-			if (argv(0) == id)
-			{
-				//print("you already have this achievement, silly!\n");
-				fclose(f);
-				return 0;
-			}
-		}
-
-		fclose(f);
-	}
-
-	filestream j = fopen("json/achievements.json", FILE_READNL);
-	jsonnode tree = json_parse(fgets(j));
-	fclose(j);
-
-	if (tree && tree[id]["title"].s != "")
-	{
-		filestream w = fopen("achievements.dat", FILE_APPEND);
-
-		if (w > 0)
-		{
-			if (has_achievements == 0)
-				fputs(w, strcat(id, ",", strftime(1, "%Y-%m-%d %H:%M")));
-			else
-				fputs(w, strcat("\n", id, ",", strftime(1, "%Y-%m-%d %H:%M")));
-
-			fclose(w);
-		}
-
-		has_achievements = 1;
-
-		float displaytime = cvar("achievement_display_time");
-
-		if (displaytime <= 0)
-			return 0;
-		else
-		{
-			achievement_timer = time + displaytime;
-			achievementbox_ypos = -16 * cvar("accessibility_resolution_scale");
-
-			return tree[id];
-		}
-
-	}
-
-	return 0;
-};
-
-#if defined(STANLEY)
-
-jsonnode(string line) initialize_narrator =
-{
-	filestream j = fopen("json/captions.json", FILE_READNL);
-	jsonnode tree = json_parse(fgets(j));
-	fclose(j);
-	
-	if (tree)
-	{
-		// play narrator line specified
-		//soundupdate(self, CHAN_VOICE, line, 1.0, ATTN_NONE, 100, 0, 0);
-		//current_line_sample = line;
-		localsound(line, CHAN_VOICE, cvar("volume"));
-		caption_iteration = 0;
-		caption_timer = time + 0.1;
-
-		return tree[line];
-	}
-
-	return 0;
-};
-
-#endif
-
-void(string name, string func) trigger_map_entity =
-{
-	print("Triggering entity ", name, " with function ", func, " at ", ftos(time), "\n");
-	sendevent("FireTarget", "ss", name, func);
-};
-
-//
-// ENGINE BUILTINS
-//
-
 void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 {
 	clearscene();
@@ -144,6 +32,11 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		view_size = [384 * scale, 240 * scale];
 		screensize = [384 * scale, 240 * scale];
 	}
+	else if (cvar("r_viewmode") == 4) // ultrawide (21:9 without narrator box)
+	{
+		view_size = [560 * scale, 240 * scale];
+		screensize = [560 * scale, 240 * scale];
+	}
 	else // normal (4:3 with narrator box)
 	{
 		view_size = [320 * scale, 200 * scale];
@@ -161,14 +54,36 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	setproperty(VF_DRAWWORLD, 1);
 	addentities((intermission?0:MASK_VIEWMODEL)|MASK_ENGINE);
 
+	UpdateShake();
+
 	#if defined(CRAFTWORLD)
 		setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, -256, 64]);	
 		setproperty(VF_ANGLES, [0, 90, 0]);
 	#else
 		// set the camera to where the player is
-		float view_ofs = 64;
-		setproperty(VF_ORIGIN, getentity(player_localentnum, GE_ORIGIN) + [0, 0, view_ofs]);	
-		setproperty(VF_ANGLES, view_angles);
+
+		// figure out crouch view_offs
+		view_offs[2] += (getstatf(STAT_VIEWHEIGHT) == PLAYER_VIEW_OFFSET_CROUCHED[2]) ? -256 * frametime : 256 * frametime;
+		view_offs[2] = bound(PLAYER_VIEW_OFFSET_CROUCHED[2], view_offs[2], PLAYER_VIEW_OFFSET[2]);
+
+		if (cvar("chase_active") == 1)
+		{
+			vector headpos = getentity(player_localentnum, GE_ORIGIN) + view_offs;
+
+			makevectors(view_angles);
+			traceline(headpos, (headpos - (v_forward * 96)) + (v_up * 32), FALSE, self);
+
+			view_finalorigin = trace_endpos;
+			view_finalangles = view_angles + shake_angle;
+		}
+		else
+		{
+			view_finalorigin = getentity(player_localentnum, GE_ORIGIN) + view_offs;
+			view_finalangles = view_angles + shake_angle;
+		}
+
+		setproperty(VF_ORIGIN, view_finalorigin);	
+		setproperty(VF_ANGLES, view_finalangles);
 	#endif
 
 	#if defined(DUKE) || defined(BITCHHELL)
@@ -198,6 +113,31 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 	//print("active: ", ftos(skyroom_active), " entnum: ", ftos(getstatf(STAT_VIEW2)), strcat(" origin: ", ftos(skyroom_org_x), " ", ftos(skyroom_org_y), " ", ftos(skyroom_org_z)), " scale: ", ftos(skyroom_scale), "\n"); 
 
 	renderscene();
+
+	#if defined(DUKE)
+		vector sbar_pos;
+		vector sbar_size = [320 * scale, 40 * scale];
+		float sbar_alpha;
+
+		if (cvar("r_viewmode") == 1)
+		{
+			sbar_alpha = 0.5;
+			sbar_pos = [0, screensize_y - sbar_size_y];
+		}
+		else if (cvar("r_viewmode") == 2 || cvar("r_viewmode") == 3 || cvar("r_viewmode") == 4)
+		{
+			sbar_alpha = 0.5;
+			sbar_pos = [(screensize_x - sbar_size_x) / 2, screensize_y - sbar_size_y];
+		}
+		else
+		{
+			sbar_alpha = 1;
+			sbar_pos = [0, screensize_y - sbar_size_y];
+		}
+
+		drawpic(sbar_pos, "gfx/hud/sbar_temp1", sbar_size, [1, 1, 1], sbar_alpha);
+		drawpic(sbar_pos, "gfx/hud/sbar_temp2", sbar_size, [1, 1, 1], 1);
+	#endif
 
 	#if defined(STANLEY)
 		if (cvar_string("mapname") == "stanley" && getsoundtime(self, CHAN_BODY) < 0 && music_status != 1)
@@ -253,7 +193,7 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 			if (caption_line1 != "" || caption_line2 != "" || caption_line3 != "")
 				drawfill(captionbox_pos, captionbox_size, [0.1, 0.1, 0.1], 0.5); // background color
 		}
-		else if (cvar("r_viewmode") == 2 || cvar("r_viewmode") == 3)
+		else if (cvar("r_viewmode") == 2 || cvar("r_viewmode") == 3 || cvar("r_viewmode") == 4)
 		{
 			captionbox_pos = [(screensize_x - captionbox_size_x) / 2, screensize_y - captionbox_size_y];
 
@@ -356,11 +296,32 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 		else
 		{
 			// window is phone-shaped (?)
-			display_pos = [0, (vheight / 2) - ((vwidth * 0.5625) / 2)];
+			display_pos = [0, (vheight / 2) - ((vwidth * 0.625) / 2)];
 			display_size = [vwidth, vwidth * 0.625];
 		}
 	}
-	else
+	else if (cvar("r_viewmode") == 4) // ultrawide 21:9
+	{
+		if (vheight < vwidth && (vheight * ar_ultrawide) < vwidth)
+		{
+			// window is widescreen-shaped
+			display_pos = [(vwidth / 2) - ((vheight * ar_ultrawide) / 2), 0];
+			display_size = [vheight * ar_ultrawide, vheight];
+		}
+		else if ((vwidth / vheight) == ar_ultrawide)
+		{
+			// perfectly 16:9 window
+			display_pos = [0, 0];
+			display_size = [vwidth, vheight];
+		}
+		else
+		{
+			// window is phone-shaped (?)
+			display_pos = [0, (vheight / 2) - ((vwidth * 0.4285) / 2)];
+			display_size = [vwidth, vwidth * 0.4285];
+		}
+	}
+	else // fullscreen (4:3)
 	{
 		if (vheight < vwidth && (vheight * ar_normal) < vwidth)
 		{
@@ -384,6 +345,8 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	// finally draw the screen
 	drawpic(display_pos, "screenrtshader", display_size, [1, 1, 1], 1);
+
+	ResetShake();
 };
 
 void(float apilevel, string enginename, float engineversion) CSQC_Init =
@@ -392,6 +355,12 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	registercommand("achievement_clearall");
 	registercommand("achievement_list");
 	registercommand("ent_fire");
+	
+	// set skybox
+	localcmd("sky ", serverkey("skyname"), "\n");
+
+	// set default view height
+	view_offs = [0, 0, 64];
 
 	#if defined(DUKE) || defined(BITCHHELL)
 	cl_viewmodel = spawn();
@@ -405,7 +374,11 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 	#if defined(DUKE)
 	precache_model("models/v_models/v_sniper.iqm");
 	precache_model("models/v_models/v_shotgun.iqm");
-	setmodel(cl_viewmodel, "models/v_models/v_shotgun.iqm");
+	precache_model("models/v_models/v_shotgun_hn.iqm");
+	precache_sound("weapons/shotgun_deploy.wav");
+	precache_sound("weapons/shotgun_fire.wav");
+	setmodel(cl_viewmodel, "models/v_models/v_shotgun_hn.iqm");
+	SetEntityFrame(cl_viewmodel, F_SHOTGUN_DRAW);
 	#endif
 };
 
@@ -415,7 +388,7 @@ float(string cmd) CSQC_ConsoleCommand =
 
 	switch(argv(0))
 	{
-		case "ent_fire" : trigger_map_entity(argv(1), argv(2)); return TRUE;
+		case "ent_fire" : TriggerMapEntity(argv(1), argv(2)); return TRUE;
 		case "achievement_clearall" : clear_achievements(); return TRUE;
 		case "achievement_get" : if (argv(1) != "") achievement_tree = initialize_achievement(argv(1)); return TRUE;
 		default: return FALSE;
@@ -430,9 +403,19 @@ void() CSQC_Parse_Event =
 	{
 		case EVENT_ACHIEVEMENT: achievement_tree = initialize_achievement(readstring()); break;
 		case EVENT_SKYROOM: skyroom_org = [readcoord(), readcoord(), readcoord()]; skyroom_scale = readfloat(); skyroom_active = 1; break;
+		case EVENT_SHAKE: shake_duration = readfloat(); shake_amplitude = readfloat(); shake_frequency = readfloat(); shake_time = shake_duration; break;
+		#if defined(DUKE) || defined(BITCHHELL)
+		case EVENT_WEAPON: WeaponEvent(readfloat()); break;
+		#endif
 		#if defined(STANLEY)
 		case EVENT_NARRATOR: caption_tree = initialize_narrator(readstring()); break;
 		#endif
 		default: print("^1CSQC_Parse_Event: ^dUnknown Event!\n"); break;
 	}
+};
+
+void(string rendererdescription) CSQC_RendererRestarted =
+{
+	// set skybox
+	localcmd("sky ", serverkey("skyname"), "\n");
 };

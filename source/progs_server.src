@@ -27,6 +27,8 @@
 	server/entities/func_illusionary.qc
 	server/entities/func_rotate.qc
 	server/entities/func_train.qc
+	server/entities/info_player_start.qc
+	server/entities/info_teleport_destination.qc
 	server/entities/light.qc
 	server/entities/path_node.qc
 	server/entities/point_changelevel.qc
@@ -54,5 +56,7 @@
 
 	// final setup
 	server/csevents.qc
+	server/utilities.qc
+	server/player.qc
 	server/builtins.qc
 #endlist

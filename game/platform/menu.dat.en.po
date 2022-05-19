@@ -90,8 +90,14 @@ msgstr "Left"
 msgid "m_key_moveright"
 msgstr "Right"
 
+msgid "m_key_attack"
+msgstr "Attack"
+
 msgid "m_key_use"
 msgstr "Use"
+
+msgid "m_key_jump"
+msgstr "Jump"
 
 msgid "m_key_crouch"
 msgstr "Crouch"
@@ -137,7 +143,7 @@ msgid "m_viewmode"
 msgstr "Aspect Ratio"
 
 msgid "m_viewmode0"
-msgstr "Default (4:3)"
+msgstr "Classic (4:3)"
 
 msgid "m_viewmode1"
 msgstr "Fullscreen (4:3)"
@@ -147,4 +153,7 @@ msgstr "Widescreen (16:9)"
 
 msgid "m_viewmode3"
 msgstr "Widescreen (16:10)"
+
+msgid "m_viewmode4"
+msgstr "Ultrawide (21:9)"
 

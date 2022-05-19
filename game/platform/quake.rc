@@ -1,0 +1,5 @@
+exec platform.cfg
+exec default.cfg
+exec fte.cfg
+exec autoexec.cfg
+stuffcmds

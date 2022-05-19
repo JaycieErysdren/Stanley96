@@ -22,6 +22,19 @@ float ar_normal = 4 / 3;
 float ar_laptop1 = 1366 / 768;
 float ar_widescreen = 16 / 9;
 float ar_widescreen2 = 16 / 10;
+float ar_ultrawide = 21 / 9;
+
+//
+// GLOBAL PLAYER VALUES
+//
+
+vector PLAYER_VIEW_OFFSET = [0, 0, 64];
+vector PLAYER_SIZE_MIN = [-16, -16, 0];
+vector PLAYER_SIZE_MAX = [16, 16, 72];
+
+vector PLAYER_VIEW_OFFSET_CROUCHED = [0, 0, 28];
+vector PLAYER_SIZE_MIN_CROUCHED = [-16, -16, 0];
+vector PLAYER_SIZE_MAX_CROUCHED = [16, 16, 36];
 
 //
 // MULTICAST EVENTS
@@ -32,7 +45,8 @@ float ar_widescreen2 = 16 / 10;
 enum
 {
 	EVENT_ACHIEVEMENT,
-	EVENT_SKYROOM
+	EVENT_SKYROOM,
+	EVENT_SHAKE
 };
 
 // project-specific events - always start at 128
@@ -42,6 +56,22 @@ enum
 enum
 {
 	EVENT_NARRATOR = 128
+};
+
+#endif
+
+#if defined(DUKE) || defined(BITCHHELL)
+
+enum
+{
+	EVENT_WEAPON = 128,
+};
+
+// EVENT_WEAPON variables
+enum
+{
+	WEAPON_RELOAD,
+	WEAPON_FIRE
 };
 
 #endif

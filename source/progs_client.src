@@ -12,10 +12,21 @@
 
 	// initial setup
 	client/defs.qc
+	client/utilities.qc
 
+	#if defined(DUKE) || defined(BITCHHELL)
 	// weapons
+	client/weapon_shotgun.qc
 	client/weapons.qc
+	#endif
+	
+	#if defined(STANLEY)
+	// narrator
+	client/narrator.qc
+	#endif
 
 	// final setup
+	client/achievements.qc
+	client/shake.qc
 	client/builtins.qc
 #endlist

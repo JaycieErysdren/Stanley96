@@ -21,7 +21,16 @@ float skyroom_active;
 vector skyroom_rotangle;
 float skyroom_rotspeed;
 
+float shake_frequency;
+float shake_duration;
+float shake_amplitude;
+float shake_time;
+vector shake_angle;
+
 vector view_org;
+vector view_offs;
+vector view_finalangles;
+vector view_finalorigin;
 
 #if defined(DUKE)
 entity cl_viewmodel;
