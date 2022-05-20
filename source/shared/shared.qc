@@ -46,7 +46,8 @@ enum
 {
 	EVENT_ACHIEVEMENT,
 	EVENT_SKYROOM,
-	EVENT_SHAKE
+	EVENT_SHAKE,
+	EVENT_WUI
 };
 
 // project-specific events - always start at 128

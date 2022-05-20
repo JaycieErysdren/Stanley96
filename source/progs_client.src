@@ -26,8 +26,12 @@
 	client/narrator.qc
 	#endif
 
+	// world ui
+	client/wui.qc
+
 	// final setup
 	client/achievements.qc
 	client/shake.qc
+	client/parsemapentity.qc
 	client/builtins.qc
 #endlist

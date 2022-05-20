@@ -404,6 +404,32 @@ float(string cmd) CSQC_ConsoleCommand =
 	return TRUE;
 };
 
+// another crack at this bullshit...
+void() CSQC_WorldLoaded =
+{
+	string token;
+
+	while (1)
+	{
+		token = getentitytoken();
+
+		if (token == "")
+			break;
+
+		if (token != "{")
+		{
+			print("^1bad entity data token!\n");
+			return;
+		}
+		
+		if (!ParseMapEntity())
+		{
+			print("^1could not parse entity data in mapfile\n");
+			return;
+		}
+	}
+};
+
 void() CSQC_Parse_Event =
 {
 	switch(readbyte())
@@ -411,6 +437,7 @@ void() CSQC_Parse_Event =
 		case EVENT_ACHIEVEMENT: achievement_tree = initialize_achievement(readstring()); break;
 		case EVENT_SKYROOM: skyroom_org = [readcoord(), readcoord(), readcoord()]; skyroom_scale = readfloat(); skyroom_active = 1; break;
 		case EVENT_SHAKE: shake_duration = readfloat(); shake_amplitude = readfloat(); shake_frequency = readfloat(); shake_time = shake_duration; break;
+		//case EVENT_WUI: spawn_wui_instance([readcoord(), readcoord(), readcoord()]); break;
 		#if defined(DUKE) || defined(BITCHHELL)
 		case EVENT_WEAPON: WeaponEvent(readfloat()); break;
 		#endif

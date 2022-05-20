@@ -44,6 +44,7 @@
 	server/entities/trigger_crosshair.qc
 	server/entities/trigger_once.qc
 	server/entities/trigger_teleport.qc
+	server/entities/wui_test.qc
 
 	#if defined(DUKE)
 		server/entities/decore_fire.qc
