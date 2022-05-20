@@ -260,87 +260,23 @@ void(float vwidth, float vheight, float notmenu) CSQC_UpdateView =
 
 	if (cvar("r_viewmode") == 2) // widescreen 16:9
 	{
-		if (vheight < vwidth && (vheight * ar_widescreen) < vwidth)
-		{
-			// window is widescreen-shaped
-			display_pos = [(vwidth / 2) - ((vheight * ar_widescreen) / 2), 0];
-			display_size = [vheight * ar_widescreen, vheight];
-		}
-		else if ((vwidth / vheight) == ar_widescreen)
-		{
-			// perfectly 16:9 window
-			display_pos = [0, 0];
-			display_size = [vwidth, vheight];
-		}
-		else
-		{
-			// window is phone-shaped (?)
-			display_pos = [0, (vheight / 2) - ((vwidth * 0.5625) / 2)];
-			display_size = [vwidth, vwidth * 0.5625];
-		}
+		display_pos = CalculateDisplayPos([vwidth, vheight], aspect_widescreen);
+		display_size = CalculateDisplaySize([vwidth, vheight], aspect_widescreen);
 	}
 	else if (cvar("r_viewmode") == 3) // widescreen 16:10
 	{
-		if (vheight < vwidth && (vheight * ar_widescreen2) < vwidth)
-		{
-			// window is widescreen-shaped
-			display_pos = [(vwidth / 2) - ((vheight * ar_widescreen2) / 2), 0];
-			display_size = [vheight * ar_widescreen2, vheight];
-		}
-		else if ((vwidth / vheight) == ar_widescreen2)
-		{
-			// perfectly 16:9 window
-			display_pos = [0, 0];
-			display_size = [vwidth, vheight];
-		}
-		else
-		{
-			// window is phone-shaped (?)
-			display_pos = [0, (vheight / 2) - ((vwidth * 0.625) / 2)];
-			display_size = [vwidth, vwidth * 0.625];
-		}
+		display_pos = CalculateDisplayPos([vwidth, vheight], aspect_widescreen_alt);
+		display_size = CalculateDisplaySize([vwidth, vheight], aspect_widescreen_alt);
 	}
 	else if (cvar("r_viewmode") == 4) // ultrawide 21:9
 	{
-		if (vheight < vwidth && (vheight * ar_ultrawide) < vwidth)
-		{
-			// window is widescreen-shaped
-			display_pos = [(vwidth / 2) - ((vheight * ar_ultrawide) / 2), 0];
-			display_size = [vheight * ar_ultrawide, vheight];
-		}
-		else if ((vwidth / vheight) == ar_ultrawide)
-		{
-			// perfectly 16:9 window
-			display_pos = [0, 0];
-			display_size = [vwidth, vheight];
-		}
-		else
-		{
-			// window is phone-shaped (?)
-			display_pos = [0, (vheight / 2) - ((vwidth * 0.4285) / 2)];
-			display_size = [vwidth, vwidth * 0.4285];
-		}
+		display_pos = CalculateDisplayPos([vwidth, vheight], aspect_ultrawide);
+		display_size = CalculateDisplaySize([vwidth, vheight], aspect_ultrawide);
 	}
 	else // fullscreen (4:3)
 	{
-		if (vheight < vwidth && (vheight * ar_normal) < vwidth)
-		{
-			// window is widescreen-shaped
-			display_pos = [(vwidth / 2) - ((vheight * ar_normal) / 2), 0];
-			display_size = [vheight * ar_normal, vheight];
-		}
-		else if ((vwidth / vheight) == ar_normal)
-		{
-			// perfectly 4:3 window
-			display_pos = [0, 0];
-			display_size = [vwidth, vheight];
-		}
-		else
-		{
-			// window is phone-shaped (?)
-			display_pos = [0, (vheight / 2) - ((vwidth * 0.75) / 2)];
-			display_size = [vwidth, vwidth * 0.75];
-		}
+		display_pos = CalculateDisplayPos([vwidth, vheight], aspect_fullscreen);
+		display_size = CalculateDisplaySize([vwidth, vheight], aspect_fullscreen);
 	}
 
 	// finally draw the screen

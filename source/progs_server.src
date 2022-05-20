@@ -42,6 +42,7 @@
 	server/entities/trigger_achievement.qc
 	server/entities/trigger_changelevel.qc
 	server/entities/trigger_crosshair.qc
+	server/entities/trigger_multiple.qc
 	server/entities/trigger_once.qc
 	server/entities/trigger_teleport.qc
 	server/entities/wui_test.qc

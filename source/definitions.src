@@ -2,4 +2,5 @@
 #define EXPERIMENTAL
 //#define CRAFTWORLD
 //#define STANLEY
-#define DUKE
+//#define DUKE
+#define SWITCH

@@ -16,9 +16,9 @@ class player : CBaseEntity
 	virtual void() MovementStep;
 	virtual void() Reload;
 	#if defined(DUKE) || defined(BITCHHELL)
-	virtual void() Attack;
+		virtual void() Attack;
+		virtual void() Melee;
 	#endif
-	virtual void() Melee;
 	virtual void() Jump;
 	virtual void() Crouch;
 	virtual void() UnCrouch;
@@ -44,8 +44,10 @@ void player :: player ( void )
 	setsize(this, PLAYER_SIZE_MIN, PLAYER_SIZE_MAX);
 	view_ofs = PLAYER_VIEW_OFFSET;
 
-	items |= IT_SHOTGUN;
-	weapon = IT_SHOTGUN;
+	#if defined(DUKE) || defined(BITCHHELL)
+		items |= IT_SHOTGUN;
+		weapon = IT_SHOTGUN;
+	#endif
 	
 	flags |= FL_CLIENT;
 	takedamage = DAMAGE_YES;
@@ -136,13 +138,13 @@ void player :: PreFrame ( void )
 			#if defined(DUKE) || defined(BITCHHELL)
 			if (button0)
 				Attack();
+
+			if (button5)
+				Melee();
 			#endif
 
 			if (button3)
 				UseCheck();
-
-			if (button5)
-				Melee();
 
 			if (button6)
 				Reload();
@@ -309,10 +311,15 @@ void player :: UnCrouch ( void )
 	}
 };
 
+
+#if defined(DUKE) || defined(BITCHHELL)
+
 void player :: Melee ( void )
 {
 	EasyMulticastFloat(EVENT_WEAPON, WEAPON_MELEE, this);
 	readytime = time + 1;
 };
+
+#endif
 
 void player :: SwitchWeapon ( float to ) { };

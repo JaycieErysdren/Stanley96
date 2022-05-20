@@ -3,9 +3,24 @@
 //
 
 //
+// ASPECT RATIO VALUES
+//
+
+float ar_normal = 4 / 3;
+float ar_widescreen = 16 / 9;
+float ar_widescreen2 = 16 / 10;
+float ar_ultrawide = 21 / 9;
+
+vector aspect_fullscreen = [4, 3];
+vector aspect_widescreen = [16, 9];
+vector aspect_widescreen_alt = [16, 10];
+vector aspect_ultrawide = [21, 9];
+
+//
 // USEFUL FUNCTIONS
 //
 
+// cvar_toggle
 void(string cvar_s, vector values) cvar_toggle =
 {
 	if (cvar(cvar_s) == values[0])
@@ -14,15 +29,39 @@ void(string cvar_s, vector values) cvar_toggle =
 		cvar_set(cvar_s, ftos(values[0]));
 };
 
-//
-// ASPECT RATIO VALUES
-//
+// CalculateDisplayPos
+vector(vector screensize, vector aspect) CalculateDisplayPos =
+{
+	float ratio1 = aspect_x / aspect_y;
+	float ratio2 = aspect_y / aspect_x;
+	vector display_pos;
 
-float ar_normal = 4 / 3;
-float ar_laptop1 = 1366 / 768;
-float ar_widescreen = 16 / 9;
-float ar_widescreen2 = 16 / 10;
-float ar_ultrawide = 21 / 9;
+	if (screensize_y < screensize_x && (screensize_y * ratio1) < screensize_x) // window is widescreen-shaped
+		display_pos = [(screensize_x / 2) - ((screensize_y * ratio1) / 2), 0];
+	else if ((screensize_x / screensize_y) == ratio1) // perfectly 16:9 window
+		display_pos = [0, 0];
+	else // window is phone-shaped (?)
+		display_pos = [0, (screensize_y / 2) - ((screensize_x * ratio2) / 2)];
+	
+	return display_pos;
+};
+
+// CalculateDisplaySize
+vector(vector screensize, vector aspect) CalculateDisplaySize =
+{
+	float ratio1 = aspect_x / aspect_y;
+	float ratio2 = aspect_y / aspect_x;
+	vector display_size;
+
+	if (screensize_y < screensize_x && (screensize_y * ratio1) < screensize_x) // window is widescreen-shaped
+		display_size = [screensize_y * ratio1, screensize_y];
+	else if ((screensize_x / screensize_y) == ratio1) // perfectly 16:9 window
+		display_size = [screensize_x, screensize_y];
+	else // window is phone-shaped (?)
+		display_size = [screensize_x, screensize_x * ratio2];
+
+	return display_size;
+};
 
 //
 // GLOBAL PLAYER VALUES
@@ -40,7 +79,7 @@ vector PLAYER_SIZE_MAX_CROUCHED = [16, 16, 36];
 // MULTICAST EVENTS
 //
 
-// generic events - 1 through 127
+// generic events - 0 through 127
 
 enum
 {
@@ -69,7 +108,7 @@ enum
 };
 
 // EVENT_WEAPON variables
-enum
+enum class weaponevents
 {
 	WEAPON_RELOAD,
 	WEAPON_FIRE,

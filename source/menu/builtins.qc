@@ -20,23 +20,19 @@ void() m_init =
 
 void(vector screensize) m_calculatedisplay =
 {
-	if (screensize_y < screensize_x && (screensize_y * ar_normal) < screensize_x )
+	if (cvar("r_viewmode") == 2 || cvar("r_viewmode") == 3 || cvar("r_viewmode") == 4) // any widescreen res
 	{
-		// window is widescreen-shaped
-		display_pos = [(screensize_x / 2) - ((screensize_y * ar_normal) / 2), 0];
-		display_size = [screensize_y * ar_normal, screensize_y];
+		menu_bg = "gfx/menu_bg_widescreen";
+		loading_bg = "gfx/menu_loading_widescreen";
+		display_pos = CalculateDisplayPos(screensize, aspect_widescreen);
+		display_size = CalculateDisplaySize(screensize, aspect_widescreen);
 	}
-	else if ((screensize_x / screensize_y) == ar_normal)
+	else // fullscreen (4:3)
 	{
-		// perfectly 4:3 window
-		display_pos = [0, 0];
-		display_size = screensize;
-	}
-	else
-	{
-		// window is phone-shaped (?)
-		display_pos = [0, (screensize_y / 2) - ((screensize_x * 0.75) / 2)];
-		display_size = [screensize_x, screensize_x * 0.75];
+		menu_bg = "gfx/menu_bg_fullscreen";
+		loading_bg = "gfx/menu_loading_fullscreen";
+		display_pos = CalculateDisplayPos(screensize, aspect_fullscreen);
+		display_size = CalculateDisplaySize(screensize, aspect_fullscreen);
 	}
 };
 

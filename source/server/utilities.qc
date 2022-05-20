@@ -14,6 +14,8 @@ void(vector org, vector vel, float damage) ParticleImpact =
 	particle(org, vel*0.1, 2, damage*2);
 };
 
+#if defined(DUKE) || defined(BITCHHELL)
+
 // LaunchBullet
 void(vector org, vector dir, float spread, float damage, float speed) LaunchBullet =
 {
@@ -95,6 +97,8 @@ void(vector org, vector dir, float spread, float damage, float speed) LaunchBull
 	else
 		bullet.velocity = dir * 2048;
 };
+
+#endif
 
 // Client_ShakeOnce
 void(vector pos, float radius, float duration, float frequency, float amplitude) Client_ShakeOnce =
