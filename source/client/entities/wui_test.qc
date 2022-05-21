@@ -1,8 +1,6 @@
 //
-// wui.qc
+// wui_test.qc
 //
-
-// wui entity class
 
 class wui_test
 {
@@ -21,7 +19,6 @@ float wui_test :: predraw ( void )
 	float vsz = 32;
 	float hsz = vsz / 2;
 	makevectors(angles);
-	//print("wui_test, v_right: ", vtos([v_right[0] * (vsz / 2), v_right[1] * (vsz / 2), v_right[2] * (vsz / 2)]), "\n");
 
 	vector mvec = [v_right[0] + v_up[0], v_right[1] + v_up[1], v_right[2] + v_up[2]];
 

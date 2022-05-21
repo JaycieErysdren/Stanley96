@@ -8,10 +8,7 @@
 #includelist
 	// shared
 	shared/fteextensions.qc
-	shared/shared.qc
-
-	// initial setup
-	menu/defs.qc
+	shared/defs.qc
 
 	// shpuld's SUI lib
 	menu/sui_sys.qc

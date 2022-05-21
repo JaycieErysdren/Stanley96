@@ -8,12 +8,9 @@
 #includelist
 	// shared
 	shared/fteextensions.qc
-	shared/shared.qc
+	shared/defs.qc
 
-	// initial setup
-	server/defs.qc
-
-	// entity base classes
+	// shared entity base classes
 	server/classes/CBaseEntity.qc
 	server/classes/CBaseBrushEntity.qc
 	server/classes/CBaseTrigger.qc
@@ -45,7 +42,6 @@
 	server/entities/trigger_multiple.qc
 	server/entities/trigger_once.qc
 	server/entities/trigger_teleport.qc
-	server/entities/wui_test.qc
 
 	#if defined(DUKE)
 		server/entities/decore_fire.qc

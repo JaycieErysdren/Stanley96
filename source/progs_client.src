@@ -8,11 +8,13 @@
 #includelist
 	// shared
 	shared/fteextensions.qc
-	shared/shared.qc
+	shared/defs.qc
 
 	// initial setup
-	client/defs.qc
 	client/utilities.qc
+
+	// entity classes
+	client/entities/wui_test.qc
 
 	#if defined(DUKE) || defined(BITCHHELL)
 	// weapons
@@ -25,9 +27,6 @@
 	// narrator
 	client/narrator.qc
 	#endif
-
-	// world ui
-	client/wui.qc
 
 	// final setup
 	client/achievements.qc

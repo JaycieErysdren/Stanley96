@@ -48,8 +48,10 @@ void CBaseEntity :: CBaseEntity ( void )
 
 	InitKeys();
 
-	if (!use)
-		use = Use;
+	#if defined(SERVER)
+		if (!use)
+			use = Use;
+	#endif
 
 	if (!touch)
 		touch = Touch;
@@ -84,7 +86,7 @@ void CBaseEntity :: InitKeys ( void )
 {
 	for (int i = 1; i < (tokenize(__fullspawndata) - 1); i += 2)
 		SpawnKey(argv(i), argv(i+1));
-	
+
 	__fullspawndata = "";
 };
 
