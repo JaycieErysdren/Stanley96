@@ -1,46 +1,50 @@
-carpet002a { program defaultwall diffusemap textures/stanley/carpet002a }
-carpet003a { program defaultwall diffusemap textures/stanley/carpet003a }
-concrete001a { program defaultwall diffusemap textures/stanley/concrete001a }
-concrete004a { program defaultwall diffusemap textures/stanley/concrete004a }
-concrete005a { program defaultwall diffusemap textures/stanley/concrete005a }
-concrete006a { program defaultwall diffusemap textures/stanley/concrete006a }
-door001a { program defaultwall diffusemap textures/stanley/door001a }
-elevator001a { program defaultwall diffusemap textures/stanley/elevator001a }
-elevator001c { program defaultwall diffusemap textures/stanley/elevator001c }
-elevator002a { program defaultwall diffusemap textures/stanley/elevator002a }
-exit001a { program defaultwall diffusemap textures/stanley/exit001a fullbrightmap textures/stanley/exit001a_luma }
-exit001b { program defaultwall diffusemap textures/stanley/exit001b fullbrightmap textures/stanley/exit001b_luma }
-exit002a { program defaultwall diffusemap textures/stanley/exit002a fullbrightmap textures/stanley/exit002a_luma }
-exit002b { program defaultwall diffusemap textures/stanley/exit002b fullbrightmap textures/stanley/exit002b_luma }
-filecab001a { program defaultwall diffusemap textures/stanley/filecab001a }
-filecab001b { program defaultwall diffusemap textures/stanley/filecab001b }
-filecab001c { program defaultwall diffusemap textures/stanley/filecab001c }
-grass001a { program defaultwall diffusemap textures/stanley/grass001a }
-hazard001a { program defaultwall diffusemap textures/stanley/hazard001a }
-light001a { program defaultwall diffusemap textures/stanley/light001a fullbrightmap textures/stanley/light001a_luma }
-light001b { program defaultwall diffusemap textures/stanley/light001b }
-metal003a { program defaultwall diffusemap textures/stanley/metal003a }
-metal003b { program defaultwall diffusemap textures/stanley/metal003b }
-microwave { program defaultwall diffusemap textures/stanley/microwave }
-plaster001a { program defaultwall diffusemap textures/stanley/plaster001a }
-plaster001b { program defaultwall diffusemap textures/stanley/plaster001b }
-plaster002a { program defaultwall diffusemap textures/stanley/plaster002a }
-plaster002b { program defaultwall diffusemap textures/stanley/plaster002b }
-plaster003a { program defaultwall diffusemap textures/stanley/plaster003a }
-plaster003b { program defaultwall diffusemap textures/stanley/plaster003b }
-snack001a { program defaultwall diffusemap textures/stanley/snack001a }
-snack002a { program defaultwall diffusemap textures/stanley/snack001a }
-snack002b { program defaultwall diffusemap textures/stanley/snack001a }
-snack002c { program defaultwall diffusemap textures/stanley/snack001a }
-soda001a { program defaultwall diffusemap textures/stanley/soda001a }
-soda002a { program defaultwall diffusemap textures/stanley/soda002a }
-soda002b { program defaultwall diffusemap textures/stanley/soda002b }
-soda002c { program defaultwall diffusemap textures/stanley/soda002c }
-stairs001a { program defaultwall diffusemap textures/stanley/stairs001a }
-stairs001b { program defaultwall diffusemap textures/stanley/stairs001b }
-stone001a { program defaultwall diffusemap textures/stanley/stone001a }
-stone001b { program defaultwall diffusemap textures/stanley/stone001b }
-tile001a { program defaultwall diffusemap textures/stanley/tile001a }
+carpetfloor01a { program defaultwall diffusemap textures/stanley/carpetfloor01a }
+carpetfloor02a { program defaultwall diffusemap textures/stanley/carpetfloor02a }
+color_black { program defaultwall diffusemap textures/stanley/color_black }
+cretefloor01a { program defaultwall diffusemap textures/stanley/cretefloor01a }
+cretestairs01a { program defaultwall diffusemap textures/stanley/cretestairs01a }
+cretestairs01b { program defaultwall diffusemap textures/stanley/cretestairs01b }
+cretewall01a { program defaultwall diffusemap textures/stanley/cretewall01a }
+cretewall02a { program defaultwall diffusemap textures/stanley/cretewall02a }
+cretewall03a { program defaultwall diffusemap textures/stanley/cretewall03a }
+fake_sky { program defaultwall diffusemap textures/stanley/fake_sky }
+grassfloor01a { program defaultwall diffusemap textures/stanley/grassfloor01a }
+light01b { program defaultwall diffusemap textures/stanley/light01b }
+metalceil01a { program defaultwall diffusemap textures/stanley/metalceil01a }
+metaldoor01a { program defaultwall diffusemap textures/stanley/metaldoor01a }
+metaldoor01b { program defaultwall diffusemap textures/stanley/metaldoor01b }
+metaldoor01c { program defaultwall diffusemap textures/stanley/metaldoor01c }
+metaldoor02a { program defaultwall diffusemap textures/stanley/metaldoor02a }
+metalelev01a { program defaultwall diffusemap textures/stanley/metalelev01a }
+metalfloor01a { program defaultwall diffusemap textures/stanley/metalfloor01a }
+metalglue01a { program defaultwall diffusemap textures/stanley/metalglue01a }
+plasterwall01a { program defaultwall diffusemap textures/stanley/plasterwall01a }
+plasterwall01b { program defaultwall diffusemap textures/stanley/plasterwall01b }
+plasterwall02a { program defaultwall diffusemap textures/stanley/plasterwall02a }
+plasterwall02b { program defaultwall diffusemap textures/stanley/plasterwall02b }
+plasterwall03a { program defaultwall diffusemap textures/stanley/plasterwall03a }
+plasterwall03b { program defaultwall diffusemap textures/stanley/plasterwall03b }
+propexit01a { program defaultwall diffusemap textures/stanley/propexit01a fullbrightmap textures/stanley/propexit01a_luma }
+propexit01b { program defaultwall diffusemap textures/stanley/propexit01b fullbrightmap textures/stanley/propexit01b_luma }
+propexit02a { program defaultwall diffusemap textures/stanley/propexit02a fullbrightmap textures/stanley/propexit02a_luma }
+propexit02b { program defaultwall diffusemap textures/stanley/propexit02b fullbrightmap textures/stanley/propexit02b_luma }
+propfile01a { program defaultwall diffusemap textures/stanley/propfile01a }
+propfile01b { program defaultwall diffusemap textures/stanley/propfile01b }
+propfile01c { program defaultwall diffusemap textures/stanley/propfile01c }
+prophazard01a { program defaultwall diffusemap textures/stanley/prophazard01a }
+proplight01a { program defaultwall diffusemap textures/stanley/proplight01a fullbrightmap textuers/stanley/proplight01a_luma }
+propmicrowav01a { program defaultwall diffusemap textures/stanley/propmicrowav01a }
+propsnack01a { program defaultwall diffusemap textures/stanley/propsnack01a }
+propsnack01b { program defaultwall diffusemap textures/stanley/propsnack01b }
+propsnack01c { program defaultwall diffusemap textures/stanley/propsnack01c }
+propsnack02a { program defaultwall diffusemap textures/stanley/propsnack02a }
+propsoda01a { program defaultwall diffusemap textures/stanley/propsoda01a }
+propsoda01b { program defaultwall diffusemap textures/stanley/propsoda01b }
+propsoda01c { program defaultwall diffusemap textures/stanley/propsoda01c }
+propsoda02a { program defaultwall diffusemap textures/stanley/propsoda02a }
+stonefloor01a { program defaultwall diffusemap textures/stanley/stonefloor01a }
+stonefloor01b { program defaultwall diffusemap textures/stanley/stonefloor01b }
+tilefloor01a { program defaultwall diffusemap textures/stanley/tilefloor01a }
 
 {251 { diffusemap textures/stanley/{251 { program defaultwall alphaFunc ge128 map $diffuse } }
 {252 { diffusemap textures/stanley/{252 { program defaultwall alphaFunc ge128 map $diffuse } }
