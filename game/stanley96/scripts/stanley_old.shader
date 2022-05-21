@@ -1,10 +1,7 @@
-carpet002a { program defaultwall diffusemap textures/stanley/carpet002a }
-carpet003a { program defaultwall diffusemap textures/stanley/carpet003a }
 concrete001a { program defaultwall diffusemap textures/stanley/concrete001a }
 concrete004a { program defaultwall diffusemap textures/stanley/concrete004a }
 concrete005a { program defaultwall diffusemap textures/stanley/concrete005a }
 concrete006a { program defaultwall diffusemap textures/stanley/concrete006a }
-door001a { program defaultwall diffusemap textures/stanley/door001a }
 elevator001a { program defaultwall diffusemap textures/stanley/elevator001a }
 elevator001c { program defaultwall diffusemap textures/stanley/elevator001c }
 elevator002a { program defaultwall diffusemap textures/stanley/elevator002a }
@@ -22,10 +19,37 @@ light001b { program defaultwall diffusemap textures/stanley/light001b }
 metal003a { program defaultwall diffusemap textures/stanley/metal003a }
 metal003b { program defaultwall diffusemap textures/stanley/metal003b }
 microwave { program defaultwall diffusemap textures/stanley/microwave }
-plaster001a { program defaultwall diffusemap textures/stanley/plaster001a }
-plaster001b { program defaultwall diffusemap textures/stanley/plaster001b }
-plaster002a { program defaultwall diffusemap textures/stanley/plaster002a }
-plaster002b { program defaultwall diffusemap textures/stanley/plaster002b }
+
+plaster001a
+{
+	program wall
+	if r_fakesoftware == 0
+		diffusemap textures/stanley/plasterwall02a
+	else
+		{ map $colourmap } { map $palettize:textures/stanley/plasterwall02a } 
+	endif
+}
+
+carpet002a
+{
+	program wall
+	if r_fakesoftware == 0
+		diffusemap textures/stanley/carpetfloor01a
+	else
+		{ map $colourmap } { map $palettize:textures/stanley/carpetfloor01a } 
+	endif
+}
+
+door002a
+{
+	program wall
+	if r_fakesoftware == 0
+		diffusemap textures/stanley/metaldoor01a
+	else
+		{ map $colourmap } { map $palettize:textures/stanley/metaldoor01a } 
+	endif
+}
+
 plaster003a { program defaultwall diffusemap textures/stanley/plaster003a }
 plaster003b { program defaultwall diffusemap textures/stanley/plaster003b }
 snack001a { program defaultwall diffusemap textures/stanley/snack001a }

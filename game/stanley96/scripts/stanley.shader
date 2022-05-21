@@ -1,5 +1,5 @@
-carpetfloor01a { program defaultwall diffusemap textures/stanley/carpetfloor01a }
-carpetfloor02a { program defaultwall diffusemap textures/stanley/carpetfloor02a }
+//carpetfloor01a { program defaultwall diffusemap textures/stanley/carpetfloor01a }
+//carpetfloor02a { program defaultwall diffusemap textures/stanley/carpetfloor02a }
 color_black { program defaultwall diffusemap textures/stanley/color_black }
 cretefloor01a { program defaultwall diffusemap textures/stanley/cretefloor01a }
 cretestairs01a { program defaultwall diffusemap textures/stanley/cretestairs01a }
@@ -11,9 +11,9 @@ fake_sky { program defaultwall diffusemap textures/stanley/fake_sky }
 grassfloor01a { program defaultwall diffusemap textures/stanley/grassfloor01a }
 light01b { program defaultwall diffusemap textures/stanley/light01b }
 metalceil01a { program defaultwall diffusemap textures/stanley/metalceil01a }
-metaldoor01a { program defaultwall diffusemap textures/stanley/metaldoor01a }
-metaldoor01b { program defaultwall diffusemap textures/stanley/metaldoor01b }
-metaldoor01c { program defaultwall diffusemap textures/stanley/metaldoor01c }
+//metaldoor01a { program defaultwall diffusemap textures/stanley/metaldoor01a }
+//metaldoor01b { program defaultwall diffusemap textures/stanley/metaldoor01b }
+//metaldoor01c { program defaultwall diffusemap textures/stanley/metaldoor01c }
 metaldoor02a { program defaultwall diffusemap textures/stanley/metaldoor02a }
 metalelev01a { program defaultwall diffusemap textures/stanley/metalelev01a }
 metalfloor01a { program defaultwall diffusemap textures/stanley/metalfloor01a }

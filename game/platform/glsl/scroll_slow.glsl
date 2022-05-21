@@ -1,10 +1,15 @@
 !!ver 100 450
+
 !!permu FOG
+
 !!samps diffuse lightmap
+
 #include "sys/defs.h"
 #include "sys/fog.h"
+
 varying vec2 tc;
 varying vec2 lm0;
+
 #ifdef VERTEX_SHADER
 	void main ()
 	{
@@ -16,6 +21,7 @@ varying vec2 lm0;
 		gl_Position = ftetransform();
 	}
 #endif
+
 #ifdef FRAGMENT_SHADER
 	void main ()
 	{
